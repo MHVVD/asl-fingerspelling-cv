@@ -1,0 +1,288 @@
+{
+ "A": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "B": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "straight",
+   "pinky": "straight"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": "together"
+ },
+ "C": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": null,
+   "pinky": null
+  },
+  "thumb": "out",
+  "direction": "up",
+  "spread": null
+ },
+ "D": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": "curled",
+   "pinky": null
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "E": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "F": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": null,
+   "pinky": null
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "G": {
+  "fingers": {
+   "index": "straight",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "H": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": null,
+  "spread": "together"
+ },
+ "I": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "straight"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "J": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "straight"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "K": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "L": {
+  "fingers": {
+   "index": "straight",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": "out",
+  "direction": "up",
+  "spread": null
+ },
+ "M": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": null,
+   "pinky": null
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "N": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "O": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": null,
+   "pinky": null
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "P": {
+  "fingers": {
+   "index": "straight",
+   "middle": null,
+   "ring": "curled",
+   "pinky": null
+  },
+  "thumb": "out",
+  "direction": null,
+  "spread": null
+ },
+ "Q": {
+  "fingers": {
+   "index": null,
+   "middle": null,
+   "ring": null,
+   "pinky": null
+  },
+  "thumb": "out",
+  "direction": null,
+  "spread": null
+ },
+ "R": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "S": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "T": {
+  "fingers": {
+   "index": null,
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "U": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": "together"
+ },
+ "V": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "W": {
+  "fingers": {
+   "index": "straight",
+   "middle": "straight",
+   "ring": "straight",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "X": {
+  "fingers": {
+   "index": null,
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": "up",
+  "spread": null
+ },
+ "Y": {
+  "fingers": {
+   "index": "curled",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "straight"
+  },
+  "thumb": "out",
+  "direction": "up",
+  "spread": null
+ },
+ "Z": {
+  "fingers": {
+   "index": "straight",
+   "middle": "curled",
+   "ring": "curled",
+   "pinky": "curled"
+  },
+  "thumb": null,
+  "direction": null,
+  "spread": null
+ }
+}

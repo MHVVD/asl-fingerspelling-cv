@@ -1,0 +1,178 @@
+{
+  "source": "data/raw",
+  "output": "data/public/asl_alphabet.npz",
+  "settings": {
+    "limit": null,
+    "pad": 0.25,
+    "block": 500,
+    "min_conf": 0.5,
+    "handedness": "Right"
+  },
+  "images": 78000,
+  "detected": 65707,
+  "detection_rate": 0.8424,
+  "rescued_by_padding": 5425,
+  "mediapipe_handedness_labels": {
+    "Right": 62473,
+    "Left": 3234
+  },
+  "seconds": 1134.5,
+  "per_letter": {
+    "A": {
+      "total": 3000,
+      "detected": 2306,
+      "padded": 124,
+      "rate": 0.769
+    },
+    "B": {
+      "total": 3000,
+      "detected": 2269,
+      "padded": 67,
+      "rate": 0.756
+    },
+    "C": {
+      "total": 3000,
+      "detected": 2257,
+      "padded": 295,
+      "rate": 0.752
+    },
+    "D": {
+      "total": 3000,
+      "detected": 2663,
+      "padded": 206,
+      "rate": 0.888
+    },
+    "E": {
+      "total": 3000,
+      "detected": 2375,
+      "padded": 68,
+      "rate": 0.792
+    },
+    "F": {
+      "total": 3000,
+      "detected": 2980,
+      "padded": 116,
+      "rate": 0.993
+    },
+    "G": {
+      "total": 3000,
+      "detected": 2643,
+      "padded": 215,
+      "rate": 0.881
+    },
+    "H": {
+      "total": 3000,
+      "detected": 2534,
+      "padded": 161,
+      "rate": 0.845
+    },
+    "I": {
+      "total": 3000,
+      "detected": 2534,
+      "padded": 155,
+      "rate": 0.845
+    },
+    "J": {
+      "total": 3000,
+      "detected": 2725,
+      "padded": 154,
+      "rate": 0.908
+    },
+    "K": {
+      "total": 3000,
+      "detected": 2796,
+      "padded": 97,
+      "rate": 0.932
+    },
+    "L": {
+      "total": 3000,
+      "detected": 2728,
+      "padded": 207,
+      "rate": 0.909
+    },
+    "M": {
+      "total": 3000,
+      "detected": 2058,
+      "padded": 455,
+      "rate": 0.686
+    },
+    "N": {
+      "total": 3000,
+      "detected": 1817,
+      "padded": 542,
+      "rate": 0.606
+    },
+    "O": {
+      "total": 3000,
+      "detected": 2479,
+      "padded": 221,
+      "rate": 0.826
+    },
+    "P": {
+      "total": 3000,
+      "detected": 2229,
+      "padded": 189,
+      "rate": 0.743
+    },
+    "Q": {
+      "total": 3000,
+      "detected": 2416,
+      "padded": 298,
+      "rate": 0.805
+    },
+    "R": {
+      "total": 3000,
+      "detected": 2696,
+      "padded": 151,
+      "rate": 0.899
+    },
+    "S": {
+      "total": 3000,
+      "detected": 2759,
+      "padded": 204,
+      "rate": 0.92
+    },
+    "T": {
+      "total": 3000,
+      "detected": 2567,
+      "padded": 213,
+      "rate": 0.856
+    },
+    "U": {
+      "total": 3000,
+      "detected": 2635,
+      "padded": 126,
+      "rate": 0.878
+    },
+    "V": {
+      "total": 3000,
+      "detected": 2739,
+      "padded": 191,
+      "rate": 0.913
+    },
+    "W": {
+      "total": 3000,
+      "detected": 2701,
+      "padded": 248,
+      "rate": 0.9
+    },
+    "X": {
+      "total": 3000,
+      "detected": 2531,
+      "padded": 375,
+      "rate": 0.844
+    },
+    "Y": {
+      "total": 3000,
+      "detected": 2670,
+      "padded": 90,
+      "rate": 0.89
+    },
+    "Z": {
+      "total": 3000,
+      "detected": 2600,
+      "padded": 257,
+      "rate": 0.867
+    }
+  }
+}
