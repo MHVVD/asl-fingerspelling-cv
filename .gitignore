@@ -1,0 +1,20 @@
+# environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# large or third-party data (regenerate: see README "Setup")
+data/raw/
+data/public/
+models/hand_landmarker.task
+
+# local-only
+data/recorded_backup/
+data/progress.json
+clips/
+outputs/
+
+# experiment models (reproducible with aslcv.train); only the final model is kept
+models/letter_mlp_*_test_*.npz
+models/letter_mlp_public.npz

@@ -1,0 +1,186 @@
+{
+  "data": "recorded",
+  "test_sessions": [
+    "20261011-011708"
+  ],
+  "n_train_raw": 5100,
+  "n_train_augmented": 10200,
+  "n_test": 3900,
+  "models": {
+    "logreg": {
+      "train_seconds": 2.7,
+      "accuracy": 0.7328,
+      "macro_f1": 0.6817,
+      "per_letter_f1": {
+        "A": 0.667,
+        "B": 1.0,
+        "C": 0.0,
+        "D": 0.783,
+        "E": 0.984,
+        "F": 1.0,
+        "G": 1.0,
+        "H": 1.0,
+        "I": 0.804,
+        "J": 0.678,
+        "K": 1.0,
+        "L": 1.0,
+        "M": 0.647,
+        "N": 0.589,
+        "O": 1.0,
+        "P": 0.693,
+        "Q": 0.204,
+        "R": 0.0,
+        "S": 0.729,
+        "T": 1.0,
+        "U": 0.0,
+        "V": 0.526,
+        "W": 1.0,
+        "X": 0.369,
+        "Y": 1.0,
+        "Z": 0.052
+      },
+      "top_confusions": [
+        {
+          "true": "R",
+          "predicted": "V",
+          "rate": 1.0
+        },
+        {
+          "true": "C",
+          "predicted": "A",
+          "rate": 1.0
+        },
+        {
+          "true": "Z",
+          "predicted": "X",
+          "rate": 0.973
+        },
+        {
+          "true": "Q",
+          "predicted": "P",
+          "rate": 0.887
+        },
+        {
+          "true": "U",
+          "predicted": "V",
+          "rate": 0.8
+        },
+        {
+          "true": "N",
+          "predicted": "M",
+          "rate": 0.58
+        },
+        {
+          "true": "X",
+          "predicted": "D",
+          "rate": 0.553
+        },
+        {
+          "true": "J",
+          "predicted": "I",
+          "rate": 0.487
+        },
+        {
+          "true": "S",
+          "predicted": "M",
+          "rate": 0.427
+        },
+        {
+          "true": "U",
+          "predicted": "R",
+          "rate": 0.2
+        }
+      ]
+    },
+    "mlp": {
+      "accuracy": 0.7026,
+      "macro_f1": 0.6753,
+      "per_letter_f1": {
+        "A": 0.935,
+        "B": 1.0,
+        "C": 0.0,
+        "D": 0.055,
+        "E": 0.993,
+        "F": 1.0,
+        "G": 1.0,
+        "H": 1.0,
+        "I": 0.906,
+        "J": 0.885,
+        "K": 1.0,
+        "L": 1.0,
+        "M": 0.508,
+        "N": 0.712,
+        "O": 0.89,
+        "P": 0.667,
+        "Q": 0.0,
+        "R": 0.0,
+        "S": 0.828,
+        "T": 0.993,
+        "U": 0.256,
+        "V": 0.538,
+        "W": 1.0,
+        "X": 0.0,
+        "Y": 0.98,
+        "Z": 0.413
+      },
+      "top_confusions": [
+        {
+          "true": "R",
+          "predicted": "V",
+          "rate": 1.0
+        },
+        {
+          "true": "Q",
+          "predicted": "P",
+          "rate": 1.0
+        },
+        {
+          "true": "C",
+          "predicted": "D",
+          "rate": 0.82
+        },
+        {
+          "true": "X",
+          "predicted": "D",
+          "rate": 0.787
+        },
+        {
+          "true": "Z",
+          "predicted": "X",
+          "rate": 0.733
+        },
+        {
+          "true": "U",
+          "predicted": "V",
+          "rate": 0.72
+        },
+        {
+          "true": "D",
+          "predicted": "R",
+          "rate": 0.68
+        },
+        {
+          "true": "N",
+          "predicted": "M",
+          "rate": 0.307
+        },
+        {
+          "true": "S",
+          "predicted": "M",
+          "rate": 0.293
+        },
+        {
+          "true": "D",
+          "predicted": "O",
+          "rate": 0.247
+        }
+      ],
+      "train_seconds": 5.1,
+      "epochs": 27,
+      "n_params": 18138,
+      "latency_ms_per_frame": 0.0622,
+      "model_file": "models/letter_mlp_recorded_test_s2.npz",
+      "model_kb": 72.8
+    }
+  }
+}
