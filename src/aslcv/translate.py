@@ -40,7 +40,7 @@ def translate(video_path, out_video=None, out_srt=None, model_path=DEFAULT_MODEL
     fps = src_fps / step
 
     model = LetterModel.load(model_path)
-    detector = HandDetector(mode="video")
+    detector = HandDetector(mode="video", max_hands=2)   # both hands, then read the signing one (journal 11)
     pipe = FramePipeline(detector, model, hand=hand)
     stream = LetterStream.for_fps(model.classes, fps, hold_s=hold_s)
 

@@ -23,7 +23,7 @@ frame ─▶ MediaPipe hand landmarks (21 pts) ─▶ pixel space ─▶ normali
 | 4 Data: recorder with reference panel + live hand check, public ASL Alphabet extraction (65,707 samples), 4 personal sessions | done |
 | 5 Training + evaluation: NumPy-only MLP, 73 KB, 0.08 ms/frame | done |
 | 6 Smoothing (letter stream, double letters, spaces) + shared frame pipeline; 0.22 char error rate on simulated words | done |
-| 7b Video translator: captioned MP4 + SRT, ~50 frames/s on CPU | built; awaiting a real test clip |
+| 7b Video translator: captioned MP4 + SRT, two-hand aware, 33–55 frames/s on CPU | built; first real-world test 12/26 letters |
 | 7a Tutor: spaced repetition, hold-to-confirm, finger-level tips (2.4% false alarms), teach mode, debug view | built; awaiting a live session |
 | 8 Stretch: CNN comparison, motion letters (J, Z) | planned |
 
@@ -34,6 +34,7 @@ frame ─▶ MediaPipe hand landmarks (21 pts) ─▶ pixel space ─▶ normali
 | **A new session of my own hand** (model trained on public data + my 3 earlier sessions) | **72.6%** |
 | Same, public data only | 42.4% (a model of one person does not transfer to another) |
 | Spelling words from real held-out frames, after smoothing | 0.19 character error rate |
+| **Real-world video: a stranger fingerspelling A–Z** ([CC BY-SA clip](https://commons.wikimedia.org/wiki/File:American_Sign_Language_demo_-_Travis_Dougherty.ogv)) | **12 / 26 letters** (up from 1/26 after fixing which hand is read; journal 11) |
 
 Weakest letters: thumb-position fists (M, N, S, T), crossed/spread pairs (R/U/V), and letters signed inconsistently between
 sessions. Details and the debugging stories (including two mirroring bugs) are in the journal.

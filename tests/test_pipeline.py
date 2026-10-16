@@ -54,3 +54,23 @@ def test_auto_hand_uses_vote_not_single_frame_label():
         pipe.process(f)
     # the last frame was labeled Left but the vote says Right, so it must NOT be mirrored
     assert np.allclose(model.seen[-1], model.seen[0])
+
+
+def hand_at_height(y_px, label="Right"):
+    pts = np.zeros((21, 3)); pts[9] = [0, -100, 0]
+    pts[:, 0] += 300; pts[:, 1] += y_px
+    return Hand(pts / [640, 480, 640], pts, label, 0.9)
+
+
+def test_signing_hand_is_the_raised_one_not_the_resting_one():
+    """Real clip (journal 11): MediaPipe locked onto the signer's resting hand at the waist
+    while the other hand fingerspelled at shoulder height."""
+    resting, signing = hand_at_height(450), hand_at_height(200)
+
+    class TwoHands:
+        def detect(self, frame, t_ms=None):
+            return [resting, signing]          # resting hand listed first
+
+    pipe = FramePipeline(TwoHands(), FakeModel(), hand="Right")
+    r = pipe.process(np.zeros((480, 640, 3), np.uint8))
+    assert r.hand is signing

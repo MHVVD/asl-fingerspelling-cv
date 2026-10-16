@@ -19,6 +19,12 @@ def wrist_motion(prev_px, cur_px):
     return float(np.linalg.norm(cur_px[WRIST, :2] - prev_px[WRIST, :2]) / max(size, 1e-6))
 
 
+def signing_hand(hands):
+    """With two hands in view, fingerspelling is done by the raised hand (around shoulder height);
+    the other usually rests lower. Pick the hand whose landmarks sit highest in the image."""
+    return min(hands, key=lambda h: float(np.mean(h.landmarks[:, 1])))
+
+
 class HandednessVote:
     """Running majority of MediaPipe's Left/Right labels. One signer keeps one hand, so the
     majority so far is far more reliable than any single frame (see journal 05)."""
@@ -53,7 +59,7 @@ class FramePipeline:
         hands = self.detector.detect(frame_bgr) if t_ms is None else self.detector.detect(frame_bgr, t_ms=t_ms)
         if not hands:
             return FrameResult(None, None, 0.0, None)
-        h = hands[0]
+        h = signing_hand(hands)
         side = self.vote.update(h.handedness) if self.hand == "auto" else resolve_handedness(h.handedness, self.hand)
         feats = normalize_landmarks(h.landmarks_px, side)
         motion = wrist_motion(self._prev_px, h.landmarks_px)
