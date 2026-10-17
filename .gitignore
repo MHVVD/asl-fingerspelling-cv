@@ -18,3 +18,4 @@ outputs/
 # experiment models (reproducible with aslcv.train); only the final model is kept
 models/letter_mlp_*_test_*.npz
 models/letter_mlp_public.npz
+.claude/
