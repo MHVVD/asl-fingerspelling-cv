@@ -1,6 +1,7 @@
 """Before/after demo video of the first real-world test (journal 11).
 
     python -m aslcv.make_demo          # -> outputs/demo_realworld_before_after.mp4 (1080x1080, H.264)
+    python -m aslcv.make_demo --wide   # -> outputs/demo_realworld_before_after_wide.mp4 (1280x720, for 16:9 players)
 
 Built from the two translator runs on the CC BY-SA Travis Dougherty clip: the run-1 and run-2 captioned
 videos (which show which hand was tracked) and their JSON records (which letters were output, and whether
@@ -58,7 +59,7 @@ def card(lines, credit=True):
     for y, text, f, fill in lines:
         centered(d, y, text, f, fill)
     if credit:
-        centered(d, H - 44, CREDIT, font(FONT, 20), GREY)
+        centered(d, H - int(44 * H / 1080), CREDIT, font(FONT, 20 if H >= 1000 else 15), GREY)
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
@@ -95,8 +96,34 @@ def main_frame(fa, fb, t, run_a, run_b):
     return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 
-def main():
-    out = ROOT / "outputs" / "demo_realworld_before_after.mp4"
+def main_frame_wide(fa, fb, t, run_a, run_b):
+    """16:9 layout: same content as main_frame, arranged for a 1280x720 player."""
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    pw, ph, x_a, x_b, y_p = 500, 490, 130, 650, 74
+    for x, title, desc, col in ((x_a, "BEFORE", "tracking the wrong hand", RED), (x_b, "AFTER", "tracking the signing hand", GREEN)):
+        d.text((x, 10), title, font=font(BOLD, 30), fill=col)
+        tw = d.textlength(title, font=font(BOLD, 30))
+        d.text((x + tw + 14, 22), desc, font=font(FONT, 19), fill=WHITE)
+    for x, frame in ((x_a, fa), (x_b, fb)):
+        crop = cv2.cvtColor(cv2.resize(frame[0:470, 240:720], (pw, ph)), cv2.COLOR_BGR2RGB)
+        img.paste(Image.fromarray(crop), (x, y_p))
+    mono = font(MONO, 25)
+    for x, run in ((x_a, run_a), (x_b, run_b)):
+        d.text((x, y_p + ph + 6), "model output:", font=font(FONT, 16), fill=GREY)
+        letters_strip(d, x, y_p + ph + 28, pw, [r for r in run if r[0] <= t], mono)
+    d.text((x_a, 662), "correct:", font=font(FONT, 16), fill=GREY)
+    d.text((x_a + 78, 659), TRUTH, font=font(MONO, 22), fill=AMBER)
+    d.text((x_b, 664), "Real footage · signer never seen · laptop CPU", font=font(FONT, 16), fill=WHITE)
+    centered(d, H - 26, CREDIT, font(FONT, 15), GREY)
+    return cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+
+
+def main(wide=False):
+    global W, H
+    if wide:
+        W, H = 1280, 720
+    out = ROOT / "outputs" / ("demo_realworld_before_after_wide.mp4" if wide else "demo_realworld_before_after.mp4")
     run_a, right_a = load_run(ROOT / "artifacts" / "realworld_travis_run1.json")
     run_b, right_b = load_run(ROOT / "artifacts" / "realworld_travis_run2.json")
     ca = cv2.VideoCapture(str(ROOT / "outputs" / "asl_alphabet_travis_subtitled.mp4"))
@@ -117,10 +144,12 @@ def main():
             a = min(1.0, i / 10, (n - i) / 10)                  # fade in/out over 10 frames
             emit((frame * a).astype(np.uint8))
 
-    title = card([(330, "Can my model read a", font(BOLD, 58), WHITE),
-                  (405, "stranger's fingerspelling?", font(BOLD, 58), WHITE),
-                  (520, "First real-world test: a signer it has never seen,", font(FONT, 32), GREY),
-                  (565, "spelling the alphabet A to Z", font(FONT, 32), GREY)])
+    k = H / 1080                                               # vertical scale for the cards
+    fs = (lambda n: max(14, int(n * (0.8 if wide else 1))))    # font scale
+    title = card([(int(330 * k), "Can my model read a", font(BOLD, fs(58)), WHITE),
+                  (int(405 * k), "stranger's fingerspelling?", font(BOLD, fs(58)), WHITE),
+                  (int(520 * k), "First real-world test: a signer it has never seen,", font(FONT, fs(32)), GREY),
+                  (int(565 * k), "spelling the alphabet A to Z", font(FONT, fs(32)), GREY)])
     hold_with_fade(title, 4.0)
 
     start, end = int(SEG[0] * FPS), int(SEG[1] * FPS)
@@ -130,17 +159,17 @@ def main():
         if not (ok_a and ok_b):
             break
         if i >= start:
-            emit(main_frame(fa, fb, i / FPS, run_a, run_b))
+            emit((main_frame_wide if wide else main_frame)(fa, fb, i / FPS, run_a, run_b))
 
-    results = card([(170, "Result", font(BOLD, 56), WHITE),
-                    (280, f"Before:  {right_a} / 26 letters", font(BOLD, 50), RED),
-                    (350, f"After:  {right_b} / 26 letters", font(BOLD, 50), GREEN),
-                    (480, "The bug: the tracker locked onto the resting hand", font(FONT, 32), WHITE),
-                    (522, "at the waist, not the hand doing the spelling.", font(FONT, 32), WHITE),
-                    (590, "The fix: detect both hands, read the raised one.", font(FONT, 32), WHITE),
-                    (680, "Next: more signers, a 'no letter' state for transitions,", font(FONT, 28), GREY),
-                    (718, "and more real-world clips.", font(FONT, 28), GREY),
-                    (820, REPO, font(BOLD, 32), AMBER)])
+    results = card([(int(170 * k), "Result", font(BOLD, fs(56)), WHITE),
+                    (int(280 * k), f"Before:  {right_a} / 26 letters", font(BOLD, fs(50)), RED),
+                    (int(350 * k), f"After:  {right_b} / 26 letters", font(BOLD, fs(50)), GREEN),
+                    (int(480 * k), "The bug: the tracker locked onto the resting hand", font(FONT, fs(32)), WHITE),
+                    (int(522 * k), "at the waist, not the hand doing the spelling.", font(FONT, fs(32)), WHITE),
+                    (int(590 * k), "The fix: detect both hands, read the raised one.", font(FONT, fs(32)), WHITE),
+                    (int(680 * k), "Next: more signers, a 'no letter' state for transitions,", font(FONT, fs(28)), GREY),
+                    (int(718 * k), "and more real-world clips.", font(FONT, fs(28)), GREY),
+                    (int(820 * k), REPO, font(BOLD, fs(32)), AMBER)])
     hold_with_fade(results, 6.0)
     ff.stdin.close()
     ff.wait()
@@ -148,4 +177,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(wide="--wide" in sys.argv)
