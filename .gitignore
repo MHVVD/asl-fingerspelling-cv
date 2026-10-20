@@ -19,3 +19,6 @@ outputs/
 models/letter_mlp_*_test_*.npz
 models/letter_mlp_public.npz
 .claude/
+data/chicagofswild/
+models/seq_fsw*.npz
+artifacts/fsw_results.json
