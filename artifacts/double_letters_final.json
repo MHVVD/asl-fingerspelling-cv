@@ -10,7 +10,8 @@
   "beam_lm": 0.706,
   "doubles_total": 111,
   "doubles_greedy": 2,
-  "doubles_beam_lm": 18
+  "doubles_beam_lm": 18,
+  "beam_lm_beta_space_0": 0.7028
  },
  "fresh_clips": {
   "clips": [
@@ -38,5 +39,6 @@
   ],
   "letter_accuracy_greedy": 0.88,
   "letter_accuracy_beam_lm": 0.84
- }
+ },
+ "note": "beta_space=0 chosen on dev (artifacts/space_bonus_dev.json); this test score is a second look at test for this decoder, taken after the choice."
 }
