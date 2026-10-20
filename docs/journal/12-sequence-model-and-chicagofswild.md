@@ -73,7 +73,7 @@ Extraction: 58 min on CPU, hand found in 97–98% of frames in every split.
 | Same, hold and threshold tuned on the **dev** signers (best: hold 0.10 s, threshold 0.4) | 25.3% |
 | **Sequence model (CTC), trained on 87 train signers, epoch chosen on dev (66.8%)** | **67.3%** |
 
-Sequence model: 510k parameters (2 MB), 40 epochs, ~1.5 h on the laptop CPU. Dev accuracy levelled off at 66–67% from
+Sequence model: 510k parameters (2 MB), 40 epochs, 31 minutes on the laptop CPU. Dev accuracy levelled off at 66–67% from
 epoch ~17 while training loss kept falling, so more epochs would not help.
 
 **Published results on the same test set** (read from the papers' tables):
