@@ -36,7 +36,7 @@ Fix: spaces get their own bonus `beta_space` (default 0). Test added. Re-tuned o
 | **Separate space bonus 0 (α 0.3, β 1.5)** | 69.9% | 17 |
 
 Same accuracy, far fewer stray spaces; chosen on dev. ChicagoFSWild test with the final setting: **70.3%** (70.6% before; a
-second look at test for this decoder, taken after the choice).
+second look at test for this decoder, taken after the choice). Doubles found on test with the final setting: 17 / 111 (18 / 111 with the earlier shared bonus).
 
 ## On the full USDA video (3.6 min; not a score)
 `python -m aslcv.translate clips/usda_campylobacter.webm` — 6,501 frames, hand seen in 92%, 271 s on the laptop CPU
