@@ -1,0 +1,13 @@
+{
+ "name": "travis_run5_seq_slowaug2",
+ "note": "corrected slow-signing augmentation; Travis is a tuning clip by now, not a clean test",
+ "truth": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+ "output_scored": "ABDFGHLMNRSTWYTIC",
+ "char_error_rate": 0.538,
+ "counts": {
+  "ok": 12,
+  "wrong": 5,
+  "missed": 9,
+  "extra": 0
+ }
+}

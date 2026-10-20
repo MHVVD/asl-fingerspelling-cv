@@ -50,9 +50,18 @@ def augment(F, rng, max_rot_deg=15, noise=0.02, speed=(0.8, 1.25), slow_share=0.
     from .seqsim import augment as rot_noise
     F = rot_noise(F, rng, max_rot_deg, noise)
     k = rng.uniform(*slow) if rng.random() < slow_share else rng.uniform(*speed)
+    return resample_speed(F, k)
+
+
+def resample_speed(F, k):
+    """Play a clip at k times its speed (k < 1 = slower, more frames). The wrist-velocity channels are
+    per-frame distances, so they scale by k as well: a hand signing at half speed moves half as far per
+    frame. (Copying them unchanged gave slowed clips fast-hand velocities on slow frames; journal 12.)"""
     T = max(2, int(round(len(F) / k)))
     idx = np.clip(np.round(np.linspace(0, len(F) - 1, T)).astype(int), 0, len(F) - 1)
-    return F[idx]
+    out = F[idx].copy()
+    out[:, 63:65] *= k
+    return out
 
 
 def main():
