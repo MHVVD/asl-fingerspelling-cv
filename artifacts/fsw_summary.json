@@ -1,0 +1,70 @@
+{
+ "dataset": "ChicagoFSWild (Shi et al., IEEE SLT 2018); test = 868 clips from 36 signers unseen in training",
+ "measure": "letter accuracy = 1 - total edits / total reference letters",
+ "baseline_per_frame_smoothing": {
+  "test_letter_accuracy": 0.0937
+ },
+ "baseline_tuned_on_dev": {
+  "hold_s": 0.1,
+  "enter": 0.4,
+  "dev_letter_accuracy": 0.249,
+  "test_letter_accuracy": 0.2526
+ },
+ "sequence_ctc": {
+  "test_letter_accuracy": 0.6729,
+  "best_dev_letter_accuracy": 0.6675,
+  "params": 510621,
+  "epochs": 40,
+  "hidden": 128,
+  "layers": 2,
+  "train_minutes": 31.2,
+  "dev_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.001,
+   0.045,
+   0.2102,
+   0.3982,
+   0.496,
+   0.4627,
+   0.5504,
+   0.5876,
+   0.6201,
+   0.6237,
+   0.6365,
+   0.6382,
+   0.641,
+   0.6554,
+   0.6514,
+   0.6406,
+   0.6598,
+   0.6456,
+   0.6602,
+   0.6554,
+   0.6588,
+   0.6422,
+   0.6482,
+   0.658,
+   0.6592,
+   0.6622,
+   0.6604,
+   0.658,
+   0.6584,
+   0.6653,
+   0.6671,
+   0.6673,
+   0.6637,
+   0.6655,
+   0.6675,
+   0.6651,
+   0.6649
+  ]
+ },
+ "published_same_test_set": {
+  "Shi et al. SLT 2018 (hand ROI + CTC + LM)": 0.419,
+  "Shi et al. ICCV 2019, trained on ChicagoFSWild (best)": 0.451,
+  "Shi et al. ICCV 2019, + ChicagoFSWild+ extra data (best)": 0.612
+ },
+ "note": "Example transcripts are kept out of the repository: labels can contain real people's names."
+}

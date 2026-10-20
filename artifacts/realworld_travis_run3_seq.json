@@ -1,0 +1,146 @@
+{
+ "name": "travis_run3_sequence_model",
+ "note": "CTC sequence model trained on ChicagoFSWild (87 signers), whole 16-45.5 s window decoded at once",
+ "truth": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+ "output_scored": "ABFGHMRTYB",
+ "char_error_rate": 0.654,
+ "counts": {
+  "ok": 9,
+  "wrong": 1,
+  "missed": 16,
+  "extra": 0
+ },
+ "alignment": [
+  {
+   "truth": "A",
+   "output": "A",
+   "result": "ok"
+  },
+  {
+   "truth": "B",
+   "output": "B",
+   "result": "ok"
+  },
+  {
+   "truth": "C",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "D",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "E",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "F",
+   "output": "F",
+   "result": "ok"
+  },
+  {
+   "truth": "G",
+   "output": "G",
+   "result": "ok"
+  },
+  {
+   "truth": "H",
+   "output": "H",
+   "result": "ok"
+  },
+  {
+   "truth": "I",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "J",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "K",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "L",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "M",
+   "output": "M",
+   "result": "ok"
+  },
+  {
+   "truth": "N",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "O",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "P",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "Q",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "R",
+   "output": "R",
+   "result": "ok"
+  },
+  {
+   "truth": "S",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "T",
+   "output": "T",
+   "result": "ok"
+  },
+  {
+   "truth": "U",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "V",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "W",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "X",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "Y",
+   "output": "Y",
+   "result": "ok"
+  },
+  {
+   "truth": "Z",
+   "output": "B",
+   "result": "wrong"
+  }
+ ],
+ "handedness": "Left"
+}

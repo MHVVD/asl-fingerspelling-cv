@@ -1,0 +1,75 @@
+{
+ "train_words": 4000,
+ "test_words": 200,
+ "train_minutes": 23.3,
+ "seq_params": 290427,
+ "cer_sequence_model": 0.42,
+ "cer_per_frame_baseline": 0.233,
+ "word_exact_sequence_model": 0.04,
+ "word_exact_baseline": 0.175,
+ "examples": [
+  {
+   "word": "pulleys",
+   "sequence": "tues",
+   "baseline": "zulleys"
+  },
+  {
+   "word": "generate",
+   "sequence": "lemeaes",
+   "baseline": "tenerate"
+  },
+  {
+   "word": "thumbing",
+   "sequence": "tumbiml",
+   "baseline": "tzumbint"
+  },
+  {
+   "word": "bootee",
+   "sequence": "bces",
+   "baseline": "bootee"
+  },
+  {
+   "word": "pleaders",
+   "sequence": "tceaders",
+   "baseline": "zleaxer"
+  },
+  {
+   "word": "handmade",
+   "sequence": "tamdmadoe",
+   "baseline": "zanxmaxe"
+  },
+  {
+   "word": "tar",
+   "sequence": "tar",
+   "baseline": "tar"
+  },
+  {
+   "word": "eggshell",
+   "sequence": "slstel",
+   "baseline": "ettzell"
+  },
+  {
+   "word": "nest",
+   "sequence": "mest",
+   "baseline": "net"
+  },
+  {
+   "word": "ashcan",
+   "sequence": "astcan",
+   "baseline": "azca"
+  },
+  {
+   "word": "espresso",
+   "sequence": "sressc",
+   "baseline": "ezreo"
+  },
+  {
+   "word": "antacids",
+   "sequence": "anacids",
+   "baseline": "antacix"
+  }
+ ],
+ "cer_per_frame_baseline_contaminated_note": "letter_mlp_final includes session 4 (the test session) in training; superseded by the clean figure below",
+ "cer_per_frame_baseline_clean": 0.257,
+ "word_exact_baseline_clean": 0.14
+}
