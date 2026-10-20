@@ -1,0 +1,42 @@
+{
+ "settings": {
+  "model": "seq_fsw_slowaug2",
+  "alpha": 0.3,
+  "beta": 1.5,
+  "lm": "5-gram Witten-Bell, train labels x3 + /usr/share/dict a-z words"
+ },
+ "chicagofswild_test": {
+  "greedy": 0.6664,
+  "beam_lm": 0.706,
+  "doubles_total": 111,
+  "doubles_greedy": 2,
+  "doubles_beam_lm": 18
+ },
+ "fresh_clips": {
+  "clips": [
+   {
+    "truth": "BOOK",
+    "greedy": "BEK",
+    "beam_lm": "BED",
+    "right_greedy": 2,
+    "right_beam_lm": 1
+   },
+   {
+    "truth": "CAMPYLOBACTER",
+    "greedy": "CAMPYLOBACTER",
+    "beam_lm": "CAMPYLOBACTER",
+    "right_greedy": 13,
+    "right_beam_lm": 13
+   },
+   {
+    "truth": "BACTERIA",
+    "greedy": "BACTERIAT",
+    "beam_lm": "BACTERIAT",
+    "right_greedy": 8,
+    "right_beam_lm": 8
+   }
+  ],
+  "letter_accuracy_greedy": 0.88,
+  "letter_accuracy_beam_lm": 0.84
+ }
+}

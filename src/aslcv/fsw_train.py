@@ -18,7 +18,7 @@ from .extract_fsw import FSW, VOCAB, letter_accuracy, unpack_sequence
 from .features import majority_handedness
 from .infer import LetterStream, transcript
 from .model import LetterModel
-from .seqmodel import FEAT_DIM, SeqModel, Vocab, sequence_features
+from .seqmodel import FEAT_DIM, REPEAT, SeqModel, Vocab, encode_repeats, sequence_features
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -72,6 +72,7 @@ def main():
     ap.add_argument("--layers", type=int, default=2)
     ap.add_argument("--slow-share", type=float, default=0.0, help="share of training clips slowed to 0.2-0.6x")
     ap.add_argument("--tag", default="", help="suffix for the model file and results key")
+    ap.add_argument("--repeats", action="store_true", help="add a 'repeat' symbol for double letters (journal 14)")
     a = ap.parse_args()
 
     out = ROOT / "artifacts" / "fsw_results.json"
@@ -90,9 +91,9 @@ def main():
         return
 
     from .seqtrain import SeqNet, train
-    vocab = Vocab(VOCAB)
+    vocab = Vocab(VOCAB + (REPEAT if a.repeats else ""))
     tr, dev = load_split("train"), load_split("dev")
-    tr = [(f, l) for f, l in tr if l]
+    tr = [(f, encode_repeats(l) if a.repeats else l) for f, l in tr if l]      # dev/test stay as plain words
     net = SeqNet(FEAT_DIM, vocab.size, hidden=a.hidden, layers=a.layers)
 
     def val_fn(n):
@@ -112,6 +113,7 @@ def main():
         "test_letter_accuracy": round(letter_accuracy(refs, hyps), 4),
         "best_dev_letter_accuracy": round(max(h["dev_letter_acc"] for h in hist), 4),
         "params": seq.n_params, "epochs": a.epochs, "hidden": a.hidden, "layers": a.layers, "slow_share": a.slow_share,
+        "repeats": a.repeats,
         "train_minutes": round((time.time() - t0) / 60, 1), "history": hist,
         "examples": [{"truth": r, "output": h} for r, h in list(zip(refs, hyps))[:15]]}
     out.write_text(json.dumps(results, indent=1))

@@ -53,3 +53,24 @@ def test_speed_resample_scales_length_and_hand_velocity():
     assert np.all(slow[slow[:, 65] == 0][:, :65] == 0)
     fast = resample_speed(F, 2.0)
     assert len(fast) == 5 and np.allclose(fast[fast[:, 65] == 1][:, 63], 0.8)
+
+
+def test_repeat_symbol_encoding_and_decoding():
+    from aslcv.seqmodel import encode_repeats, expand_repeats
+    assert encode_repeats("mall") == "mal+"
+    assert encode_repeats("bookkeeper") == "bo+k+e+per"
+    assert encode_repeats("aaa") == "a+"            # triples are rare; treated as a double
+    assert encode_repeats("ab") == "ab"
+    assert expand_repeats("mal+") == "mall"
+    assert expand_repeats("+ab+") == "abb"          # a leading + has nothing to repeat
+    assert expand_repeats("a +") == "a "            # never repeat a space
+
+
+def test_decode_expands_repeat_symbol():
+    v = Vocab("ab+")
+    ids = [v.index[c] for c in "a"] + [0] + [v.index["+"]] + [v.index["b"]]
+    logits = np.full((len(ids), v.size), -5.0); logits[np.arange(len(ids)), ids] = 5.0
+    from aslcv.seqmodel import SeqModel
+    assert ctc_greedy_decode(logits, v) == "a+b"
+    m = SeqModel.__new__(SeqModel); m.vocab = v; m.logits = lambda f: logits
+    assert m.decode(None) == "aab"
