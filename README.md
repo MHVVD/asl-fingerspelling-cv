@@ -35,7 +35,7 @@ frame ─▶ MediaPipe hand landmarks (21 pts) ─▶ pixel space ─▶ normali
 | Same, public data only | 42.4% (a model of one person does not transfer to another) |
 | Spelling words from real held-out frames, after smoothing | 0.19 character error rate |
 | **Real-world video: a stranger fingerspelling A–Z** | **12 / 26 letters** (up from 1/26 after fixing which hand is read; journal 11) |
-| **ChicagoFSWild test set: 36 real-world signers never seen** (sequence model trained on 87 others) | **67.3% letter accuracy** (per-frame system: 25.3%; journal 12) |
+| **ChicagoFSWild test set: 36 real-world signers never seen** (sequence model trained on 87 others) | **67.3% letter accuracy**; **70.6%** with spelling-aware decoding (per-frame system: 25.3%; journals 12, 14) |
 | **Fresh clips, answer keys written before scoring** (2 new signers, 25 letters, scored once) | **88%** sequence model vs 40% per-frame; CAMPYLOBACTER read perfectly at ~6 letters/s (journal 13) |
 
 Weakest letters: thumb-position fists (M, N, S, T), crossed/spread pairs (R/U/V), letters signed pointing down (P, Q),

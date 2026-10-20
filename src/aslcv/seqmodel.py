@@ -53,6 +53,34 @@ def sequence_features(raw_seq, handedness="Right"):
     return out
 
 
+REPEAT = "+"
+
+
+def encode_repeats(text):
+    """'mall' -> 'mal+'. CTC merges identical neighbours unless a blank separates them, and fast signers
+    show a double letter as one hold, so doubles were almost always lost (4% kept, journal 14). A separate
+    'repeat' symbol cannot be merged into the letter before it. Triples (rare) become a single '+'."""
+    out = []
+    for c in text:
+        if out and c != " " and (c == out[-1] or (out[-1] == REPEAT and len(out) > 1 and c == out[-2])):
+            if out[-1] != REPEAT:
+                out.append(REPEAT)
+            continue
+        out.append(c)
+    return "".join(out)
+
+
+def expand_repeats(text):
+    out = []
+    for c in text:
+        if c == REPEAT:
+            if out and out[-1] != " ":
+                out.append(out[-1])
+        else:
+            out.append(c)
+    return "".join(out)
+
+
 def ctc_greedy_decode(logits, vocab):
     best = np.argmax(logits, axis=-1)
     collapsed = [int(b) for i, b in enumerate(best) if i == 0 or b != best[i - 1]]
@@ -102,7 +130,8 @@ class SeqModel:
         return h @ p["out.weight"].T + p["out.bias"]
 
     def decode(self, feats):
-        return ctc_greedy_decode(self.logits(feats), self.vocab)
+        text = ctc_greedy_decode(self.logits(feats), self.vocab)
+        return expand_repeats(text) if REPEAT in self.vocab.symbols else text
 
     @property
     def n_params(self):
