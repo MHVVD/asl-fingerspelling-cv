@@ -7,8 +7,12 @@ Outputs (default: outputs/<name>_subtitled.mp4 and outputs/<name>.srt):
   * a captioned video: running text at the bottom, current letter + confidence top-right, hand skeleton
   * an .srt subtitle file, one cue per word, playable alongside the original video in any player
 
-Pipeline per frame: MediaPipe (VIDEO mode, real timestamps) -> handedness by majority vote ->
-normalized features -> NumPy MLP -> LetterStream (thresholds in seconds) -> events -> subtitles.
+Two engines (--engine, default auto):
+  * sequence: CTC sequence model + spelling-aware decoding, reads whole signing segments (seq_translate.py).
+    70.6% letter accuracy on 36 unseen ChicagoFSWild signers. Its model is trained on ChicagoFSWild and is
+    local-only; when it is missing, auto falls back to:
+  * frame: per-frame NumPy MLP + LetterStream smoothing, committing letters as frames arrive (25% on the
+    same signers, tuned). Pipeline: MediaPipe -> handedness vote -> features -> MLP -> LetterStream -> events.
 Videos above --max-fps are subsampled to keep it light on a laptop CPU.
 """
 import argparse
@@ -101,7 +105,7 @@ def _chars_for(frame):
     return max(12, frame.shape[1] // 22)
 
 
-def _overlay(frame, caption, letter, conf):
+def _overlay(frame, caption, letter, conf, status=None):
     h, w = frame.shape[:2]
     s = h / 480                                                   # scale fonts with resolution
     # caption bar
@@ -119,8 +123,8 @@ def _overlay(frame, caption, letter, conf):
         cv2.rectangle(frame, (x0 + int(8 * s), y0 + int(88 * s)),
                       (x0 + int(8 * s) + int((bw - 16 * s) * conf), y0 + int(98 * s)), (80, 200, 255), -1)
     else:
-        cv2.putText(frame, "no hand", (x0 + int(10 * s), y0 + int(60 * s)), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.55 * s, (180, 180, 180), 1, cv2.LINE_AA)
+        cv2.putText(frame, status or "no hand", (x0 + int(10 * s), y0 + int(60 * s)), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.55 * s, (80, 200, 255) if status == "signing" else (180, 180, 180), 1, cv2.LINE_AA)
 
 
 def _finalize_video(tmp, out):
@@ -139,7 +143,10 @@ def main():
     ap.add_argument("video")
     ap.add_argument("--out", help="captioned video path (default outputs/<name>_subtitled.mp4)")
     ap.add_argument("--srt", help="subtitle path (default outputs/<name>.srt)")
-    ap.add_argument("--model", default=str(DEFAULT_MODEL))
+    ap.add_argument("--engine", choices=["auto", "sequence", "frame"], default="auto",
+                    help="auto = sequence model if available locally, else the per-frame model")
+    ap.add_argument("--model", default=None, help="model file (default depends on the engine)")
+    ap.add_argument("--no-lm", action="store_true", help="sequence engine: greedy decoding, no character model")
     ap.add_argument("--hand", choices=["auto", "right", "left"], default="auto",
                     help="signing hand; auto = majority vote over the video")
     ap.add_argument("--no-skeleton", action="store_true")
@@ -151,8 +158,19 @@ def main():
     out = a.out or ROOT / "outputs" / f"{stem}_subtitled.mp4"
     srt = a.srt or ROOT / "outputs" / f"{stem}.srt"
     hand = a.hand if a.hand == "auto" else a.hand.capitalize()
-    r = translate(a.video, out, srt, a.model, hand, not a.no_skeleton, a.max_fps, a.hold)
-    print(f"\ntranscript: {r['text'] or '(nothing recognised)'}")
+    from .seq_translate import SEQ_MODEL, translate_sequence
+    engine = a.engine
+    if engine == "auto":
+        engine = "sequence" if SEQ_MODEL.exists() else "frame"
+        if engine == "frame":
+            print("sequence model not found (it is trained on ChicagoFSWild and kept local); using the per-frame engine")
+    if engine == "sequence":
+        r = translate_sequence(a.video, out, srt, a.model or SEQ_MODEL, hand, not a.no_skeleton, a.max_fps,
+                               use_lm=not a.no_lm)
+    else:
+        r = translate(a.video, out, srt, a.model or DEFAULT_MODEL, hand, not a.no_skeleton, a.max_fps, a.hold)
+    print(f"\nengine: {engine}" + (f" ({r['decoder']})" if engine == "sequence" else ""))
+    print(f"transcript: {r['text'] or '(nothing recognised)'}")
     print(f"hand seen in {r['hand_detected_share']:.0%} of frames | hand: {r['handedness_used']} | "
           f"{r['frames_processed']} frames at {r['processed_fps']} fps | {r['seconds']} s ({r['speed_fps']} frames/s)")
     print(f"saved {out}\nsaved {srt}")

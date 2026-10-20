@@ -5,7 +5,10 @@ blank between the two l's, which fast signers rarely give. Prefix beam search ke
 spellings at every frame (summing over all the frame paths that produce each spelling), and adds a character
 language model's opinion:
 
-    score(spelling) = log P_ctc(spelling | video) + alpha * log P_lm(spelling) + beta * len(spelling)
+    score(spelling) = log P_ctc(spelling | video) + alpha * log P_lm(spelling) + beta * letters + beta_space * spaces
+
+beta rewards letters (it counters the language model's preference for short outputs). Spaces get their own
+beta_space (default 0): sharing beta made inserting a space almost free ("campyl obacter", journal 15).
 
 The character model is an n-gram with Witten-Bell smoothing, trained on training-set labels plus an English
 word list (never on dev/test labels). alpha and beta are tuned on the dev signers.
@@ -59,7 +62,7 @@ def _lae(a, b):
     return max(a, b) + np.log1p(np.exp(-abs(a - b)))
 
 
-def beam_decode(logits, vocab, lm=None, alpha=0.5, beta=0.0, beam=16, prune=1e-3):
+def beam_decode(logits, vocab, lm=None, alpha=0.5, beta=0.0, beam=16, prune=1e-3, beta_space=0.0):
     """CTC prefix beam search with optional character-LM fusion. Returns the decoded text
     (with repeat symbols expanded)."""
     lp_all = logits - np.logaddexp.reduce(logits, axis=1, keepdims=True)        # log-softmax
@@ -80,11 +83,12 @@ def beam_decode(logits, vocab, lm=None, alpha=0.5, beta=0.0, beam=16, prune=1e-3
             text = text_of(prefix) if lm else ""
             for s in cands:
                 ch = syms[s - 1]
+                step_bonus = beta_space if ch == " " else beta
                 if lm:
                     lm_char = (text[-1] if text and text[-1] != " " else ch) if ch == REPEAT else ch
-                    bonus = alpha * lm.logp(text, lm_char) + beta
+                    bonus = alpha * lm.logp(text, lm_char) + step_bonus
                 else:
-                    bonus = beta
+                    bonus = step_bonus
                 new = prefix + (s,)
                 if prefix and s == prefix[-1]:
                     nxt[new][1] = _lae(nxt[new][1], pb + lp[s] + bonus)     # a real repeat needs a blank first

@@ -39,3 +39,12 @@ def test_repeat_symbol_is_expanded_for_the_lm_and_the_output():
     v = Vocab("al+")
     L = logits_from_probs([{"a": .9}, {"l": .9}, {"+": .9}], v)
     assert beam_decode(L, v, lm=None) == "all"
+
+
+def test_length_bonus_does_not_make_mid_word_spaces_free():
+    """journal 15: 'campyl obacter'. The letter bonus must not reward inserting a space."""
+    v = Vocab("abc ")
+    L = logits_from_probs([{"a": .9}, {"b": .9}, {"-": .55, " ": .45}, {"c": .9}], v)
+    assert ctc_greedy_decode(L, v) == "abc"
+    lm = CharLM(["abc"] * 20 + ["ab c"], order=3)
+    assert beam_decode(L, v, lm=lm, alpha=0.3, beta=1.5) == "abc"

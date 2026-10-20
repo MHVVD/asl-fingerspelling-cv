@@ -49,7 +49,7 @@ and letters signed inconsistently between sessions. The debugging stories (two m
 | 5 Training + evaluation: NumPy-only MLP, 73 KB, 0.08 ms/frame | done |
 | 6 Smoothing (letter stream, double letters, spaces) + shared frame pipeline | done |
 | 7a Tutor: spaced repetition, hold-to-confirm, finger-level tips (2.4% false alarms), teach mode, debug view | done, in use |
-| 7b Video translator: captioned MP4 + SRT, two-hand aware, 33–55 frames/s on CPU | done; real-world test 12/26 letters |
+| 7b Video translator: captioned MP4 + SRT; sequence engine (70% on unseen signers) with per-frame fallback | done (journal 15) |
 | Next: many-signer data and a sequence model (ChicagoFSWild), motion letters J and Z | in progress |
 
 ## Built for a laptop CPU
@@ -73,6 +73,7 @@ so the tutor and translator run straight away. To retrain from scratch you also 
 source .venv/bin/activate
 PYTHONPATH=src python -m aslcv.tutor_app       # the tutor (SPACE skip, ENTER teach, D debug, ESC quit)
 PYTHONPATH=src python -m aslcv.translate my_clip.mp4   # captioned video + .srt into outputs/
+                                               # (--engine sequence|frame; the sequence model is local-only, see journal 15)
 PYTHONPATH=src python -m aslcv.record_clip     # record a test clip into clips/
 PYTHONPATH=src python -m aslcv.record          # record your own training samples (reference hand shown on the right)
 PYTHONPATH=src python -m aslcv.extract_public  # landmarks from the Kaggle ASL Alphabet set in data/raw/
