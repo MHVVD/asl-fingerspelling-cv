@@ -11,7 +11,8 @@
   "doubles_total": 111,
   "doubles_greedy": 2,
   "doubles_beam_lm": 18,
-  "beam_lm_beta_space_0": 0.7028
+  "beam_lm_beta_space_0": 0.7028,
+  "doubles_beam_lm_beta_space_0": 17
  },
  "fresh_clips": {
   "clips": [
