@@ -1,0 +1,145 @@
+{
+ "name": "travis_run4_sequence_model_slowaug",
+ "note": "CTC model retrained with 50% of clips slowed to 0.2-0.6x; native speed, no subsampling",
+ "truth": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+ "output_scored": "ADFGHLMORSTWYTAC",
+ "char_error_rate": 0.577,
+ "counts": {
+  "ok": 11,
+  "wrong": 5,
+  "missed": 10,
+  "extra": 0
+ },
+ "alignment": [
+  {
+   "truth": "A",
+   "output": "A",
+   "result": "ok"
+  },
+  {
+   "truth": "B",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "C",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "D",
+   "output": "D",
+   "result": "ok"
+  },
+  {
+   "truth": "E",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "F",
+   "output": "F",
+   "result": "ok"
+  },
+  {
+   "truth": "G",
+   "output": "G",
+   "result": "ok"
+  },
+  {
+   "truth": "H",
+   "output": "H",
+   "result": "ok"
+  },
+  {
+   "truth": "I",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "J",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "K",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "L",
+   "output": "L",
+   "result": "ok"
+  },
+  {
+   "truth": "M",
+   "output": "M",
+   "result": "ok"
+  },
+  {
+   "truth": "N",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "O",
+   "output": "O",
+   "result": "ok"
+  },
+  {
+   "truth": "P",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "Q",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "R",
+   "output": "R",
+   "result": "ok"
+  },
+  {
+   "truth": "S",
+   "output": "S",
+   "result": "ok"
+  },
+  {
+   "truth": "T",
+   "output": "T",
+   "result": "ok"
+  },
+  {
+   "truth": "U",
+   "output": "",
+   "result": "missed"
+  },
+  {
+   "truth": "V",
+   "output": "W",
+   "result": "wrong"
+  },
+  {
+   "truth": "W",
+   "output": "Y",
+   "result": "wrong"
+  },
+  {
+   "truth": "X",
+   "output": "T",
+   "result": "wrong"
+  },
+  {
+   "truth": "Y",
+   "output": "A",
+   "result": "wrong"
+  },
+  {
+   "truth": "Z",
+   "output": "C",
+   "result": "wrong"
+  }
+ ]
+}

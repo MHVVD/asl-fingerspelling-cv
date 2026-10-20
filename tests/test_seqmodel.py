@@ -38,3 +38,18 @@ def test_numpy_model_matches_torch():
         ref = net(torch.from_numpy(x)[None]).numpy()[0]
     np_model = SeqModel.from_torch(net, Vocab("abcd"))
     assert np.allclose(np_model.logits(x), ref, atol=1e-4)
+
+
+def test_speed_resample_scales_length_and_hand_velocity():
+    """Slowing a clip must also slow the hand: per-frame wrist velocity shrinks by the same factor (journal 12)."""
+    from aslcv.fsw_train import resample_speed
+    F = np.zeros((10, FEAT_DIM), np.float32)
+    F[:, 63] = 0.4; F[:, 65] = 1.0                 # wrist moving 0.4 hand sizes per frame
+    F[4, :] = 0.0                                   # one frame without a hand
+    slow = resample_speed(F, 0.5)                   # half speed
+    assert len(slow) == 20
+    moving = slow[slow[:, 65] == 1]
+    assert np.allclose(moving[:, 63], 0.2)          # half the distance per frame
+    assert np.all(slow[slow[:, 65] == 0][:, :65] == 0)
+    fast = resample_speed(F, 2.0)
+    assert len(fast) == 5 and np.allclose(fast[fast[:, 65] == 1][:, 63], 0.8)

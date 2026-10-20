@@ -1,0 +1,98 @@
+{
+ "keys_file": "artifacts/fresh_test_keys.json",
+ "per_frame_settings": {
+  "hold_s": 0.1,
+  "enter": 0.4
+ },
+ "clips": [
+  {
+   "clip": "asl_book_goodrow.ogv",
+   "truth": "BOOK",
+   "frames": 57,
+   "hand_found": 0.982,
+   "handedness": "Right",
+   "models": {
+    "per-frame (dev-tuned)": {
+     "output": "ACBOZ",
+     "letters_right": 1,
+     "edits": 4
+    },
+    "sequence": {
+     "output": "K",
+     "letters_right": 1,
+     "edits": 3
+    },
+    "sequence + slow signing": {
+     "output": "BEK",
+     "letters_right": 2,
+     "edits": 2
+    }
+   }
+  },
+  {
+   "clip": "usda_campylobacter.webm",
+   "truth": "CAMPYLOBACTER",
+   "frames": 69,
+   "hand_found": 1.0,
+   "handedness": "Right",
+   "models": {
+    "per-frame (dev-tuned)": {
+     "output": "CAOHYLMBACZRX",
+     "letters_right": 7,
+     "edits": 6
+    },
+    "sequence": {
+     "output": "CAMPYLOBACTER",
+     "letters_right": 13,
+     "edits": 0
+    },
+    "sequence + slow signing": {
+     "output": "CAMPYLOBACTER",
+     "letters_right": 13,
+     "edits": 0
+    }
+   }
+  },
+  {
+   "clip": "usda_campylobacter.webm",
+   "truth": "BACTERIA",
+   "frames": 53,
+   "hand_found": 1.0,
+   "handedness": "Right",
+   "models": {
+    "per-frame (dev-tuned)": {
+     "output": "BACZYAX",
+     "letters_right": 3,
+     "edits": 5
+    },
+    "sequence": {
+     "output": "BACTERIAT",
+     "letters_right": 8,
+     "edits": 1
+    },
+    "sequence + slow signing": {
+     "output": "BACTERIAT",
+     "letters_right": 8,
+     "edits": 1
+    }
+   }
+  }
+ ],
+ "summary": {
+  "per-frame (dev-tuned)": {
+   "letters_right": 11,
+   "letters_total": 25,
+   "letter_accuracy": 0.4
+  },
+  "sequence": {
+   "letters_right": 22,
+   "letters_total": 25,
+   "letter_accuracy": 0.84
+  },
+  "sequence + slow signing": {
+   "letters_right": 23,
+   "letters_total": 25,
+   "letter_accuracy": 0.88
+  }
+ }
+}

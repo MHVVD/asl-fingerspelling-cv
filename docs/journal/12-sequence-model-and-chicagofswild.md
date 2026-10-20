@@ -100,7 +100,40 @@ k-th frame to match the training speed gave 18–19 / 26 for every k from 2 to 6
 is training-time: augment with slow signing (the current speed augmentation is only 0.8–1.25×). Slow, deliberate signing
 is also how learners sign in the tutor, so this matters beyond one clip.
 
+## Retraining with slow signing
+Half of the training clips slowed to 0.2–0.6× (`--slow-share 0.5`), 30 epochs.
+
+| Model | ChicagoFSWild test | Travis, native speed |
+|---|---|---|
+| Sequence model (journal 12, above) | 67.3% | 9 / 26, error 0.65 |
+| **+ slow-signing augmentation** | 66.5% (dev 66.1%; within run-to-run noise) | **11 / 26, error 0.58** (lowest error so far) |
+| Per-frame system (journal 11, run 2), for reference | 25.3% (tuned) | 12 / 26, error 0.73 |
+
+It helped, but far less than the 18–19 / 26 the subsampling diagnosis suggested. Likely cause, found reading my own code:
+the augmentation stretches a clip by repeating frames, but the wrist-velocity features were computed at the original speed
+and copied unchanged, so slowed clips show fast-hand velocities on slow-moving frames, a combination real slow signing
+never produces. Fix: scale the velocity channels by the speed factor when resampling. Not yet done.
+
+**The Travis clip is no longer a clean test.** It has now informed three decisions (which hand to read, the speed diagnosis,
+whether this retraining worked). Further gains on it would overstate real-world performance, so the next honest
+real-world number needs a fresh clip that is only looked at for the final score.
+
+## Fixing the slow-signing augmentation
+`fsw_train.resample_speed(F, k)` now scales the wrist-velocity channels by the speed factor k (test added). Check before
+retraining, median wrist speed in hand sizes per frame: ChicagoFSWild 0.041; slowed to 0.25× with the old augmentation 0.041
+(the bug); with the fix 0.010; real slow signing (Travis) 0.027, which now falls inside the training range.
+
+| Model | ChicagoFSWild test | Travis (no longer a clean test) |
+|---|---|---|
+| Sequence model | 67.3% | 9 / 26, error 0.65 |
+| + slow signing, velocity bug | 66.5% | 11 / 26, error 0.58 |
+| **+ slow signing, fixed** (`seq_fsw_slowaug2`) | **66.7%** | **12 / 26, error 0.54** |
+| Per-frame system | 25.3% | 12 / 26, error 0.73 |
+
+ChicagoFSWild accuracy held; on Travis it ties the per-frame system on letters right with the lowest error so far.
+
 ## Next
-1. Retrain with a wide speed augmentation (slow signing), re-check ChicagoFSWild test (must not drop) and Travis.
+1. Fresh real-world test, scored once, all models side by side: "ASL BOOK" (Richard Goodrow, CC BY 3.0, fingerspells B-O-O-K)
+   and "(ASL) – Campylobacter" (USDA, public domain; answer key to be built by watching before any model sees it).
 2. Double letters: beam search, possibly with a small language model.
 3. Use the sequence model in the video translator.

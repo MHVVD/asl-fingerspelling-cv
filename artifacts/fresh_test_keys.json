@@ -1,0 +1,47 @@
+{
+ "_purpose": "Answer keys for fresh real-world test clips, written BEFORE any model is run on them (journal 13). Each clip is scored once.",
+ "clips": [
+  {
+   "file": "clips/asl_book_goodrow.ogv",
+   "sha256": "a15f0922cdf15e5ed64c23de797fa222d2d2fdb13845a0af941e9967fdcea631",
+   "source": "https://commons.wikimedia.org/wiki/File:ASL_BOOK.ogv",
+   "author": "Richard Goodrow",
+   "license": "CC BY 3.0",
+   "window_s": [
+    1.9,
+    3.8
+   ],
+   "truth": "BOOK",
+   "how_key_was_made": "Description says 'BOOK. B-O-O-K. ...'; confirmed by eye at 0.1 s steps: B 2.1-2.6 s, O-O 2.7-2.9 s (brief, one hold), K 3.0-3.5 s.",
+   "written": "2026-10-20T18:49:28+01:00"
+  },
+  {
+   "file": "clips/usda_campylobacter.webm",
+   "sha256": "9823ba3e1cfa3863b5277e8def9143c4a8b313396ec61fcbd2d14a18e5821bd6",
+   "source": "https://commons.wikimedia.org/wiki/File:(ASL)_-_Campylobacter_2011.webm",
+   "author": "USDA Food Safety and Inspection Service",
+   "license": "Public domain (US government work)",
+   "written": "2026-10-20T18:51:53+01:00",
+   "window_s": [
+    25.85,
+    28.15
+   ],
+   "truth": "CAMPYLOBACTER",
+   "how_key_was_made": "Burned-in caption 'What is Campylobacter?'; read at full frame rate: C 25.90, A/M 26.03-26.27 (too fast to separate), P 26.30, Y 26.50, L 26.70, O 26.83, B 27.00, A 27.20, C 27.33, T/E 27.50-27.70, R 27.77-28.10. ~6 letters/s."
+  },
+  {
+   "file": "clips/usda_campylobacter.webm",
+   "sha256": "9823ba3e1cfa3863b5277e8def9143c4a8b313396ec61fcbd2d14a18e5821bd6",
+   "source": "https://commons.wikimedia.org/wiki/File:(ASL)_-_Campylobacter_2011.webm",
+   "author": "USDA Food Safety and Inspection Service",
+   "license": "Public domain (US government work)",
+   "written": "2026-10-20T18:51:53+01:00",
+   "window_s": [
+    29.05,
+    30.82
+   ],
+   "truth": "BACTERIA",
+   "how_key_was_made": "Caption 'Campylobacter bacteria is...'; read at full frame rate: B 29.13, A, C, T, E, R ~30.0, I ~30.1, A 30.30-30.77; the V at 30.84 is the next sign."
+  }
+ ]
+}
