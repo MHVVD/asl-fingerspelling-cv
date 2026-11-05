@@ -82,6 +82,25 @@ PYTHONPATH=src python -m aslcv.score_clip CLIP --truth WORD --name RUN   # score
 python -m pytest -q                            # tests
 ```
 
+## Make it speak (ElevenLabs)
+The video translator can also say the words it reads, using [ElevenLabs](https://elevenlabs.io) text-to-speech.
+This is optional; nothing else needs it. [30-second demo](docs/media/usda_spoken_demo.mp4) (USDA video, public domain).
+```bash
+pip install -r requirements-tts.txt            # or: pip install .[tts]
+cp .env.example .env                           # then paste your key: ELEVENLABS_API_KEY=...
+PYTHONPATH=src python -m aslcv.translate my_video.mp4 --speak --vocab my_topic_words.txt
+```
+Besides the captioned video and `.srt`, you get:
+- `outputs/<name>_spoken.mp3`: each decoded word spoken at the moment its signing starts
+- `outputs/<name>_captioned_spoken.mp4`: the captioned video with that narration
+- `outputs/<name>_spoken.json`: what was spoken, what was skipped and why, characters used
+
+Only real words found in the decoded letters are spoken (the model also turns ordinary signs into letter strings);
+`--vocab` adds names and topic terms a general word list lacks ([example](examples/usda_campylobacter_vocab.txt)),
+`--speak-all` speaks everything. Clips are cached in `cache/tts/`, so a re-run costs no credits (`--no-cache` to
+force). Also `--voice-id`, `--tts-model`, `--min-confidence`. Needs ffmpeg; the key needs the Text to Speech
+permission. Details: [journal 16](docs/journal/16-make-it-speak.md).
+
 ## Notebooks
 Three runnable walkthroughs that need no webcam and use only data in this repo
 (open with `pip install jupyter && jupyter lab`):
