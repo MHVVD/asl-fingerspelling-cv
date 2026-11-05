@@ -14,9 +14,15 @@ Two engines (--engine, default auto):
   * frame: per-frame NumPy MLP + LetterStream smoothing, committing letters as frames arrive (25% on the
     same signers, tuned). Pipeline: MediaPipe -> handedness vote -> features -> MLP -> LetterStream -> events.
 Videos above --max-fps are subsampled to keep it light on a laptop CPU.
+
+--speak (optional, ElevenLabs; journal 16) also writes outputs/<name>_spoken.mp3, a narration track with each
+decoded word spoken at its segment's start, and outputs/<name>_captioned_spoken.mp4, the captioned video with
+that narration. Setup: pip install -r requirements-tts.txt, and ELEVENLABS_API_KEY in .env.
 """
 import argparse
+import json
 import shutil
+import sys
 import subprocess
 import time
 from pathlib import Path
@@ -31,6 +37,7 @@ from .subtitles import caption_at, events_to_cues, format_srt
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_MODEL = ROOT / "models" / "letter_mlp_final.npz"
+MIN_CONFIDENCE = 0.6       # --speak: below this only short junk segments were found on the USDA video (journal 16)
 
 
 def translate(video_path, out_video=None, out_srt=None, model_path=DEFAULT_MODEL, hand="auto",
@@ -138,6 +145,49 @@ def _finalize_video(tmp, out):
     tmp.replace(out)
 
 
+def speech_segments(result, engine, min_confidence=0.0, vocab=None):
+    """-> (items to speak [{"start_s", "text"}], segments skipped [{"start_s", "text", "reason"}]).
+    Sequence engine: segments below min_confidence are skipped. Then, with a vocabulary, only words spotted
+    inside each segment are spoken (spotting.py); without one (--speak-all), whole segments are.
+    The per-frame engine has no confidence, so its word cues go straight to spotting."""
+    from .spotting import words_in_segment
+    if engine == "sequence":
+        segs = [s for s in result["segments"] if s["text"].strip()]
+    else:
+        segs = [{"start_s": c.start, "end_s": c.end, "text": c.text} for c in result["cues"]]
+    keep, skipped = [], []
+    for seg in segs:
+        if seg.get("confidence", 1.0) < min_confidence:
+            skipped.append({"start_s": seg["start_s"], "text": seg["text"], "reason": f"confidence {seg['confidence']}"})
+        elif vocab is None:
+            keep.append({"start_s": seg["start_s"], "text": seg["text"].lower()})
+        else:
+            words = words_in_segment(seg, vocab)
+            keep += words
+            if not words:
+                skipped.append({"start_s": seg["start_s"], "text": seg["text"], "reason": "no known word"})
+    return keep, skipped
+
+
+def speak(result, engine, synth, video, out_dir, stem, min_confidence=0.0, vocab=None):
+    """Narration track + captioned video with narration. Returns a report (also saved as JSON)."""
+    from .narrate import mux, narrate, video_duration
+    keep, skipped = speech_segments(result, engine, min_confidence, vocab)
+    if not keep:
+        return {"clips": 0, "skipped": skipped}, None, None
+    spoken_mp3 = Path(out_dir) / f"{stem}_spoken.mp3"
+    spoken_mp4 = Path(out_dir) / f"{stem}_captioned_spoken.mp4"
+    t0 = time.time()
+    report = narrate(keep, synth, video_duration(video), spoken_mp3)
+    mux(video, spoken_mp3, spoken_mp4)
+    report.update(skipped=skipped, voice_id=synth.voice_id, model_id=synth.model_id,
+                  seconds=round(time.time() - t0, 1), min_confidence=min_confidence,
+                  filter="all segments" if vocab is None else f"words spotted ({len(vocab)}-word vocabulary)",
+                  **synth.stats)
+    Path(out_dir, f"{stem}_spoken.json").write_text(json.dumps(report, indent=1))
+    return report, spoken_mp3, spoken_mp4
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("video")
@@ -152,7 +202,28 @@ def main():
     ap.add_argument("--no-skeleton", action="store_true")
     ap.add_argument("--max-fps", type=float, default=30.0)
     ap.add_argument("--hold", type=float, default=0.2, help="seconds a letter must be held (lower for fast signers)")
+    sp = ap.add_argument_group("speech (optional, ElevenLabs; needs requirements-tts.txt and ELEVENLABS_API_KEY)")
+    sp.add_argument("--speak", action="store_true", help="also write a narrated MP3 and a captioned video with it")
+    sp.add_argument("--voice-id", default=None, help="ElevenLabs voice (default: George, the quickstart voice)")
+    sp.add_argument("--tts-model", default=None, help="ElevenLabs model (default: eleven_multilingual_v2)")
+    sp.add_argument("--min-confidence", type=float, default=MIN_CONFIDENCE,
+                    help=f"sequence engine: skip segments the model is less sure of (default {MIN_CONFIDENCE})")
+    sp.add_argument("--vocab", help="extra words to listen for, one per line (names, topic terms)")
+    sp.add_argument("--speak-all", action="store_true",
+                    help="speak whole decoded segments, not only the words found in them")
+    sp.add_argument("--no-cache", action="store_true", help="always call the API (default: reuse cached clips)")
     a = ap.parse_args()
+
+    synth = None
+    if a.speak:                                  # fail fast, before the slow video pass
+        from .narrate import NarrationError, require_ffmpeg
+        from .tts import DEFAULT_MODEL as TTS_MODEL, DEFAULT_VOICE, Synthesizer, TTSError
+        try:
+            require_ffmpeg()
+            synth = Synthesizer(a.voice_id or DEFAULT_VOICE, a.tts_model or TTS_MODEL, use_cache=not a.no_cache)
+            synth.check()
+        except (TTSError, NarrationError) as e:
+            sys.exit(f"error: {e}")
 
     stem = Path(a.video).stem
     out = a.out or ROOT / "outputs" / f"{stem}_subtitled.mp4"
@@ -174,6 +245,25 @@ def main():
     print(f"hand seen in {r['hand_detected_share']:.0%} of frames | hand: {r['handedness_used']} | "
           f"{r['frames_processed']} frames at {r['processed_fps']} fps | {r['seconds']} s ({r['speed_fps']} frames/s)")
     print(f"saved {out}\nsaved {srt}")
+
+    if synth is not None:
+        try:
+            from .spotting import load_vocab
+            vocab = None if a.speak_all else load_vocab(a.vocab)
+            if vocab is not None and not vocab:
+                print("no word list found (/usr/share/dict/words or --vocab); speaking whole segments")
+                vocab = None
+            rep, mp3, mp4 = speak(r, engine, synth, out, Path(out).parent, stem, a.min_confidence, vocab)
+        except (TTSError, NarrationError) as e:
+            sys.exit(f"error: {e}")
+        if not rep["clips"]:
+            print(f"\nnothing to speak: all {len(rep['skipped'])} segments were unsure or had no known word "
+                  "(try --speak-all, --vocab or a lower --min-confidence); no audio written")
+            return
+        print(f"\nspoke {rep['clips']} clips ({len(rep['skipped'])} segments skipped) | "
+              f"{rep['characters']} characters synthesized, {rep['cache_hits']} clips from cache | "
+              f"{rep['queued']} queued (max delay {rep['max_delay_s']} s) | {rep['seconds']} s")
+        print(f"saved {mp3}\nsaved {mp4}")
 
 
 if __name__ == "__main__":

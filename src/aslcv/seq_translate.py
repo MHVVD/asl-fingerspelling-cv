@@ -79,6 +79,15 @@ def text_to_events(text, t0, t1):
     return events
 
 
+def segment_confidence(logits, blank):
+    """How sure the model is about the letters it emitted: mean top probability over the frames whose most
+    likely symbol is not blank (0 if there are none). Used only to choose what to speak (--min-confidence);
+    the decoded text does not depend on it."""
+    p = np.exp(logits - np.logaddexp.reduce(logits, axis=1, keepdims=True))
+    letter = p.argmax(axis=1) != blank
+    return round(float(p.max(axis=1)[letter].mean()), 3) if letter.any() else 0.0
+
+
 @lru_cache(maxsize=1)
 def load_char_lm():
     """Character model: ChicagoFSWild training labels (if present locally) + the system English word list."""
@@ -142,8 +151,10 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
     events, decoded = [], []
     for a, b in segments:
         F = sequence_features([None if h is None else h.landmarks_px for h in chosen[a:b]], side)
-        text = beam_decode(model.logits(F), model.vocab, lm=lm, alpha=ALPHA, beta=BETA) if lm else model.decode(F)
-        decoded.append({"start_s": round(times[a], 2), "end_s": round(times[b - 1], 2), "text": text})
+        logits = model.logits(F)
+        text = beam_decode(logits, model.vocab, lm=lm, alpha=ALPHA, beta=BETA) if lm else model.decode(F)
+        decoded.append({"start_s": round(times[a], 2), "end_s": round(times[b - 1], 2), "text": text,
+                        "confidence": segment_confidence(logits, model.vocab.blank)})
         events += text_to_events(text, times[a], times[b - 1])
         if verbose:
             print(f"  {times[a]:6.1f}-{times[b - 1]:6.1f}s  {text}", flush=True)

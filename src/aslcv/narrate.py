@@ -117,9 +117,10 @@ def video_duration(path):
         return 0.0
 
 
-def narrate(segments, synthesizer, total_s, out_mp3, decode=decode_mp3, write=write_mp3):
+def narrate(segments, synthesizer, total_s, out_mp3, decode=None, write=None):
     """segments: [{"start_s", "text"}] (already filtered) -> writes out_mp3, returns a report.
     All clips are synthesized and decoded before anything is written, so an API error leaves no output."""
+    decode, write = decode or decode_mp3, write or write_mp3
     texts = sorted((s["start_s"], s["text"].strip()) for s in segments if s["text"].strip())  # plan_timeline's order
     clips = [decode(synthesizer.synthesize(text)) for _, text in texts]
     placements = plan_timeline([(t, len(c) / RATE, text) for (t, text), c in zip(texts, clips)])
