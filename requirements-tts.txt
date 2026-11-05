@@ -1,0 +1,2 @@
+# optional: spoken narration for the video translator (--speak); see README "Make it speak"
+elevenlabs>=2.76,<3

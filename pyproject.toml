@@ -1,7 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "aslcv"
 version = "0.1.0"
 requires-python = ">=3.10"
+dependencies = ["mediapipe>=1.1", "opencv-python>=4.10", "numpy>=1.26"]
+
+[project.optional-dependencies]
+tts = ["elevenlabs>=2.76,<3"]          # spoken narration for the video translator (--speak)
+dev = ["pytest>=7.4", "scikit-learn>=1.9", "matplotlib>=3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
