@@ -1,0 +1,12 @@
+# Topic words for the USDA "Campylobacter" video (--vocab examples/usda_campylobacter_vocab.txt).
+# Names and technical terms a general word list lacks, written from the video's subject, the way
+# you would give a speech recogniser a custom vocabulary. Journal 16 reports results with and without it.
+campylobacter
+campylobacteriosis
+jejuni
+meningitis
+guillain
+barre
+fsis
+usda
+karen

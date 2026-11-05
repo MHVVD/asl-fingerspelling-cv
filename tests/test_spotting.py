@@ -1,4 +1,4 @@
-from aslcv.spotting import load_vocab, spot_words, words_in_segment
+from aslcv.spotting import Vocab, load_vocab, spot_words, words_in_segment
 
 
 def test_greedy_longest_match_ignores_decoder_spaces():
@@ -7,8 +7,14 @@ def test_greedy_longest_match_ignores_decoder_spaces():
 
 
 def test_short_words_need_min_len():
-    assert spot_words("goofeces", {"goof", "feces"}, min_len=6) == []
-    assert spot_words("goofeces", {"goof", "feces"}, min_len=4) == [("goof", 0)]     # greedy: the f is used up
+    assert spot_words("goofeces", {"goof", "feces"}) == []
+    assert spot_words("goofeces", Vocab({"goof", "feces"}, min_len=4)) == [("goof", 0)]   # greedy: the f is used up
+
+
+def test_topic_words_count_at_any_length():
+    v = Vocab({"sisters"}, topic={"fsis"})
+    assert spot_words("fsiswebsite", v) == [("fsis", 0)]
+    assert spot_words("xsistersx", v) == [("sisters", 1)]
 
 
 def test_word_time_follows_its_letters():
@@ -20,8 +26,9 @@ def test_load_vocab_merges_files_and_cleans(tmp_path):
     a, b = tmp_path / "a", tmp_path / "b"
     a.write_text("Apple\nit's\n")
     b.write_text("# topic words\nJejuni  # a bacterium\n\n")
-    assert load_vocab(b, system=a) == {"apple", "jejuni"}
-    assert load_vocab(None, system=tmp_path / "missing") == set()
+    v = load_vocab(b, system=a)
+    assert v.words == {"apple", "jejuni"} and v.topic == {"jejuni"}
+    assert len(load_vocab(None, system=tmp_path / "missing")) == 0
 
 
 def test_a_whole_known_word_is_kept_even_if_short():

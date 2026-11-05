@@ -14,28 +14,52 @@ SYSTEM_WORDS = Path("/usr/share/dict/words")
 MIN_LEN = 6              # shorter dictionary words turn up by chance inside junk ("oust", "cane", "goof")
 
 
-def load_vocab(extra=None, system=SYSTEM_WORDS):
-    """Lower-case a-z words from the system list and/or a file (one word per line, # comments)."""
+class Vocab:
+    """Known words. General words (system list) must have >= min_len letters to be spotted inside a longer
+    string; topic words (--vocab) are deliberate, so any of 3+ letters count ("fsis")."""
+
+    def __init__(self, words=(), topic=(), min_len=MIN_LEN):
+        self.topic = set(topic)
+        self.words = set(words) | self.topic
+        self.min_len = min_len
+
+    def __contains__(self, word):
+        return word in self.words
+
+    def __len__(self):
+        return len(self.words)
+
+    def spottable(self, word):
+        return word in self.topic or (word in self.words and len(word) >= self.min_len)
+
+
+def _read_words(path):
     words = set()
-    for path in [system, extra]:
-        if path and Path(path).exists():
-            for line in Path(path).read_text(errors="ignore").splitlines():
-                w = line.split("#")[0].strip().lower()
-                if re.fullmatch(r"[a-z]+", w):
-                    words.add(w)
+    if path and Path(path).exists():
+        for line in Path(path).read_text(errors="ignore").splitlines():
+            w = line.split("#")[0].strip().lower()
+            if re.fullmatch(r"[a-z]+", w):
+                words.add(w)
     return words
 
 
-def spot_words(text, vocab, min_len=MIN_LEN):
+def load_vocab(extra=None, system=SYSTEM_WORDS):
+    """System word list + topic words from `extra` (one per line, # comments); lower-case a-z only."""
+    return Vocab(_read_words(system), {w for w in _read_words(extra) if len(w) >= 3})
+
+
+def spot_words(text, vocab):
     """-> [(word, letter_index)]. Text that is exactly one known word is kept whatever its length ("hello");
-    otherwise greedy longest match, left to right, ignoring spaces the decoder put in, and letters that
-    start no word of >= min_len are skipped."""
+    otherwise greedy longest match, left to right, ignoring spaces the decoder put in; letters that start
+    no spottable word are skipped."""
+    if not isinstance(vocab, Vocab):
+        vocab = Vocab(vocab)
     letters = text.replace(" ", "").lower()
     if letters in vocab:
         return [(letters, 0)]
     found, i = [], 0
     while i < len(letters):
-        word = next((letters[i:j] for j in range(len(letters), i + min_len - 1, -1) if letters[i:j] in vocab), None)
+        word = next((letters[i:j] for j in range(len(letters), i, -1) if vocab.spottable(letters[i:j])), None)
         if word:
             found.append((word, i))
             i += len(word)
@@ -44,9 +68,9 @@ def spot_words(text, vocab, min_len=MIN_LEN):
     return found
 
 
-def words_in_segment(seg, vocab, min_len=MIN_LEN):
+def words_in_segment(seg, vocab):
     """Spotted words with a time each: letters are spread evenly over the segment, as in the captions."""
     n = max(1, len(seg["text"].replace(" ", "")))
     span = seg["end_s"] - seg["start_s"]
     return [{"start_s": round(seg["start_s"] + i / n * span, 2), "text": w}
-            for w, i in spot_words(seg["text"], vocab, min_len)]
+            for w, i in spot_words(seg["text"], vocab)]
