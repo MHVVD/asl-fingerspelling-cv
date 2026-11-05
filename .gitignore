@@ -26,3 +26,5 @@ artifacts/fsw_results.json
 # secrets and caches (ElevenLabs narration)
 .env
 cache/
+*.egg-info/
+build/
