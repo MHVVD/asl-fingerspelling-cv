@@ -132,8 +132,8 @@ def train_bigru(train, dev, hidden=64, layers=2, steps=3000, window=192, batch=3
             det = FSDetector.from_torch(net)
             probs = [det.prob(v["feats"]) for v in dev]
             ap = frame_scores(np.concatenate([v["label"] for v in dev]), np.concatenate(probs), 0.5)["AP"]
-            history.append({"step": step, "loss": round(float(loss), 4), "dev_AP": ap})
-            log(f"  step {step}  loss {float(loss):.3f}  dev AP {ap:.3f}")
+            history.append({"step": step, "loss": round(loss.item(), 4), "dev_AP": ap})
+            log(f"  step {step}  loss {loss.item():.3f}  dev AP {ap:.3f}", flush=True)
             if ap > best:
                 best, best_state = ap, {k: t.clone() for k, t in net.state_dict().items()}
     net.load_state_dict(best_state)

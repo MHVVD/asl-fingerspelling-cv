@@ -79,6 +79,25 @@ def text_to_events(text, t0, t1):
     return events
 
 
+def fingerspelling_mask(hands, times, size, detector, pad_s=0.2):
+    """Which frames the fingerspelling detector (journal 17) marks as fingerspelling, padded by pad_s at each end.
+    The detector was trained at 15 fps (its velocity features are per frame), so it runs on a 15 fps subsample."""
+    from .fsdetect import FPS as DET_FPS, detect_features, to_segments
+    times = np.asarray(times)
+    fps = 1.0 / np.median(np.diff(times)) if len(times) > 1 else DET_FPS
+    idx = np.arange(0, len(hands), max(1, round(fps / DET_FPS)))
+    H = np.full((len(idx), 2, 21, 3), np.nan, np.float32)
+    S = np.full((len(idx), 2), "", dtype="<U5")
+    for j, i in enumerate(idx):
+        for k, h in enumerate(hands[i][:2]):
+            H[j, k], S[j, k] = h.landmarks_px, h.handedness
+    segs = to_segments(detector.prob(detect_features(H, S, size)), times[idx], detector.threshold)
+    mask = np.zeros(len(times), bool)
+    for a, b in segs:
+        mask[(times >= a - pad_s) & (times <= b + pad_s)] = True
+    return mask, segs
+
+
 def segment_confidence(logits, blank):
     """How sure the model is about the letters it emitted: mean top probability over the frames whose most
     likely symbol is not blank (0 if there are none). Used only to choose what to speak (--min-confidence);
@@ -103,11 +122,13 @@ def load_char_lm():
 
 
 def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_MODEL, hand="auto", skeleton=True,
-                       max_fps=30.0, use_lm=True, verbose=True):
+                       max_fps=30.0, use_lm=True, verbose=True, detect=True):
+    """detect: read only the stretches the fingerspelling detector marks (if its model exists locally)."""
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         raise SystemExit(f"cannot open video {video_path}")
     src_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     step = max(1, round(src_fps / max_fps))
     fps = src_fps / step
     t0 = time.time()
@@ -137,7 +158,11 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
         motion.append(wrist_motion(prev, h.landmarks_px) if h is not None and prev is not None else 0.0)
         prev = h.landmarks_px if h is not None else None
 
-    segments = find_segments([bool(h) for h in hands], fps, motion=motion)
+    from .fsdetect import DETECTOR, FSDetector
+    use_detector = detect and DETECTOR.exists()
+    fs_mask, fs_segs = (fingerspelling_mask(hands, times, size, FSDetector.load(DETECTOR)) if use_detector
+                        else (np.ones(len(hands), bool), None))
+    segments = find_segments([bool(h) and m for h, m in zip(hands, fs_mask)], fps, motion=motion)
     chosen = [None] * len(hands)
     for a, b in segments:
         chosen[a:b] = select_signing_track(hands[a:b])
@@ -198,4 +223,6 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
             "video_fps": round(src_fps, 2), "processed_fps": round(fps, 2), "frames_processed": len(hands),
             "hand_detected_share": round(float(np.mean([bool(h) for h in hands])) if hands else 0.0, 3),
             "handedness_used": side, "seconds": round(elapsed, 1),
-            "speed_fps": round(len(hands) / max(elapsed, 1e-6), 1), "decoder": "beam+LM" if lm else "greedy"}
+            "speed_fps": round(len(hands) / max(elapsed, 1e-6), 1), "decoder": "beam+LM" if lm else "greedy",
+            "detector": "fingerspelling detector" if use_detector else "off",
+            "fingerspelling_share": round(float(fs_mask.mean()), 3) if hands else 0.0}

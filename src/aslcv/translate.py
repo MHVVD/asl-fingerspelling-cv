@@ -197,6 +197,8 @@ def main():
                     help="auto = sequence model if available locally, else the per-frame model")
     ap.add_argument("--model", default=None, help="model file (default depends on the engine)")
     ap.add_argument("--no-lm", action="store_true", help="sequence engine: greedy decoding, no character model")
+    ap.add_argument("--no-detect", action="store_true",
+                    help="sequence engine: read all signing as letters, not only what the fingerspelling detector marks")
     ap.add_argument("--hand", choices=["auto", "right", "left"], default="auto",
                     help="signing hand; auto = majority vote over the video")
     ap.add_argument("--no-skeleton", action="store_true")
@@ -237,10 +239,11 @@ def main():
             print("sequence model not found (it is trained on ChicagoFSWild and kept local); using the per-frame engine")
     if engine == "sequence":
         r = translate_sequence(a.video, out, srt, a.model or SEQ_MODEL, hand, not a.no_skeleton, a.max_fps,
-                               use_lm=not a.no_lm)
+                               use_lm=not a.no_lm, detect=not a.no_detect)
     else:
         r = translate(a.video, out, srt, a.model or DEFAULT_MODEL, hand, not a.no_skeleton, a.max_fps, a.hold)
-    print(f"\nengine: {engine}" + (f" ({r['decoder']})" if engine == "sequence" else ""))
+    print(f"\nengine: {engine}" + (f" ({r['decoder']}, {r['detector']}: {r['fingerspelling_share']:.0%} of frames)"
+                                     if engine == "sequence" else ""))
     print(f"transcript: {r['text'] or '(nothing recognised)'}")
     print(f"hand seen in {r['hand_detected_share']:.0%} of frames | hand: {r['handedness_used']} | "
           f"{r['frames_processed']} frames at {r['processed_fps']} fps | {r['seconds']} s ({r['speed_fps']} frames/s)")

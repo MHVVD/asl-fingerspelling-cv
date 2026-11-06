@@ -16,6 +16,7 @@ everything derived from them stay local (data/ is git-ignored).
 import argparse
 import collections
 import csv
+import re
 import subprocess
 import sys
 from concurrent.futures import ProcessPoolExecutor
@@ -32,7 +33,7 @@ VIDEOS = SRC / "videos"
 AVAILABLE = SRC / "available.txt"           # url|duration_s, written by `list`
 LANDMARKS = SRC / "landmarks"
 YTDLP = [sys.executable, "-m", "yt_dlp"]
-FPS = 15.0                                  # sampling rate for detection; plenty for spotting fingerspelling
+from .fsdetect import FPS                    # detection runs at 15 fps (plenty for spotting fingerspelling)
 MARGIN_S = 5.0                              # signing kept before the first / after the last marked clip
 
 
@@ -93,7 +94,9 @@ def cmd_download():
 
 
 def video_path(url):
-    hits = [h for h in VIDEOS.glob(f"{video_id(url)}.*") if ".part" not in h.suffixes and not h.name.endswith(".part")]
+    # finished downloads only: skip .part files and yt-dlp's per-stream fragments ("<id>.f140.m4a") left by a failed merge
+    hits = [h for h in VIDEOS.glob(f"{video_id(url)}.*")
+            if not h.name.endswith(".part") and not re.fullmatch(r"\.f\d+", h.suffixes[0] if h.suffixes else "")]
     return hits[0] if hits else None
 
 

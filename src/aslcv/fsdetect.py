@@ -21,6 +21,7 @@ from .seqmodel import bigru_forward
 
 ROOT = Path(__file__).resolve().parents[2]
 DETECTOR = ROOT / "models" / "fsdetect.npz"
+FPS = 15.0                                  # frame rate the detector is trained and run at
 SLOT_DIM = 1 + 63 + 2 + 1 + 2
 FEAT_DIM = 2 * SLOT_DIM + 2
 WRIST, MIDDLE_MCP = 0, 9
