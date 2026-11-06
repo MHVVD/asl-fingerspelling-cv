@@ -28,3 +28,7 @@ artifacts/fsw_results.json
 cache/
 *.egg-info/
 build/
+
+# fingerspelling detection: source videos and everything derived from them stay local (journal 17)
+data/fsw_source/
+models/fsdetect*.npz

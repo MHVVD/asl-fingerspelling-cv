@@ -108,6 +108,18 @@ def _gru_direction(x, w_ih, w_hh, b_ih, b_hh, reverse=False):
     return out
 
 
+def bigru_forward(p, layers, feats):
+    """Linear+ReLU -> bidirectional GRU x layers -> Linear, from a PyTorch state dict (inp, gru, out)."""
+    h = np.maximum(np.asarray(feats, np.float32) @ p["inp.weight"].T + p["inp.bias"], 0)
+    for l in range(layers):
+        fwd = _gru_direction(h, p[f"gru.weight_ih_l{l}"], p[f"gru.weight_hh_l{l}"],
+                             p[f"gru.bias_ih_l{l}"], p[f"gru.bias_hh_l{l}"])
+        bwd = _gru_direction(h, p[f"gru.weight_ih_l{l}_reverse"], p[f"gru.weight_hh_l{l}_reverse"],
+                             p[f"gru.bias_ih_l{l}_reverse"], p[f"gru.bias_hh_l{l}_reverse"], reverse=True)
+        h = np.concatenate([fwd, bwd], axis=1)
+    return h @ p["out.weight"].T + p["out.bias"]
+
+
 class SeqModel:
     def __init__(self, params, vocab, layers):
         self.p = {k: np.asarray(v, np.float32) for k, v in params.items()}
@@ -119,15 +131,7 @@ class SeqModel:
         return cls(params, vocab, net.gru.num_layers)
 
     def logits(self, feats):
-        p = self.p
-        h = np.maximum(np.asarray(feats, np.float32) @ p["inp.weight"].T + p["inp.bias"], 0)
-        for l in range(self.layers):
-            fwd = _gru_direction(h, p[f"gru.weight_ih_l{l}"], p[f"gru.weight_hh_l{l}"],
-                                 p[f"gru.bias_ih_l{l}"], p[f"gru.bias_hh_l{l}"])
-            bwd = _gru_direction(h, p[f"gru.weight_ih_l{l}_reverse"], p[f"gru.weight_hh_l{l}_reverse"],
-                                 p[f"gru.bias_ih_l{l}_reverse"], p[f"gru.bias_hh_l{l}_reverse"], reverse=True)
-            h = np.concatenate([fwd, bwd], axis=1)
-        return h @ p["out.weight"].T + p["out.bias"]
+        return bigru_forward(self.p, self.layers, feats)
 
     def decode(self, feats):
         text = ctc_greedy_decode(self.logits(feats), self.vocab)
