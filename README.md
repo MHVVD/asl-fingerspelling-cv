@@ -37,6 +37,7 @@ frame ─▶ MediaPipe hand landmarks (21 pts) ─▶ pixel space ─▶ normali
 | **Real-world video: a stranger fingerspelling A–Z** | **12 / 26 letters** (up from 1/26 after fixing which hand is read; journal 11) |
 | **ChicagoFSWild test set: 36 real-world signers never seen** (sequence model trained on 87 others) | **67.3% letter accuracy**; **70.6%** with spelling-aware decoding (per-frame system: 25.3%; journals 12, 14) |
 | **Fresh clips, answer keys written before scoring** (2 new signers, 25 letters, scored once) | **88%** sequence model vs 40% per-frame; CAMPYLOBACTER read perfectly at ~6 letters/s (journal 13) |
+| **Fingerspelling detection: which moments are spelling?** (8 unseen signers, scored once) | **0.82 AP**, 73% precision / 78% recall per frame (a "hand visible" rule: 0.12 AP); on the USDA video 92% → 48% of frames read as letters (journal 17) |
 
 Weakest letters: thumb-position fists (M, N, S, T), crossed/spread pairs (R/U/V), letters signed pointing down (P, Q),
 and letters signed inconsistently between sessions. The debugging stories (two mirroring bugs, the wrong-hand bug) are in the journal.
@@ -50,7 +51,10 @@ and letters signed inconsistently between sessions. The debugging stories (two m
 | 6 Smoothing (letter stream, double letters, spaces) + shared frame pipeline | done |
 | 7a Tutor: spaced repetition, hold-to-confirm, finger-level tips (2.4% false alarms), teach mode, debug view | done, in use |
 | 7b Video translator: captioned MP4 + SRT; sequence engine (70% on unseen signers) with per-frame fallback | done (journal 15) |
-| Next: many-signer data and a sequence model (ChicagoFSWild), motion letters J and Z | in progress |
+| 8 Many-signer sequence model (ChicagoFSWild), spelling-aware decoding | done (journals 12–14) |
+| 9 Spoken narration with ElevenLabs (`--speak`) | done (journal 16) |
+| 10 Fingerspelling detection: read only the moments that are spelling | done (journal 17) |
+| Next: recognising whole signs, motion letters J and Z | planned |
 
 ## Built for a laptop CPU
 Runs on an Intel i5-8265U with no GPU required. The runtime needs only OpenCV, MediaPipe and NumPy (no PyTorch).
@@ -73,7 +77,8 @@ so the tutor and translator run straight away. To retrain from scratch you also 
 source .venv/bin/activate
 PYTHONPATH=src python -m aslcv.tutor_app       # the tutor (SPACE skip, ENTER teach, D debug, ESC quit)
 PYTHONPATH=src python -m aslcv.translate my_clip.mp4   # captioned video + .srt into outputs/
-                                               # (--engine sequence|frame; the sequence model is local-only, see journal 15)
+                                               # (--engine sequence|frame; the sequence model and the fingerspelling
+                                               #  detector are local-only, see journals 15 and 17; --no-detect)
 PYTHONPATH=src python -m aslcv.record_clip     # record a test clip into clips/
 PYTHONPATH=src python -m aslcv.record          # record your own training samples (reference hand shown on the right)
 PYTHONPATH=src python -m aslcv.extract_public  # landmarks from the Kaggle ASL Alphabet set in data/raw/

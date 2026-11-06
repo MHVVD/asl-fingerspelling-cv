@@ -1,0 +1,155 @@
+{
+ "data": {
+  "train": {
+   "videos": 49,
+   "frames": 284754
+  },
+  "dev": {
+   "videos": 14,
+   "frames": 39927
+  },
+  "test": {
+   "videos": 7,
+   "frames": 20778
+  }
+ },
+ "dev": {
+  "hand_visible": {
+   "AP": 0.156,
+   "precision": 0.134,
+   "recall": 0.995,
+   "F1": 0.237,
+   "clip_recall": 0.003,
+   "segment_precision": 0.008,
+   "clips": 341,
+   "segments_detected": 131,
+   "threshold": 0.5
+  },
+  "per_frame": {
+   "AP": 0.768,
+   "precision": 0.691,
+   "recall": 0.739,
+   "F1": 0.714,
+   "clip_recall": 0.507,
+   "segment_precision": 0.544,
+   "clips": 341,
+   "segments_detected": 318,
+   "threshold": 0.6
+  },
+  "bigru": {
+   "AP": 0.856,
+   "precision": 0.735,
+   "recall": 0.796,
+   "F1": 0.765,
+   "clip_recall": 0.592,
+   "segment_precision": 0.664,
+   "clips": 341,
+   "segments_detected": 304,
+   "threshold": 0.7
+  }
+ },
+ "test": {
+  "hand_visible": {
+   "AP": 0.121,
+   "precision": 0.115,
+   "recall": 0.996,
+   "F1": 0.207,
+   "clip_recall": 0.0,
+   "segment_precision": 0.0,
+   "clips": 162,
+   "segments_detected": 37,
+   "threshold": 0.5
+  },
+  "per_frame": {
+   "AP": 0.681,
+   "precision": 0.577,
+   "recall": 0.704,
+   "F1": 0.634,
+   "clip_recall": 0.469,
+   "segment_precision": 0.51,
+   "clips": 162,
+   "segments_detected": 149,
+   "threshold": 0.6
+  },
+  "bigru": {
+   "AP": 0.818,
+   "precision": 0.733,
+   "recall": 0.782,
+   "F1": 0.756,
+   "clip_recall": 0.593,
+   "segment_precision": 0.716,
+   "clips": 162,
+   "segments_detected": 134,
+   "threshold": 0.7
+  }
+ },
+ "history": [
+  {
+   "step": 250,
+   "loss": 0.6935,
+   "dev_AP": 0.768
+  },
+  {
+   "step": 500,
+   "loss": 0.5441,
+   "dev_AP": 0.804
+  },
+  {
+   "step": 750,
+   "loss": 0.4495,
+   "dev_AP": 0.822
+  },
+  {
+   "step": 1000,
+   "loss": 0.5281,
+   "dev_AP": 0.856
+  },
+  {
+   "step": 1250,
+   "loss": 0.3671,
+   "dev_AP": 0.854
+  },
+  {
+   "step": 1500,
+   "loss": 0.42,
+   "dev_AP": 0.856
+  },
+  {
+   "step": 1750,
+   "loss": 0.3529,
+   "dev_AP": 0.848
+  },
+  {
+   "step": 2000,
+   "loss": 0.2105,
+   "dev_AP": 0.85
+  },
+  {
+   "step": 2250,
+   "loss": 0.1423,
+   "dev_AP": 0.84
+  },
+  {
+   "step": 2500,
+   "loss": 0.1195,
+   "dev_AP": 0.843
+  },
+  {
+   "step": 2750,
+   "loss": 0.1303,
+   "dev_AP": 0.844
+  },
+  {
+   "step": 3000,
+   "loss": 0.1533,
+   "dev_AP": 0.842
+  }
+ ],
+ "settings": {
+  "hidden": 64,
+  "layers": 2,
+  "steps": 3000,
+  "params": 133569,
+  "minutes": 19.2
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "video": "USDA FSIS, (ASL) Campylobacter 2011, public domain; not used for training or tuning",
+ "detector": "models/fsdetect.npz (final run, artifacts/fsdetect_results.json)",
+ "frames_read_as_letters": {"detector_off": 0.92, "detector_on": 0.477},
+ "segments": {"detector_off": 28, "detector_on": 35},
+ "whole_segment_known_words": {
+  "detector_off": ["scull", "campyl obacter", "re", "ps", "pm"],
+  "detector_on": ["campyl obacter", "coon", "bacterial", "bus", "strain", "intestines", "bacteria", "feces", "bacteria", "antibiotics", "campylobacteriosis", "campylobacteriosis"]},
+ "spoken_dictionary_only_min_confidence_0.6": {
+  "method": "each spoken word checked against the English captions burned into the video at that time",
+  "detector_off": {"spoken": 10, "correct": ["bacteria", "bacterial", "strain", "antibiotic", "reactive", "website", "virtual"],
+                   "wrong": ["ps", "sisters (FSIS)"], "unclear": ["emails"]},
+  "detector_on": {"spoken": 18, "correct": ["bacteria", "bacterial", "strain", "bacteria", "feces", "bacteria", "antibiotics",
+                                            "meningitis", "reactive", "syndrome", "website", "virtual"],
+                  "close": ["intestines (caption: intestinal)"],
+                  "wrong": ["coon", "bus (U.S.)", "purina (urinary)", "sisters (FSIS)"], "unclear": ["mailers"]}}
+}
