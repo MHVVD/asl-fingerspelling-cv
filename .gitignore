@@ -32,3 +32,5 @@ build/
 # fingerspelling detection: source videos and everything derived from them stay local (journal 17)
 data/fsw_source/
 models/fsdetect*.npz
+
+# benchmark videos (public domain, re-downloadable from clips/benchmark/urls.txt)

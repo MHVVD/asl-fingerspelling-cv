@@ -1,0 +1,417 @@
+{
+ "created": "2026-11-08",
+ "method": "Words likely to be fingerspelled, chosen from the English text only (before any model was run on these videos): names of people, places and organisations, acronyms, and technical terms without a common sign. Time = caption start (s). Each is then checked on the video: 'seen' = fingerspelling visible around that time, 'signed' = a sign was used instead, 'unclear'. Verdicts come from 8 frames over [t-0.5, t+5.5] s: 'spelled' means fingerspelling is visible in that window (which exact word was spelled cannot always be read at this resolution).",
+ "split": {
+  "tune": [
+   "usda_microwave",
+   "nws_lightning"
+  ],
+  "test": [
+   "usda_ecoli",
+   "fema_harvey",
+   "wh_westwing",
+   "cdc_rad_inside",
+   "cdc_rad_decon"
+  ]
+ },
+ "videos": {
+  "usda_ecoli": [
+   {
+    "t": 8.0,
+    "word": "usda",
+    "verdict": "spelled"
+   },
+   {
+    "t": 29.5,
+    "word": "ecoli",
+    "verdict": "spelled"
+   },
+   {
+    "t": 33.0,
+    "word": "escherichia",
+    "verdict": "spelled"
+   },
+   {
+    "t": 44.0,
+    "word": "ecoli",
+    "verdict": "unclear"
+   },
+   {
+    "t": 55.0,
+    "word": "ecoli",
+    "verdict": "spelled"
+   },
+   {
+    "t": 61.0,
+    "word": "hemolytic",
+    "verdict": "spelled"
+   },
+   {
+    "t": 61.0,
+    "word": "uremic",
+    "verdict": "spelled"
+   },
+   {
+    "t": 61.0,
+    "word": "hus",
+    "verdict": "spelled"
+   },
+   {
+    "t": 72.0,
+    "word": "hus",
+    "verdict": "spelled"
+   },
+   {
+    "t": 83.0,
+    "word": "hiv",
+    "verdict": "spelled"
+   },
+   {
+    "t": 91.0,
+    "word": "chemotherapy",
+    "verdict": "spelled"
+   },
+   {
+    "t": 97.0,
+    "word": "pathogens",
+    "verdict": "spelled"
+   },
+   {
+    "t": 113.0,
+    "word": "unpasteurized",
+    "verdict": "spelled"
+   },
+   {
+    "t": 113.0,
+    "word": "sausage",
+    "verdict": "spelled"
+   },
+   {
+    "t": 119.0,
+    "word": "spinach",
+    "verdict": "spelled"
+   },
+   {
+    "t": 231.0,
+    "word": "fsis",
+    "verdict": "spelled"
+   },
+   {
+    "t": 238.5,
+    "word": "fsis",
+    "verdict": "spelled"
+   },
+   {
+    "t": 244.0,
+    "word": "karen",
+    "verdict": "spelled"
+   },
+   {
+    "t": 248.0,
+    "word": "karen",
+    "verdict": "spelled"
+   },
+   {
+    "t": 252.0,
+    "word": "karen",
+    "verdict": "spelled"
+   },
+   {
+    "t": 262.0,
+    "word": "usda",
+    "verdict": "spelled"
+   }
+  ],
+  "usda_microwave": [
+   {
+    "t": 34.5,
+    "word": "salmonella",
+    "verdict": "spelled"
+   },
+   {
+    "t": 42.0,
+    "word": "breaded",
+    "verdict": "unclear"
+   },
+   {
+    "t": 91.0,
+    "word": "wattage",
+    "verdict": "spelled"
+   },
+   {
+    "t": 96.0,
+    "word": "wattage",
+    "verdict": "spelled"
+   },
+   {
+    "t": 99.0,
+    "word": "wattage",
+    "verdict": "spelled"
+   },
+   {
+    "t": 152.0,
+    "word": "conduction",
+    "verdict": "unclear"
+   },
+   {
+    "t": 171.0,
+    "word": "foodsafety",
+    "verdict": "spelled"
+   }
+  ],
+  "fema_harvey": [
+   {
+    "t": 1.2,
+    "word": "fema",
+    "verdict": "spelled"
+   },
+   {
+    "t": 1.2,
+    "word": "rrcc",
+    "verdict": "spelled"
+   },
+   {
+    "t": 1.2,
+    "word": "denton",
+    "verdict": "spelled"
+   },
+   {
+    "t": 8.4,
+    "word": "nrcc",
+    "verdict": "spelled"
+   },
+   {
+    "t": 8.4,
+    "word": "dc",
+    "verdict": "spelled"
+   },
+   {
+    "t": 13.8,
+    "word": "harvey",
+    "verdict": "spelled"
+   },
+   {
+    "t": 18.9,
+    "word": "fema",
+    "verdict": "spelled"
+   },
+   {
+    "t": 18.9,
+    "word": "liaisons",
+    "verdict": "spelled"
+   },
+   {
+    "t": 18.9,
+    "word": "miami",
+    "verdict": "spelled"
+   },
+   {
+    "t": 18.9,
+    "word": "florida",
+    "verdict": "spelled"
+   },
+   {
+    "t": 26.9,
+    "word": "harvey",
+    "verdict": "unclear"
+   },
+   {
+    "t": 36.0,
+    "word": "meander",
+    "verdict": "signed"
+   },
+   {
+    "t": 54.0,
+    "word": "harvey",
+    "verdict": "spelled"
+   },
+   {
+    "t": 143.9,
+    "word": "tv",
+    "verdict": "spelled"
+   }
+  ],
+  "wh_westwing": [
+   {
+    "t": 0.0,
+    "word": "leah",
+    "verdict": "none"
+   },
+   {
+    "t": 6.2,
+    "word": "leah",
+    "verdict": "spelled"
+   },
+   {
+    "t": 6.2,
+    "word": "katz",
+    "verdict": "spelled"
+   },
+   {
+    "t": 6.2,
+    "word": "hernandez",
+    "verdict": "spelled"
+   },
+   {
+    "t": 46.3,
+    "word": "colonnade",
+    "verdict": "unclear"
+   },
+   {
+    "t": 59.2,
+    "word": "colonnade",
+    "verdict": "unclear"
+   },
+   {
+    "t": 66.7,
+    "word": "rose",
+    "verdict": "signed"
+   },
+   {
+    "t": 91.4,
+    "word": "franklin",
+    "verdict": "spelled"
+   },
+   {
+    "t": 92.4,
+    "word": "roosevelt",
+    "verdict": "spelled"
+   },
+   {
+    "t": 130.9,
+    "word": "james",
+    "verdict": "spelled"
+   },
+   {
+    "t": 132.5,
+    "word": "brady",
+    "verdict": "spelled"
+   },
+   {
+    "t": 132.5,
+    "word": "reagan",
+    "verdict": "spelled"
+   },
+   {
+    "t": 146.2,
+    "word": "franklin",
+    "verdict": "spelled"
+   },
+   {
+    "t": 149.0,
+    "word": "roosevelt",
+    "verdict": "spelled"
+   },
+   {
+    "t": 179.2,
+    "word": "cabinet",
+    "verdict": "spelled"
+   },
+   {
+    "t": 192.7,
+    "word": "roosevelt",
+    "verdict": "unclear"
+   },
+   {
+    "t": 215.7,
+    "word": "roosevelt",
+    "verdict": "spelled"
+   },
+   {
+    "t": 220.7,
+    "word": "motif",
+    "verdict": "signed"
+   },
+   {
+    "t": 223.2,
+    "word": "aquarium",
+    "verdict": "unclear"
+   },
+   {
+    "t": 231.4,
+    "word": "theodore",
+    "verdict": "unclear"
+   },
+   {
+    "t": 231.4,
+    "word": "roosevelt",
+    "verdict": "unclear"
+   },
+   {
+    "t": 238.8,
+    "word": "roosevelt",
+    "verdict": "spelled"
+   }
+  ],
+  "cdc_rad_inside": [
+   {
+    "t": 92.0,
+    "word": "john",
+    "verdict": "unclear"
+   },
+   {
+    "t": 92.0,
+    "word": "noah",
+    "verdict": "unclear"
+   },
+   {
+    "t": 252.5,
+    "word": "noaa",
+    "verdict": "none"
+   },
+   {
+    "t": 268.0,
+    "word": "emp",
+    "verdict": "unclear"
+   },
+   {
+    "t": 297.0,
+    "word": "sms",
+    "verdict": "unclear"
+   },
+   {
+    "t": 315.0,
+    "word": "facebook",
+    "verdict": "unclear"
+   },
+   {
+    "t": 315.0,
+    "word": "twitter",
+    "verdict": "unclear"
+   },
+   {
+    "t": 200.0,
+    "word": "damper",
+    "verdict": "unclear"
+   }
+  ],
+  "cdc_rad_decon": [
+   {
+    "t": 119.0,
+    "word": "shampoo",
+    "verdict": "signed"
+   },
+   {
+    "t": 119.0,
+    "word": "conditioner",
+    "verdict": "signed"
+   },
+   {
+    "t": 129.0,
+    "word": "abrasions",
+    "verdict": "none"
+   },
+   {
+    "t": 133.0,
+    "word": "faucet",
+    "verdict": "none"
+   },
+   {
+    "t": 140.0,
+    "word": "faucet",
+    "verdict": "none"
+   }
+  ],
+  "nws_lightning": []
+ }
+}
