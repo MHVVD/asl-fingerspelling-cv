@@ -121,19 +121,14 @@ def load_char_lm():
     return CharLM(texts, order=5) if texts else None
 
 
-def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_MODEL, hand="auto", skeleton=True,
-                       max_fps=30.0, use_lm=True, verbose=True, detect=True):
-    """detect: read only the stretches the fingerspelling detector marks (if its model exists locally)."""
+def hand_pass(video_path, max_fps=30.0):
+    """Pass 1: up to two hands in every (subsampled) frame. The slow part; its result can be saved (save_hands)."""
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         raise SystemExit(f"cannot open video {video_path}")
     src_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
     size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     step = max(1, round(src_fps / max_fps))
-    fps = src_fps / step
-    t0 = time.time()
-
-    # pass 1: hands per frame
     det = HandDetector(max_hands=2, mode="video")
     hands, times, idx = [], [], -1
     try:
@@ -150,7 +145,34 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
     finally:
         det.close()
         cap.release()
+    return {"hands": hands, "times": times, "size": size, "src_fps": src_fps, "step": step, "fps": src_fps / step}
 
+
+def save_hands(hp, path):
+    from .landmarks import Hand  # noqa: F401  (documents the fields stored)
+    T = len(hp["hands"])
+    norm, px = np.full((T, 2, 21, 3), np.nan, np.float32), np.full((T, 2, 21, 3), np.nan, np.float32)
+    side, score = np.full((T, 2), "", dtype="<U5"), np.zeros((T, 2), np.float32)
+    for t, hs in enumerate(hp["hands"]):
+        for k, h in enumerate(hs[:2]):
+            norm[t, k], px[t, k], side[t, k], score[t, k] = h.landmarks, h.landmarks_px, h.handedness, h.score
+    np.savez_compressed(path, norm=norm, px=px, side=side, score=score, times=np.array(hp["times"]),
+                        size=np.array(hp["size"]), src_fps=hp["src_fps"], step=hp["step"])
+
+
+def load_hands(path):
+    from .landmarks import Hand
+    d = np.load(path)
+    hands = [[Hand(d["norm"][t, k], d["px"][t, k], str(d["side"][t, k]), float(d["score"][t, k]))
+              for k in range(2) if not np.isnan(d["px"][t, k, 0, 0])] for t in range(len(d["times"]))]
+    src_fps, step = float(d["src_fps"]), int(d["step"])
+    return {"hands": hands, "times": list(d["times"]), "size": tuple(int(x) for x in d["size"]),
+            "src_fps": src_fps, "step": step, "fps": src_fps / step}
+
+
+def decode_pass(hp, model_path=SEQ_MODEL, hand="auto", use_lm=True, detect=True, verbose=False):
+    """From the hands of pass 1 to decoded segments and caption events."""
+    hands, times, fps = hp["hands"], hp["times"], hp["fps"]
     # motion of the raised hand, used only to choose where to cut very long segments
     motion, prev = [], None
     for hs in hands:
@@ -160,16 +182,13 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
 
     from .fsdetect import DETECTOR, FSDetector
     use_detector = detect and DETECTOR.exists()
-    fs_mask, fs_segs = (fingerspelling_mask(hands, times, size, FSDetector.load(DETECTOR)) if use_detector
-                        else (np.ones(len(hands), bool), None))
+    fs_mask, _ = (fingerspelling_mask(hands, times, hp["size"], FSDetector.load(DETECTOR)) if use_detector
+                  else (np.ones(len(hands), bool), None))
     segments = find_segments([bool(h) and m for h, m in zip(hands, fs_mask)], fps, motion=motion)
     chosen = [None] * len(hands)
     for a, b in segments:
         chosen[a:b] = select_signing_track(hands[a:b])
-    if hand == "auto":
-        side = majority_handedness([h.handedness for h in chosen if h is not None])
-    else:
-        side = hand
+    side = majority_handedness([h.handedness for h in chosen if h is not None]) if hand == "auto" else hand
 
     model = SeqModel.load(model_path)
     lm = load_char_lm() if use_lm else None
@@ -183,6 +202,18 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
         events += text_to_events(text, times[a], times[b - 1])
         if verbose:
             print(f"  {times[a]:6.1f}-{times[b - 1]:6.1f}s  {text}", flush=True)
+    return {"segments": decoded, "events": events, "chosen": chosen, "side": side, "fs_mask": fs_mask,
+            "use_detector": use_detector, "lm": lm}
+
+
+def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_MODEL, hand="auto", skeleton=True,
+                       max_fps=30.0, use_lm=True, verbose=True, detect=True):
+    """detect: read only the stretches the fingerspelling detector marks (if its model exists locally)."""
+    t0 = time.time()
+    hp = hand_pass(video_path, max_fps)
+    dp = decode_pass(hp, model_path, hand, use_lm, detect, verbose)
+    hands, times, fps, src_fps, step = hp["hands"], hp["times"], hp["fps"], hp["src_fps"], hp["step"]
+    events, chosen, side, fs_mask, lm = dp["events"], dp["chosen"], dp["side"], dp["fs_mask"], dp["lm"]
 
     cues = events_to_cues(events)
     if out_srt:
@@ -219,10 +250,10 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
             _finalize_video(tmp, Path(out_video))
 
     elapsed = time.time() - t0
-    return {"engine": "sequence", "text": transcript(events), "cues": cues, "events": events, "segments": decoded,
+    return {"engine": "sequence", "text": transcript(events), "cues": cues, "events": events, "segments": dp["segments"],
             "video_fps": round(src_fps, 2), "processed_fps": round(fps, 2), "frames_processed": len(hands),
             "hand_detected_share": round(float(np.mean([bool(h) for h in hands])) if hands else 0.0, 3),
             "handedness_used": side, "seconds": round(elapsed, 1),
             "speed_fps": round(len(hands) / max(elapsed, 1e-6), 1), "decoder": "beam+LM" if lm else "greedy",
-            "detector": "fingerspelling detector" if use_detector else "off",
+            "detector": "fingerspelling detector" if dp["use_detector"] else "off",
             "fingerspelling_share": round(float(fs_mask.mean()), 3) if hands else 0.0}

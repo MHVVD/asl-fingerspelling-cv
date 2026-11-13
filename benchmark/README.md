@@ -15,7 +15,7 @@ was run on these videos** (`SHA256SUMS`, and the git history).
 | [Lightning Safety for the Deaf and Hard of Hearing Community](https://commons.wikimedia.org/wiki/File:Lightning_Safety_for_the_Deaf_and_Hard_of_Hearing_Community.webm) (NWS) | signer | on-screen summary text | tune |
 
 All are US federal government works (public domain); the subtitle tracks are from Wikimedia Commons TimedText.
-The videos themselves are not in the repository (`clips/benchmark/`, git-ignored); `clips/benchmark/urls.txt` lists them.
+The videos themselves are not in the repository (`clips/benchmark/`, git-ignored); `benchmark/videos.txt` lists their download URLs (Wikimedia asks for a descriptive User-Agent).
 
 **Files.** `<video>.tsv`: the English text with start times (burned-in captions read from frames, ±1 s; or the
 subtitle track). `key.json`: terms likely to be fingerspelled (names, acronyms, technical terms without a common sign,

@@ -1,0 +1,11 @@
+usda_ecoli.webm https://upload.wikimedia.org/wikipedia/commons/3/32/%28ASL%29_-_What_is_E._coli.webm
+usda_microwave.webm https://upload.wikimedia.org/wikipedia/commons/7/75/%28ASL%29_Microwaving_Convenience_Foods_USDA.webm
+fema_harvey.webm https://upload.wikimedia.org/wikipedia/commons/b/b1/FEMA_Accessible_Hurricane_Harvey_-_Shelter_in_Place.webm
+wh_westwing.webm https://upload.wikimedia.org/wikipedia/commons/1/14/This_Is_A_Tour_Of_The_West_Wing_%28In_Sign_Language%29.webm
+cdc_ehdi.webm https://upload.wikimedia.org/wikipedia/commons/4/41/Role_of_CDC_in_Early_Hearing_Detection_and_Intervention_%28in_ASL%29.webm
+cdc_covid_care.webm https://upload.wikimedia.org/wikipedia/commons/0/03/ASL_Video_Series-_When_to_Get_Medical_Care_for_COVID-19.webm
+cdc_covid_spread.webm https://upload.wikimedia.org/wikipedia/commons/a/a5/ASL_Video_Series-_COVID-19_Do_Your_Part_to_Slow_the_Spread.webm
+cdc_covid_parents.webm https://upload.wikimedia.org/wikipedia/commons/1/13/ASL_Video_Series-_Parents_Supporting_Children.webm
+cdc_rad_inside.webm https://upload.wikimedia.org/wikipedia/commons/e/e5/Protective_Actions_for_Radiation_Emergencies_-_Get_Inside%2C_Stay_Inside%2C_Stay_Tuned_%28ASL%29.webm
+cdc_rad_decon.webm https://upload.wikimedia.org/wikipedia/commons/f/fd/Protective_Actions_for_Radiation_Emergencies_-_Self-Decontamination_%28ASL%29.webm
+nws_lightning.webm https://upload.wikimedia.org/wikipedia/commons/e/ee/Lightning_Safety_for_the_Deaf_and_Hard_of_Hearing_Community.webm
