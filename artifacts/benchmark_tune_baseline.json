@@ -1,0 +1,236 @@
+{
+ "split": "tune",
+ "settings": {
+  "detect": true,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true
+ },
+ "videos": {
+  "usda_microwave": {
+   "terms_spelled": 5,
+   "terms_read": 3,
+   "terms_spoken": 1,
+   "spoken": 5,
+   "spoken_correct": 2,
+   "spoken_words": [
+    {
+     "t": 48.08,
+     "word": "ada",
+     "correct": false
+    },
+    {
+     "t": 105.21,
+     "word": "wattage",
+     "correct": true
+    },
+    {
+     "t": 111.95,
+     "word": "safes",
+     "correct": true
+    },
+    {
+     "t": 144.51,
+     "word": "hikes",
+     "correct": false
+    },
+    {
+     "t": 146.78,
+     "word": "tale",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 34.5,
+     "word": "salmonella",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 96.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 99.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": true
+    },
+    {
+     "t": 171.0,
+     "word": "foodsafety",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.188,
+   "segments": [
+    {
+     "start_s": 27.73,
+     "end_s": 29.4,
+     "text": "unn",
+     "confidence": 0.774
+    },
+    {
+     "start_s": 33.4,
+     "end_s": 35.8,
+     "text": "salonelabrtstria",
+     "confidence": 0.794
+    },
+    {
+     "start_s": 40.94,
+     "end_s": 41.67,
+     "text": "cott",
+     "confidence": 0.676
+    },
+    {
+     "start_s": 48.08,
+     "end_s": 48.75,
+     "text": "ada",
+     "confidence": 0.738
+    },
+    {
+     "start_s": 60.23,
+     "end_s": 62.96,
+     "text": "oventout",
+     "confidence": 0.87
+    },
+    {
+     "start_s": 65.9,
+     "end_s": 67.03,
+     "text": "afe",
+     "confidence": 0.837
+    },
+    {
+     "start_s": 69.57,
+     "end_s": 74.24,
+     "text": "oven steves ghillagiaplores",
+     "confidence": 0.738
+    },
+    {
+     "start_s": 90.06,
+     "end_s": 91.72,
+     "text": "watage",
+     "confidence": 0.804
+    },
+    {
+     "start_s": 92.93,
+     "end_s": 93.73,
+     "text": "watage",
+     "confidence": 0.797
+    },
+    {
+     "start_s": 95.8,
+     "end_s": 97.26,
+     "text": "watag",
+     "confidence": 0.868
+    },
+    {
+     "start_s": 100.67,
+     "end_s": 104.27,
+     "text": "devideocast",
+     "confidence": 0.822
+    },
+    {
+     "start_s": 105.21,
+     "end_s": 106.74,
+     "text": "wattage",
+     "confidence": 0.875
+    },
+    {
+     "start_s": 111.95,
+     "end_s": 113.01,
+     "text": "safes",
+     "confidence": 0.833
+    },
+    {
+     "start_s": 128.16,
+     "end_s": 129.3,
+     "text": "baria",
+     "confidence": 0.73
+    },
+    {
+     "start_s": 139.51,
+     "end_s": 140.44,
+     "text": "bafe",
+     "confidence": 0.746
+    },
+    {
+     "start_s": 144.51,
+     "end_s": 145.31,
+     "text": "hikes",
+     "confidence": 0.857
+    },
+    {
+     "start_s": 146.78,
+     "end_s": 147.71,
+     "text": "tale",
+     "confidence": 0.738
+    },
+    {
+     "start_s": 172.14,
+     "end_s": 173.14,
+     "text": "risdo",
+     "confidence": 0.815
+    },
+    {
+     "start_s": 174.94,
+     "end_s": 178.75,
+     "text": "wtfodesaftytor",
+     "confidence": 0.785
+    }
+   ]
+  },
+  "nws_lightning": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 1,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 44.01,
+     "word": "r",
+     "correct": false
+    }
+   ],
+   "terms": [],
+   "letters_share": 0.031,
+   "segments": [
+    {
+     "start_s": 44.01,
+     "end_s": 45.28,
+     "text": "r",
+     "confidence": 0.823
+    },
+    {
+     "start_s": 51.62,
+     "end_s": 52.49,
+     "text": "at",
+     "confidence": 0.0
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 5,
+  "terms_read": 3,
+  "terms_spoken": 1,
+  "spoken": 6,
+  "spoken_correct": 2
+ }
+}

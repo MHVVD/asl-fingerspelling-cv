@@ -37,3 +37,5 @@ def test_hands_round_trip(tmp_path):
     assert [len(x) for x in back["hands"]] == [1, 0, 2] and back["size"] == (640, 360)
     assert np.allclose(back["hands"][2][1].landmarks_px, h.landmarks_px) and back["hands"][0][0].handedness == "Left"
     assert abs(back["hands"][0][0].score - 0.9) < 1e-6
+    # each hand owns its points: a view into the loaded array would keep a whole copy alive per hand (journal 18)
+    assert all(x.landmarks_px.base is None and x.landmarks.base is None for hs in back["hands"] for x in hs)

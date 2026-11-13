@@ -31,6 +31,6 @@ def test_load_vocab_merges_files_and_cleans(tmp_path):
     assert len(load_vocab(None, system=tmp_path / "missing")) == 0
 
 
-def test_a_whole_known_word_is_kept_even_if_short():
-    assert spot_words("HELLO", {"hello"}) == [("hello", 0)]
-    assert spot_words("xhello", {"hello"}) == []            # inside a longer string it would need 6 letters
+def test_short_dictionary_words_are_not_spoken_even_alone():
+    assert spot_words("BUS", {"bus"}) == []                       # journal 18: these were all wrong on tuning videos
+    assert spot_words("HELLO", Vocab({"hello"}, topic={"hello"})) == [("hello", 0)]   # unless listed as topic words

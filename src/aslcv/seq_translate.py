@@ -162,11 +162,14 @@ def save_hands(hp, path):
 
 def load_hands(path):
     from .landmarks import Hand
-    d = np.load(path)
-    hands = [[Hand(d["norm"][t, k], d["px"][t, k], str(d["side"][t, k]), float(d["score"][t, k]))
-              for k in range(2) if not np.isnan(d["px"][t, k, 0, 0])] for t in range(len(d["times"]))]
-    src_fps, step = float(d["src_fps"]), int(d["step"])
-    return {"hands": hands, "times": list(d["times"]), "size": tuple(int(x) for x in d["size"]),
+    # read each array once: indexing an NpzFile decompresses the whole array again on every access, and a slice of
+    # it would keep that whole copy alive (journal 18: this used gigabytes on a 76-second video)
+    with np.load(path) as d:
+        norm, px, side, score = d["norm"], d["px"], d["side"], d["score"]
+        times, size, src_fps, step = d["times"], d["size"], float(d["src_fps"]), int(d["step"])
+    hands = [[Hand(norm[t, k].copy(), px[t, k].copy(), str(side[t, k]), float(score[t, k]))
+              for k in range(2) if not np.isnan(px[t, k, 0, 0])] for t in range(len(times))]
+    return {"hands": hands, "times": list(times), "size": tuple(int(x) for x in size),
             "src_fps": src_fps, "step": step, "fps": src_fps / step}
 
 

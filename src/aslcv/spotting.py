@@ -4,8 +4,8 @@ The sequence model transcribes *all* signing as letters, so a segment mixes real
 strings decoded from lexical signs: "strainhumanicampylobacterjejunis". Neither the model's confidence nor a
 character-model score separates the two at segment level (journal 16), so --speak by default speaks only the
 words it can find in the decoded text, from a vocabulary (the system word list plus an optional --vocab file of
-topic words): a segment that is exactly one known word, or words of at least MIN_LEN letters inside a longer
-one, each at its estimated time inside the segment.
+topic words): dictionary words of at least MIN_LEN letters, or topic words of any length, each at its estimated
+time inside the segment.
 """
 from pathlib import Path
 import re
@@ -49,14 +49,13 @@ def load_vocab(extra=None, system=SYSTEM_WORDS):
 
 
 def spot_words(text, vocab):
-    """-> [(word, letter_index)]. Text that is exactly one known word is kept whatever its length ("hello");
-    otherwise greedy longest match, left to right, ignoring spaces the decoder put in; letters that start
-    no spottable word are skipped."""
+    """-> [(word, letter_index)]: greedy longest match, left to right, ignoring spaces the decoder put in; letters
+    that start no spottable word are skipped. A short dictionary word is not spoken even when it is the whole
+    segment ("ada", "bus"): on the benchmark's tuning videos every such word was wrong (journal 18). Short topic
+    words (--vocab) still count."""
     if not isinstance(vocab, Vocab):
         vocab = Vocab(vocab)
     letters = text.replace(" ", "").lower()
-    if letters in vocab:
-        return [(letters, 0)]
     found, i = [], 0
     while i < len(letters):
         word = next((letters[i:j] for j in range(len(letters), i, -1) if vocab.spottable(letters[i:j])), None)

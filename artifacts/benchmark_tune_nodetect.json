@@ -1,0 +1,273 @@
+{
+ "split": "tune",
+ "settings": {
+  "detect": false,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true
+ },
+ "videos": {
+  "usda_microwave": {
+   "terms_spelled": 5,
+   "terms_read": 5,
+   "terms_spoken": 0,
+   "spoken": 4,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 4.27,
+     "word": "pron",
+     "correct": false
+    },
+    {
+     "t": 69.63,
+     "word": "steven",
+     "correct": false
+    },
+    {
+     "t": 110.71,
+     "word": "fend",
+     "correct": false
+    },
+    {
+     "t": 176.34,
+     "word": "safety",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 34.5,
+     "word": "salmonella",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 96.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 99.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 171.0,
+     "word": "foodsafety",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.998,
+   "segments": [
+    {
+     "start_s": 4.27,
+     "end_s": 13.65,
+     "text": "pron",
+     "confidence": 0.767
+    },
+    {
+     "start_s": 13.68,
+     "end_s": 21.86,
+     "text": "outcof",
+     "confidence": 0.721
+    },
+    {
+     "start_s": 21.89,
+     "end_s": 31.8,
+     "text": "ed",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 31.83,
+     "end_s": 41.44,
+     "text": "salonelartrid",
+     "confidence": 0.798
+    },
+    {
+     "start_s": 41.47,
+     "end_s": 49.85,
+     "text": "graza",
+     "confidence": 0.739
+    },
+    {
+     "start_s": 49.88,
+     "end_s": 59.26,
+     "text": "deafeek",
+     "confidence": 0.704
+    },
+    {
+     "start_s": 59.29,
+     "end_s": 68.2,
+     "text": "ioventrutmafed",
+     "confidence": 0.791
+    },
+    {
+     "start_s": 68.23,
+     "end_s": 76.61,
+     "text": "even steven hillagiaporess",
+     "confidence": 0.718
+    },
+    {
+     "start_s": 76.64,
+     "end_s": 84.68,
+     "text": "sdr",
+     "confidence": 0.547
+    },
+    {
+     "start_s": 84.72,
+     "end_s": 92.76,
+     "text": "watage",
+     "confidence": 0.821
+    },
+    {
+     "start_s": 92.79,
+     "end_s": 101.57,
+     "text": "wat",
+     "confidence": 0.867
+    },
+    {
+     "start_s": 101.6,
+     "end_s": 110.68,
+     "text": "videocatewatage",
+     "confidence": 0.776
+    },
+    {
+     "start_s": 110.71,
+     "end_s": 119.95,
+     "text": "fend",
+     "confidence": 0.899
+    },
+    {
+     "start_s": 119.99,
+     "end_s": 127.99,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 128.03,
+     "end_s": 137.44,
+     "text": "baria",
+     "confidence": 0.686
+    },
+    {
+     "start_s": 137.47,
+     "end_s": 146.75,
+     "text": "bafe hines if",
+     "confidence": 0.788
+    },
+    {
+     "start_s": 146.78,
+     "end_s": 155.69,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 155.72,
+     "end_s": 164.6,
+     "text": "n",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 164.63,
+     "end_s": 174.01,
+     "text": "ed",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 174.04,
+     "end_s": 179.78,
+     "text": "wtfodesafetytor",
+     "confidence": 0.767
+    }
+   ]
+  },
+  "nws_lightning": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [],
+   "letters_share": 0.999,
+   "segments": [
+    {
+     "start_s": 1.0,
+     "end_s": 10.78,
+     "text": "ad",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 10.81,
+     "end_s": 18.82,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 18.85,
+     "end_s": 28.66,
+     "text": "sl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 28.7,
+     "end_s": 36.8,
+     "text": "tp",
+     "confidence": 0.69
+    },
+    {
+     "start_s": 36.84,
+     "end_s": 40.74,
+     "text": "b",
+     "confidence": 0.475
+    },
+    {
+     "start_s": 41.24,
+     "end_s": 50.55,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 50.58,
+     "end_s": 60.56,
+     "text": "an",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 60.59,
+     "end_s": 69.67,
+     "text": "egg",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 69.7,
+     "end_s": 72.11,
+     "text": "or",
+     "confidence": 0.0
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 5,
+  "terms_read": 5,
+  "terms_spoken": 0,
+  "spoken": 4,
+  "spoken_correct": 0
+ }
+}

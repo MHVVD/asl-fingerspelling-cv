@@ -78,8 +78,23 @@ def score_video(video, terms, captions, segments, spoken, frames_letters):
             "terms": found, "letters_share": round(frames_letters, 3)}
 
 
+def decoded_segments(video, hp, detect, use_lm):
+    """Decode once per video and decode setting, saved as soon as it is done, so an interrupted run resumes."""
+    from .seq_translate import decode_pass
+    path = CACHE / "decoded" / f"{video}__det{int(detect)}_lm{int(use_lm)}.json"
+    if path.exists():
+        return json.loads(path.read_text())
+    segments = decode_pass(hp, detect=detect, use_lm=use_lm)["segments"]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    part = path.with_suffix(".part")
+    part.write_text(json.dumps(segments))
+    part.replace(path)
+    print(f"  decoded {video}", flush=True)
+    return segments
+
+
 def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=True):
-    from .seq_translate import decode_pass, load_hands
+    from .seq_translate import load_hands
     from .spotting import load_vocab
     from .translate import speech_segments
     key = load_key()
@@ -88,17 +103,16 @@ def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=Tr
                                         "lm": use_lm}, "videos": {}}
     for video in key["split"][split]:
         hp = load_hands(CACHE / "hands" / f"{video}.npz")
-        dp = decode_pass(hp, detect=detect, use_lm=use_lm)
-        spoken, _ = speech_segments({"segments": dp["segments"]}, "sequence", min_confidence, vocab)
+        segments = decoded_segments(video, hp, detect, use_lm)
+        spoken, _ = speech_segments({"segments": segments}, "sequence", min_confidence, vocab)
         in_seg = np.zeros(len(hp["times"]), bool)
         times = np.array(hp["times"])
-        for s in dp["segments"]:
+        for s in segments:
             in_seg[(times >= s["start_s"]) & (times <= s["end_s"])] = True
         with_hand = np.array([bool(h) for h in hp["hands"]])
         share = float(in_seg[with_hand].mean()) if with_hand.any() else 0.0
-        out["videos"][video] = score_video(video, key["videos"][video], load_captions(video), dp["segments"],
-                                           spoken, share)
-        out["videos"][video]["segments"] = dp["segments"]
+        out["videos"][video] = score_video(video, key["videos"][video], load_captions(video), segments, spoken, share)
+        out["videos"][video]["segments"] = segments
     tot = {k: sum(v[k] for v in out["videos"].values())
            for k in ("terms_spelled", "terms_read", "terms_spoken", "spoken", "spoken_correct")}
     out["total"] = tot
