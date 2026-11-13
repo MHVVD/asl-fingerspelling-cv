@@ -1,0 +1,1059 @@
+{
+ "split": "test",
+ "settings": {
+  "detect": true,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true
+ },
+ "videos": {
+  "usda_ecoli": {
+   "terms_spelled": 20,
+   "terms_read": 14,
+   "terms_spoken": 2,
+   "spoken": 14,
+   "spoken_correct": 9,
+   "spoken_words": [
+    {
+     "t": 31.13,
+     "word": "escher",
+     "correct": false
+    },
+    {
+     "t": 35.5,
+     "word": "bacteria",
+     "correct": true
+    },
+    {
+     "t": 39.04,
+     "word": "intestines",
+     "correct": true
+    },
+    {
+     "t": 55.02,
+     "word": "bacterium",
+     "correct": true
+    },
+    {
+     "t": 61.56,
+     "word": "dehydration",
+     "correct": true
+    },
+    {
+     "t": 78.76,
+     "word": "kidney",
+     "correct": true
+    },
+    {
+     "t": 98.2,
+     "word": "pathogens",
+     "correct": true
+    },
+    {
+     "t": 100.67,
+     "word": "ground",
+     "correct": true
+    },
+    {
+     "t": 103.6,
+     "word": "contaminate",
+     "correct": false
+    },
+    {
+     "t": 119.18,
+     "word": "spinach",
+     "correct": true
+    },
+    {
+     "t": 236.28,
+     "word": "website",
+     "correct": false
+    },
+    {
+     "t": 239.06,
+     "word": "sisters",
+     "correct": false
+    },
+    {
+     "t": 247.8,
+     "word": "virtual",
+     "correct": true
+    },
+    {
+     "t": 275.04,
+     "word": "emails",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 8.0,
+     "word": "usda",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 29.5,
+     "word": "ecoli",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 33.0,
+     "word": "escherichia",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 55.0,
+     "word": "ecoli",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "hemolytic",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "uremic",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "hus",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 72.0,
+     "word": "hus",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 83.0,
+     "word": "hiv",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "chemotherapy",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 97.0,
+     "word": "pathogens",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": true
+    },
+    {
+     "t": 113.0,
+     "word": "unpasteurized",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 113.0,
+     "word": "sausage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 119.0,
+     "word": "spinach",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": true
+    },
+    {
+     "t": 231.0,
+     "word": "fsis",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 238.5,
+     "word": "fsis",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 244.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 248.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 252.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 262.0,
+     "word": "usda",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.387,
+   "segments": [
+    {
+     "start_s": 6.91,
+     "end_s": 9.44,
+     "text": "rustacoosify",
+     "confidence": 0.764
+    },
+    {
+     "start_s": 10.24,
+     "end_s": 12.31,
+     "text": "asl vid mcan",
+     "confidence": 0.802
+    },
+    {
+     "start_s": 13.98,
+     "end_s": 15.52,
+     "text": "satyatto",
+     "confidence": 0.801
+    },
+    {
+     "start_s": 18.52,
+     "end_s": 19.45,
+     "text": "isife",
+     "confidence": 0.804
+    },
+    {
+     "start_s": 29.0,
+     "end_s": 30.53,
+     "text": "ecoli",
+     "confidence": 0.847
+    },
+    {
+     "start_s": 31.13,
+     "end_s": 37.34,
+     "text": "escheric iacolyheclibacteria",
+     "confidence": 0.84
+    },
+    {
+     "start_s": 39.04,
+     "end_s": 40.94,
+     "text": "intestines",
+     "confidence": 0.88
+    },
+    {
+     "start_s": 45.28,
+     "end_s": 46.61,
+     "text": "ecoli",
+     "confidence": 0.86
+    },
+    {
+     "start_s": 50.42,
+     "end_s": 53.49,
+     "text": "eclid chr",
+     "confidence": 0.677
+    },
+    {
+     "start_s": 55.02,
+     "end_s": 56.96,
+     "text": "bacterium",
+     "confidence": 0.869
+    },
+    {
+     "start_s": 61.56,
+     "end_s": 68.5,
+     "text": "dehydrationhemolyticuremicayndrome",
+     "confidence": 0.781
+    },
+    {
+     "start_s": 69.04,
+     "end_s": 70.04,
+     "text": "us",
+     "confidence": 0.94
+    },
+    {
+     "start_s": 70.7,
+     "end_s": 71.57,
+     "text": "us",
+     "confidence": 0.839
+    },
+    {
+     "start_s": 73.24,
+     "end_s": 74.97,
+     "text": "lodcls",
+     "confidence": 0.902
+    },
+    {
+     "start_s": 77.58,
+     "end_s": 80.18,
+     "text": "termt kidney",
+     "confidence": 0.759
+    },
+    {
+     "start_s": 81.51,
+     "end_s": 82.52,
+     "text": "us",
+     "confidence": 0.892
+    },
+    {
+     "start_s": 88.32,
+     "end_s": 89.39,
+     "text": "ik",
+     "confidence": 0.788
+    },
+    {
+     "start_s": 89.79,
+     "end_s": 90.79,
+     "text": "chomet",
+     "confidence": 0.856
+    },
+    {
+     "start_s": 91.72,
+     "end_s": 93.13,
+     "text": "imunes",
+     "confidence": 0.909
+    },
+    {
+     "start_s": 95.93,
+     "end_s": 97.46,
+     "text": "secli",
+     "confidence": 0.848
+    },
+    {
+     "start_s": 98.2,
+     "end_s": 100.07,
+     "text": "pathogens",
+     "confidence": 0.891
+    },
+    {
+     "start_s": 100.67,
+     "end_s": 102.07,
+     "text": "groundbefy",
+     "confidence": 0.823
+    },
+    {
+     "start_s": 103.6,
+     "end_s": 105.67,
+     "text": "contaminate",
+     "confidence": 0.886
+    },
+    {
+     "start_s": 107.81,
+     "end_s": 110.21,
+     "text": "eclioduh",
+     "confidence": 0.805
+    },
+    {
+     "start_s": 111.68,
+     "end_s": 114.35,
+     "text": "iunpasteried",
+     "confidence": 0.874
+    },
+    {
+     "start_s": 116.48,
+     "end_s": 117.42,
+     "text": "cred",
+     "confidence": 0.696
+    },
+    {
+     "start_s": 117.82,
+     "end_s": 120.55,
+     "text": "suavegispinach",
+     "confidence": 0.823
+    },
+    {
+     "start_s": 121.89,
+     "end_s": 123.16,
+     "text": "contands",
+     "confidence": 0.822
+    },
+    {
+     "start_s": 123.96,
+     "end_s": 125.09,
+     "text": "eclin",
+     "confidence": 0.887
+    },
+    {
+     "start_s": 127.89,
+     "end_s": 130.83,
+     "text": "ecliodchi",
+     "confidence": 0.832
+    },
+    {
+     "start_s": 145.04,
+     "end_s": 146.45,
+     "text": "fort",
+     "confidence": 0.738
+    },
+    {
+     "start_s": 156.12,
+     "end_s": 157.26,
+     "text": "rices",
+     "confidence": 0.83
+    },
+    {
+     "start_s": 168.27,
+     "end_s": 169.14,
+     "text": "slat",
+     "confidence": 0.675
+    },
+    {
+     "start_s": 175.48,
+     "end_s": 177.28,
+     "text": "groadbefete",
+     "confidence": 0.824
+    },
+    {
+     "start_s": 178.48,
+     "end_s": 180.28,
+     "text": "dewof",
+     "confidence": 0.797
+    },
+    {
+     "start_s": 183.28,
+     "end_s": 185.22,
+     "text": "thermoter",
+     "confidence": 0.846
+    },
+    {
+     "start_s": 201.57,
+     "end_s": 202.3,
+     "text": "v",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 219.32,
+     "end_s": 221.59,
+     "text": "befodafe",
+     "confidence": 0.833
+    },
+    {
+     "start_s": 235.27,
+     "end_s": 242.34,
+     "text": "fsiswebsitermsfsisters datage",
+     "confidence": 0.782
+    },
+    {
+     "start_s": 243.68,
+     "end_s": 244.94,
+     "text": "sify",
+     "confidence": 0.701
+    },
+    {
+     "start_s": 245.41,
+     "end_s": 249.48,
+     "text": "askarenchovirtual",
+     "confidence": 0.792
+    },
+    {
+     "start_s": 250.28,
+     "end_s": 254.75,
+     "text": "askarentgevolivencott",
+     "confidence": 0.793
+    },
+    {
+     "start_s": 258.02,
+     "end_s": 258.76,
+     "text": "sf",
+     "confidence": 0.849
+    },
+    {
+     "start_s": 261.16,
+     "end_s": 263.3,
+     "text": "freroda",
+     "confidence": 0.866
+    },
+    {
+     "start_s": 263.83,
+     "end_s": 268.84,
+     "text": "thtlintiw",
+     "confidence": 0.878
+    },
+    {
+     "start_s": 275.04,
+     "end_s": 283.25,
+     "text": "emailsinfesis aafsisturdate",
+     "confidence": 0.805
+    }
+   ]
+  },
+  "fema_harvey": {
+   "terms_spelled": 12,
+   "terms_read": 5,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [
+    {
+     "t": 1.2,
+     "word": "fema",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 1.2,
+     "word": "rrcc",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 1.2,
+     "word": "denton",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 8.4,
+     "word": "nrcc",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 8.4,
+     "word": "dc",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 13.8,
+     "word": "harvey",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "fema",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "liaisons",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "miami",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "florida",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 54.0,
+     "word": "harvey",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 143.9,
+     "word": "tv",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.094,
+   "segments": [
+    {
+     "start_s": 1.13,
+     "end_s": 2.37,
+     "text": "femac",
+     "confidence": 0.876
+    },
+    {
+     "start_s": 4.84,
+     "end_s": 7.67,
+     "text": "cadenten",
+     "confidence": 0.872
+    },
+    {
+     "start_s": 11.11,
+     "end_s": 12.25,
+     "text": "nucle",
+     "confidence": 0.752
+    },
+    {
+     "start_s": 12.71,
+     "end_s": 13.38,
+     "text": "dc",
+     "confidence": 0.933
+    },
+    {
+     "start_s": 15.12,
+     "end_s": 16.12,
+     "text": "haveyca",
+     "confidence": 0.848
+    },
+    {
+     "start_s": 21.65,
+     "end_s": 23.79,
+     "text": "miniflayn",
+     "confidence": 0.852
+    },
+    {
+     "start_s": 24.39,
+     "end_s": 25.39,
+     "text": "ahaveic",
+     "confidence": 0.849
+    },
+    {
+     "start_s": 56.69,
+     "end_s": 58.63,
+     "text": "stclines",
+     "confidence": 0.749
+    },
+    {
+     "start_s": 60.89,
+     "end_s": 61.83,
+     "text": "byhos",
+     "confidence": 0.739
+    },
+    {
+     "start_s": 62.3,
+     "end_s": 63.1,
+     "text": "do",
+     "confidence": 0.707
+    },
+    {
+     "start_s": 146.51,
+     "end_s": 147.38,
+     "text": "tv",
+     "confidence": 0.874
+    }
+   ]
+  },
+  "wh_westwing": {
+   "terms_spelled": 13,
+   "terms_read": 7,
+   "terms_spoken": 2,
+   "spoken": 3,
+   "spoken_correct": 3,
+   "spoken_words": [
+    {
+     "t": 91.95,
+     "word": "franklin",
+     "correct": true
+    },
+    {
+     "t": 181.1,
+     "word": "cabinet",
+     "correct": true
+    },
+    {
+     "t": 233.73,
+     "word": "theodore",
+     "correct": true
+    }
+   ],
+   "terms": [
+    {
+     "t": 6.2,
+     "word": "leah",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 6.2,
+     "word": "katz",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 6.2,
+     "word": "hernandez",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.4,
+     "word": "franklin",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": true
+    },
+    {
+     "t": 92.4,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 130.9,
+     "word": "james",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 132.5,
+     "word": "brady",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 132.5,
+     "word": "reagan",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 146.2,
+     "word": "franklin",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 149.0,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 179.2,
+     "word": "cabinet",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": true
+    },
+    {
+     "t": 215.7,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 238.8,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.223,
+   "segments": [
+    {
+     "start_s": 6.42,
+     "end_s": 10.09,
+     "text": "leakatherned",
+     "confidence": 0.832
+    },
+    {
+     "start_s": 10.84,
+     "end_s": 11.76,
+     "text": "wing",
+     "confidence": 0.732
+    },
+    {
+     "start_s": 15.1,
+     "end_s": 15.89,
+     "text": "ow",
+     "confidence": 0.697
+    },
+    {
+     "start_s": 27.28,
+     "end_s": 28.4,
+     "text": "wailor",
+     "confidence": 0.834
+    },
+    {
+     "start_s": 33.45,
+     "end_s": 34.28,
+     "text": "so",
+     "confidence": 0.977
+    },
+    {
+     "start_s": 46.42,
+     "end_s": 48.72,
+     "text": "wonde",
+     "confidence": 0.842
+    },
+    {
+     "start_s": 61.39,
+     "end_s": 62.02,
+     "text": "ord",
+     "confidence": 0.927
+    },
+    {
+     "start_s": 68.23,
+     "end_s": 69.07,
+     "text": "gards",
+     "confidence": 0.759
+    },
+    {
+     "start_s": 84.58,
+     "end_s": 85.25,
+     "text": "bill",
+     "confidence": 0.728
+    },
+    {
+     "start_s": 91.76,
+     "end_s": 95.6,
+     "text": "afranklindedronsvelt",
+     "confidence": 0.794
+    },
+    {
+     "start_s": 109.36,
+     "end_s": 110.03,
+     "text": "wigh",
+     "confidence": 0.561
+    },
+    {
+     "start_s": 132.05,
+     "end_s": 135.3,
+     "text": "jesserodyg",
+     "confidence": 0.797
+    },
+    {
+     "start_s": 137.8,
+     "end_s": 139.39,
+     "text": "arespan",
+     "confidence": 0.746
+    },
+    {
+     "start_s": 149.07,
+     "end_s": 153.82,
+     "text": "lecafranlindraerls",
+     "confidence": 0.807
+    },
+    {
+     "start_s": 169.42,
+     "end_s": 170.92,
+     "text": "pescorks",
+     "confidence": 0.776
+    },
+    {
+     "start_s": 181.1,
+     "end_s": 182.93,
+     "text": "cabinet",
+     "confidence": 0.897
+    },
+    {
+     "start_s": 190.44,
+     "end_s": 191.44,
+     "text": "style",
+     "confidence": 0.806
+    },
+    {
+     "start_s": 216.67,
+     "end_s": 218.55,
+     "text": "rosevels",
+     "confidence": 0.753
+    },
+    {
+     "start_s": 225.64,
+     "end_s": 226.89,
+     "text": "rarium",
+     "confidence": 0.873
+    },
+    {
+     "start_s": 233.73,
+     "end_s": 237.07,
+     "text": "theodorerusert",
+     "confidence": 0.82
+    },
+    {
+     "start_s": 239.32,
+     "end_s": 241.99,
+     "text": "fronlindrasaltce",
+     "confidence": 0.792
+    },
+    {
+     "start_s": 252.75,
+     "end_s": 255.26,
+     "text": "ovalof ice",
+     "confidence": 0.815
+    }
+   ]
+  },
+  "cdc_rad_inside": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [],
+   "letters_share": 0.043,
+   "segments": [
+    {
+     "start_s": 29.93,
+     "end_s": 30.96,
+     "text": "e",
+     "confidence": 0.803
+    },
+    {
+     "start_s": 83.25,
+     "end_s": 84.08,
+     "text": "lar",
+     "confidence": 0.582
+    },
+    {
+     "start_s": 106.81,
+     "end_s": 107.47,
+     "text": "or",
+     "confidence": 0.661
+    },
+    {
+     "start_s": 237.54,
+     "end_s": 238.2,
+     "text": "cc",
+     "confidence": 0.553
+    },
+    {
+     "start_s": 265.8,
+     "end_s": 267.17,
+     "text": "mop",
+     "confidence": 0.735
+    },
+    {
+     "start_s": 269.84,
+     "end_s": 271.84,
+     "text": "nurior",
+     "confidence": 0.783
+    },
+    {
+     "start_s": 313.81,
+     "end_s": 314.55,
+     "text": "so",
+     "confidence": 0.405
+    }
+   ]
+  },
+  "cdc_rad_decon": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 1,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 122.42,
+     "word": "condor",
+     "correct": false
+    }
+   ],
+   "terms": [],
+   "letters_share": 0.068,
+   "segments": [
+    {
+     "start_s": 13.91,
+     "end_s": 16.32,
+     "text": "radien",
+     "confidence": 0.863
+    },
+    {
+     "start_s": 32.0,
+     "end_s": 34.77,
+     "text": "sandor",
+     "confidence": 0.833
+    },
+    {
+     "start_s": 113.28,
+     "end_s": 114.08,
+     "text": "co",
+     "confidence": 0.451
+    },
+    {
+     "start_s": 122.42,
+     "end_s": 124.42,
+     "text": "condor",
+     "confidence": 0.908
+    },
+    {
+     "start_s": 174.41,
+     "end_s": 175.14,
+     "text": "wool",
+     "confidence": 0.547
+    },
+    {
+     "start_s": 176.94,
+     "end_s": 177.94,
+     "text": "so",
+     "confidence": 0.884
+    },
+    {
+     "start_s": 191.93,
+     "end_s": 193.16,
+     "text": "radi",
+     "confidence": 0.725
+    },
+    {
+     "start_s": 215.11,
+     "end_s": 216.12,
+     "text": "all",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 261.63,
+     "end_s": 262.23,
+     "text": "pa",
+     "confidence": 0.922
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 45,
+  "terms_read": 26,
+  "terms_spoken": 4,
+  "spoken": 18,
+  "spoken_correct": 12
+ }
+}

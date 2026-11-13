@@ -37,6 +37,7 @@ frame ─▶ MediaPipe hand landmarks (21 pts) ─▶ pixel space ─▶ normali
 | **Real-world video: a stranger fingerspelling A–Z** | **12 / 26 letters** (up from 1/26 after fixing which hand is read; journal 11) |
 | **ChicagoFSWild test set: 36 real-world signers never seen** (sequence model trained on 87 others) | **67.3% letter accuracy**; **70.6%** with spelling-aware decoding (per-frame system: 25.3%; journals 12, 14) |
 | **Fresh clips, answer keys written before scoring** (2 new signers, 25 letters, scored once) | **88%** sequence model vs 40% per-frame; CAMPYLOBACTER read perfectly at ~6 letters/s (journal 13) |
+| **Real-world benchmark: 5 unseen videos, 5 signers, answer key written first** (scored once) | **26 / 45** fingerspelled terms read; **12 / 18** spoken words correct (without the detector: 21 / 45 and 3 / 9) (journal 18) |
 | **Fingerspelling detection: which moments are spelling?** (8 unseen signers, scored once) | **0.82 AP**, 73% precision / 78% recall per frame (a "hand visible" rule: 0.12 AP); on the USDA video 92% → 48% of frames read as letters (journal 17) |
 
 Weakest letters: thumb-position fists (M, N, S, T), crossed/spread pairs (R/U/V), letters signed pointing down (P, Q),
@@ -54,7 +55,8 @@ and letters signed inconsistently between sessions. The debugging stories (two m
 | 8 Many-signer sequence model (ChicagoFSWild), spelling-aware decoding | done (journals 12–14) |
 | 9 Spoken narration with ElevenLabs (`--speak`) | done (journal 16) |
 | 10 Fingerspelling detection: read only the moments that are spelling | done (journal 17) |
-| Next: recognising whole signs, motion letters J and Z | planned |
+| 11 Real-world benchmark (7 public-domain videos) + safe job runner for the laptop | done (journal 18) |
+| Next: small signers (crop before tracking), recognising whole signs, motion letters J and Z | planned |
 
 ## Built for a laptop CPU
 Runs on an Intel i5-8265U with no GPU required. The runtime needs only OpenCV, MediaPipe and NumPy (no PyTorch).
@@ -84,6 +86,8 @@ PYTHONPATH=src python -m aslcv.record          # record your own training sample
 PYTHONPATH=src python -m aslcv.extract_public  # landmarks from the Kaggle ASL Alphabet set in data/raw/
 PYTHONPATH=src python -m aslcv.train           # train + evaluate (writes models/ and artifacts/)
 PYTHONPATH=src python -m aslcv.score_clip CLIP --truth WORD --name RUN   # score a clip with a known answer
+PYTHONPATH=src python -m aslcv.benchmark score --split tune        # the real-world benchmark (benchmark/README.md)
+tools/safe_run.sh NAME -- COMMAND...           # heavy jobs: 2 CPUs, 6 GB, paused when hot, temperature log
 python -m pytest -q                            # tests
 ```
 

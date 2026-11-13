@@ -1,0 +1,1998 @@
+{
+ "split": "test",
+ "settings": {
+  "detect": false,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true
+ },
+ "videos": {
+  "usda_ecoli": {
+   "terms_spelled": 20,
+   "terms_read": 14,
+   "terms_spoken": 0,
+   "spoken": 7,
+   "spoken_correct": 3,
+   "spoken_words": [
+    {
+     "t": 54.56,
+     "word": "bacterium",
+     "correct": true
+    },
+    {
+     "t": 58.19,
+     "word": "dehydration",
+     "correct": false
+    },
+    {
+     "t": 79.19,
+     "word": "kidney",
+     "correct": true
+    },
+    {
+     "t": 94.77,
+     "word": "pathogens",
+     "correct": false
+    },
+    {
+     "t": 239.45,
+     "word": "sisters",
+     "correct": false
+    },
+    {
+     "t": 247.99,
+     "word": "virtual",
+     "correct": true
+    },
+    {
+     "t": 274.17,
+     "word": "emails",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 8.0,
+     "word": "usda",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 29.5,
+     "word": "ecoli",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 33.0,
+     "word": "escherichia",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 55.0,
+     "word": "ecoli",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "hemolytic",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "uremic",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 61.0,
+     "word": "hus",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 72.0,
+     "word": "hus",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 83.0,
+     "word": "hiv",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "chemotherapy",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 97.0,
+     "word": "pathogens",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 113.0,
+     "word": "unpasteurized",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 113.0,
+     "word": "sausage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 119.0,
+     "word": "spinach",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 231.0,
+     "word": "fsis",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 238.5,
+     "word": "fsis",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 244.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 248.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 252.0,
+     "word": "karen",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 262.0,
+     "word": "usda",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.997,
+   "segments": [
+    {
+     "start_s": 4.1,
+     "end_s": 13.45,
+     "text": "ersacsid asl vid mcan",
+     "confidence": 0.792
+    },
+    {
+     "start_s": 13.48,
+     "end_s": 21.99,
+     "text": "satyatolvemisafeil",
+     "confidence": 0.705
+    },
+    {
+     "start_s": 22.02,
+     "end_s": 31.8,
+     "text": "ar",
+     "confidence": 0.617
+    },
+    {
+     "start_s": 31.83,
+     "end_s": 40.44,
+     "text": "chericicliheclibacterif",
+     "confidence": 0.862
+    },
+    {
+     "start_s": 40.47,
+     "end_s": 50.12,
+     "text": "checlin",
+     "confidence": 0.689
+    },
+    {
+     "start_s": 50.15,
+     "end_s": 58.16,
+     "text": "ecliodchugabacterium",
+     "confidence": 0.842
+    },
+    {
+     "start_s": 58.19,
+     "end_s": 66.27,
+     "text": "dehydrationhemolyticure",
+     "confidence": 0.786
+    },
+    {
+     "start_s": 66.3,
+     "end_s": 75.31,
+     "text": "micayndromehushushmalodcls",
+     "confidence": 0.831
+    },
+    {
+     "start_s": 75.34,
+     "end_s": 83.82,
+     "text": "gremt kidney",
+     "confidence": 0.796
+    },
+    {
+     "start_s": 83.85,
+     "end_s": 92.13,
+     "text": "mikachmeti",
+     "confidence": 0.75
+    },
+    {
+     "start_s": 92.16,
+     "end_s": 100.63,
+     "text": "eclipathogens",
+     "confidence": 0.811
+    },
+    {
+     "start_s": 100.67,
+     "end_s": 110.44,
+     "text": "secliod",
+     "confidence": 0.797
+    },
+    {
+     "start_s": 110.48,
+     "end_s": 120.05,
+     "text": "iunpasterie jriced",
+     "confidence": 0.759
+    },
+    {
+     "start_s": 120.09,
+     "end_s": 128.19,
+     "text": "declife",
+     "confidence": 0.759
+    },
+    {
+     "start_s": 128.23,
+     "end_s": 131.26,
+     "text": "ecliodchi",
+     "confidence": 0.853
+    },
+    {
+     "start_s": 131.66,
+     "end_s": 139.67,
+     "text": "wi",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 139.71,
+     "end_s": 147.98,
+     "text": "fort",
+     "confidence": 0.699
+    },
+    {
+     "start_s": 148.01,
+     "end_s": 156.86,
+     "text": "asl",
+     "confidence": 0.711
+    },
+    {
+     "start_s": 156.89,
+     "end_s": 164.96,
+     "text": "emcee",
+     "confidence": 0.414
+    },
+    {
+     "start_s": 165.0,
+     "end_s": 173.91,
+     "text": "haw od",
+     "confidence": 0.623
+    },
+    {
+     "start_s": 173.94,
+     "end_s": 182.05,
+     "text": "corndbfeedewf",
+     "confidence": 0.767
+    },
+    {
+     "start_s": 182.08,
+     "end_s": 191.86,
+     "text": "thermotering",
+     "confidence": 0.804
+    },
+    {
+     "start_s": 191.89,
+     "end_s": 194.46,
+     "text": "bap",
+     "confidence": 0.755
+    },
+    {
+     "start_s": 194.99,
+     "end_s": 203.0,
+     "text": "wow",
+     "confidence": 0.563
+    },
+    {
+     "start_s": 203.04,
+     "end_s": 211.84,
+     "text": "of",
+     "confidence": 0.829
+    },
+    {
+     "start_s": 211.88,
+     "end_s": 220.25,
+     "text": "bobbeef",
+     "confidence": 0.725
+    },
+    {
+     "start_s": 220.29,
+     "end_s": 228.6,
+     "text": "dafendson",
+     "confidence": 0.752
+    },
+    {
+     "start_s": 228.63,
+     "end_s": 236.94,
+     "text": "deefsiswebe",
+     "confidence": 0.816
+    },
+    {
+     "start_s": 236.97,
+     "end_s": 246.38,
+     "text": "siewfsistersategosy",
+     "confidence": 0.766
+    },
+    {
+     "start_s": 246.41,
+     "end_s": 254.82,
+     "text": "darncovirtualaskarntgevolivenect",
+     "confidence": 0.751
+    },
+    {
+     "start_s": 254.85,
+     "end_s": 264.7,
+     "text": "bobcofrenundamith",
+     "confidence": 0.777
+    },
+    {
+     "start_s": 264.73,
+     "end_s": 274.14,
+     "text": "tlinib",
+     "confidence": 0.781
+    },
+    {
+     "start_s": 274.17,
+     "end_s": 283.25,
+     "text": "emailsinfesis aafsisturdate",
+     "confidence": 0.794
+    },
+    {
+     "start_s": 283.82,
+     "end_s": 284.68,
+     "text": "pa",
+     "confidence": 0.317
+    }
+   ]
+  },
+  "fema_harvey": {
+   "terms_spelled": 12,
+   "terms_read": 1,
+   "terms_spoken": 0,
+   "spoken": 1,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 131.1,
+     "word": "collar",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 1.2,
+     "word": "fema",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 1.2,
+     "word": "rrcc",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 1.2,
+     "word": "denton",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 8.4,
+     "word": "nrcc",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 8.4,
+     "word": "dc",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 13.8,
+     "word": "harvey",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "fema",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "liaisons",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "miami",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 18.9,
+     "word": "florida",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 54.0,
+     "word": "harvey",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 143.9,
+     "word": "tv",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.997,
+   "segments": [
+    {
+     "start_s": 0.87,
+     "end_s": 10.44,
+     "text": "feman",
+     "confidence": 0.807
+    },
+    {
+     "start_s": 10.48,
+     "end_s": 19.42,
+     "text": "newcad",
+     "confidence": 0.812
+    },
+    {
+     "start_s": 19.45,
+     "end_s": 28.53,
+     "text": "miniflayncahaveicaul",
+     "confidence": 0.79
+    },
+    {
+     "start_s": 28.56,
+     "end_s": 36.87,
+     "text": "bill",
+     "confidence": 0.466
+    },
+    {
+     "start_s": 36.9,
+     "end_s": 45.08,
+     "text": "banasa",
+     "confidence": 0.704
+    },
+    {
+     "start_s": 45.11,
+     "end_s": 53.42,
+     "text": "scag",
+     "confidence": 0.605
+    },
+    {
+     "start_s": 53.45,
+     "end_s": 62.86,
+     "text": "noncines pocy bished",
+     "confidence": 0.685
+    },
+    {
+     "start_s": 62.9,
+     "end_s": 71.37,
+     "text": "bonbebar",
+     "confidence": 0.698
+    },
+    {
+     "start_s": 71.4,
+     "end_s": 73.61,
+     "text": "law",
+     "confidence": 0.952
+    },
+    {
+     "start_s": 74.01,
+     "end_s": 83.92,
+     "text": "dynny",
+     "confidence": 0.772
+    },
+    {
+     "start_s": 84.48,
+     "end_s": 93.43,
+     "text": "cate",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 93.46,
+     "end_s": 102.97,
+     "text": "thor",
+     "confidence": 0.838
+    },
+    {
+     "start_s": 103.0,
+     "end_s": 105.64,
+     "text": "wow",
+     "confidence": 0.845
+    },
+    {
+     "start_s": 106.37,
+     "end_s": 110.78,
+     "text": "dara",
+     "confidence": 0.639
+    },
+    {
+     "start_s": 111.74,
+     "end_s": 120.42,
+     "text": "gr",
+     "confidence": 0.605
+    },
+    {
+     "start_s": 120.45,
+     "end_s": 129.2,
+     "text": "yo",
+     "confidence": 0.615
+    },
+    {
+     "start_s": 129.6,
+     "end_s": 130.43,
+     "text": "aa",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 131.1,
+     "end_s": 139.21,
+     "text": "collar",
+     "confidence": 0.842
+    },
+    {
+     "start_s": 139.24,
+     "end_s": 148.05,
+     "text": "ance",
+     "confidence": 0.547
+    },
+    {
+     "start_s": 148.08,
+     "end_s": 157.19,
+     "text": "ed",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 157.22,
+     "end_s": 164.56,
+     "text": "dynys",
+     "confidence": 0.786
+    }
+   ]
+  },
+  "wh_westwing": {
+   "terms_spelled": 13,
+   "terms_read": 6,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [
+    {
+     "t": 6.2,
+     "word": "leah",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 6.2,
+     "word": "katz",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 6.2,
+     "word": "hernandez",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.4,
+     "word": "franklin",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 92.4,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 130.9,
+     "word": "james",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 132.5,
+     "word": "brady",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 132.5,
+     "word": "reagan",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 146.2,
+     "word": "franklin",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 149.0,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 179.2,
+     "word": "cabinet",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 215.7,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 238.8,
+     "word": "roosevelt",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.99,
+   "segments": [
+    {
+     "start_s": 4.84,
+     "end_s": 12.55,
+     "text": "bleakatherundwig",
+     "confidence": 0.802
+    },
+    {
+     "start_s": 12.97,
+     "end_s": 13.43,
+     "text": "coat",
+     "confidence": 0.208
+    },
+    {
+     "start_s": 15.1,
+     "end_s": 20.1,
+     "text": "own",
+     "confidence": 0.821
+    },
+    {
+     "start_s": 23.69,
+     "end_s": 24.27,
+     "text": "pate",
+     "confidence": 0.225
+    },
+    {
+     "start_s": 27.28,
+     "end_s": 36.66,
+     "text": "cs",
+     "confidence": 0.781
+    },
+    {
+     "start_s": 36.7,
+     "end_s": 38.5,
+     "text": "karwin",
+     "confidence": 0.738
+    },
+    {
+     "start_s": 43.0,
+     "end_s": 43.38,
+     "text": "i",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 46.42,
+     "end_s": 48.97,
+     "text": "wonde",
+     "confidence": 0.835
+    },
+    {
+     "start_s": 49.76,
+     "end_s": 58.52,
+     "text": "vc",
+     "confidence": 0.657
+    },
+    {
+     "start_s": 60.02,
+     "end_s": 62.56,
+     "text": "lords",
+     "confidence": 0.593
+    },
+    {
+     "start_s": 63.4,
+     "end_s": 70.24,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 80.83,
+     "end_s": 89.01,
+     "text": "ofobly",
+     "confidence": 0.692
+    },
+    {
+     "start_s": 89.05,
+     "end_s": 97.06,
+     "text": "cofrondlindedrosveltu",
+     "confidence": 0.798
+    },
+    {
+     "start_s": 97.1,
+     "end_s": 101.89,
+     "text": "it",
+     "confidence": 0.401
+    },
+    {
+     "start_s": 102.35,
+     "end_s": 102.48,
+     "text": "if",
+     "confidence": 0.312
+    },
+    {
+     "start_s": 106.94,
+     "end_s": 116.45,
+     "text": "wron",
+     "confidence": 0.582
+    },
+    {
+     "start_s": 120.5,
+     "end_s": 121.54,
+     "text": "po",
+     "confidence": 0.237
+    },
+    {
+     "start_s": 122.37,
+     "end_s": 122.75,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 123.87,
+     "end_s": 124.04,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 125.0,
+     "end_s": 134.47,
+     "text": "ol",
+     "confidence": 0.572
+    },
+    {
+     "start_s": 134.51,
+     "end_s": 141.18,
+     "text": "rodygdcaresan",
+     "confidence": 0.737
+    },
+    {
+     "start_s": 143.02,
+     "end_s": 151.36,
+     "text": "elecafrank",
+     "confidence": 0.806
+    },
+    {
+     "start_s": 151.4,
+     "end_s": 158.7,
+     "text": "lindratum",
+     "confidence": 0.759
+    },
+    {
+     "start_s": 159.37,
+     "end_s": 159.58,
+     "text": "if",
+     "confidence": 0.54
+    },
+    {
+     "start_s": 160.24,
+     "end_s": 170.13,
+     "text": "dab",
+     "confidence": 0.532
+    },
+    {
+     "start_s": 170.17,
+     "end_s": 171.38,
+     "text": "corka",
+     "confidence": 0.747
+    },
+    {
+     "start_s": 175.13,
+     "end_s": 176.18,
+     "text": "c",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 179.97,
+     "end_s": 188.81,
+     "text": "cabinedcocoachas",
+     "confidence": 0.867
+    },
+    {
+     "start_s": 188.86,
+     "end_s": 195.45,
+     "text": "bostylemen",
+     "confidence": 0.681
+    },
+    {
+     "start_s": 201.08,
+     "end_s": 203.49,
+     "text": "wbs",
+     "confidence": 0.686
+    },
+    {
+     "start_s": 204.12,
+     "end_s": 209.33,
+     "text": "joymbs",
+     "confidence": 0.542
+    },
+    {
+     "start_s": 216.67,
+     "end_s": 226.35,
+     "text": "revelted",
+     "confidence": 0.723
+    },
+    {
+     "start_s": 226.39,
+     "end_s": 235.11,
+     "text": "orcstothed",
+     "confidence": 0.757
+    },
+    {
+     "start_s": 235.15,
+     "end_s": 243.62,
+     "text": "orersertcowwigofronlindraltco",
+     "confidence": 0.801
+    },
+    {
+     "start_s": 243.66,
+     "end_s": 248.08,
+     "text": "cl",
+     "confidence": 0.876
+    },
+    {
+     "start_s": 248.54,
+     "end_s": 249.29,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 251.71,
+     "end_s": 261.39,
+     "text": "holof iceced",
+     "confidence": 0.766
+    },
+    {
+     "start_s": 261.43,
+     "end_s": 262.68,
+     "text": "all",
+     "confidence": 0.468
+    },
+    {
+     "start_s": 280.24,
+     "end_s": 280.7,
+     "text": "co",
+     "confidence": 0.183
+    },
+    {
+     "start_s": 284.45,
+     "end_s": 288.87,
+     "text": "n",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 289.62,
+     "end_s": 289.83,
+     "text": "so",
+     "confidence": 0.54
+    },
+    {
+     "start_s": 290.46,
+     "end_s": 291.79,
+     "text": "in",
+     "confidence": 0.0
+    }
+   ]
+  },
+  "cdc_rad_inside": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [],
+   "letters_share": 0.979,
+   "segments": [
+    {
+     "start_s": 23.46,
+     "end_s": 23.62,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 29.06,
+     "end_s": 30.96,
+     "text": "e",
+     "confidence": 0.869
+    },
+    {
+     "start_s": 31.4,
+     "end_s": 35.44,
+     "text": "asl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 35.84,
+     "end_s": 37.4,
+     "text": "bts",
+     "confidence": 0.835
+    },
+    {
+     "start_s": 38.17,
+     "end_s": 39.07,
+     "text": "so",
+     "confidence": 0.533
+    },
+    {
+     "start_s": 42.38,
+     "end_s": 47.88,
+     "text": "or",
+     "confidence": 0.611
+    },
+    {
+     "start_s": 48.45,
+     "end_s": 50.82,
+     "text": "d",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 51.58,
+     "end_s": 52.02,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 62.8,
+     "end_s": 63.73,
+     "text": "cl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 69.7,
+     "end_s": 71.64,
+     "text": "so",
+     "confidence": 0.348
+    },
+    {
+     "start_s": 74.61,
+     "end_s": 75.38,
+     "text": "dc",
+     "confidence": 0.153
+    },
+    {
+     "start_s": 77.34,
+     "end_s": 78.75,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 79.51,
+     "end_s": 81.05,
+     "text": "all",
+     "confidence": 0.198
+    },
+    {
+     "start_s": 82.65,
+     "end_s": 84.08,
+     "text": "ware",
+     "confidence": 0.638
+    },
+    {
+     "start_s": 85.39,
+     "end_s": 85.75,
+     "text": "pm",
+     "confidence": 0.228
+    },
+    {
+     "start_s": 86.39,
+     "end_s": 86.49,
+     "text": "ok",
+     "confidence": 0.907
+    },
+    {
+     "start_s": 87.19,
+     "end_s": 87.29,
+     "text": "ok",
+     "confidence": 0.66
+    },
+    {
+     "start_s": 87.99,
+     "end_s": 88.62,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 89.76,
+     "end_s": 90.02,
+     "text": "cook",
+     "confidence": 0.259
+    },
+    {
+     "start_s": 90.62,
+     "end_s": 91.46,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 92.03,
+     "end_s": 92.13,
+     "text": "so",
+     "confidence": 0.314
+    },
+    {
+     "start_s": 92.69,
+     "end_s": 93.43,
+     "text": "or",
+     "confidence": 0.615
+    },
+    {
+     "start_s": 94.06,
+     "end_s": 94.26,
+     "text": "i",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 95.3,
+     "end_s": 97.0,
+     "text": "asl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 97.63,
+     "end_s": 98.7,
+     "text": "o",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 99.17,
+     "end_s": 100.53,
+     "text": "po",
+     "confidence": 0.169
+    },
+    {
+     "start_s": 101.27,
+     "end_s": 101.43,
+     "text": "ok",
+     "confidence": 0.556
+    },
+    {
+     "start_s": 102.6,
+     "end_s": 102.8,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 103.5,
+     "end_s": 104.1,
+     "text": "cl",
+     "confidence": 0.233
+    },
+    {
+     "start_s": 106.67,
+     "end_s": 107.77,
+     "text": "or",
+     "confidence": 0.64
+    },
+    {
+     "start_s": 110.98,
+     "end_s": 115.38,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 116.05,
+     "end_s": 117.72,
+     "text": "aa",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 118.32,
+     "end_s": 119.32,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 120.59,
+     "end_s": 121.89,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 123.26,
+     "end_s": 129.46,
+     "text": "an",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 130.06,
+     "end_s": 130.83,
+     "text": "cook",
+     "confidence": 0.63
+    },
+    {
+     "start_s": 132.9,
+     "end_s": 133.27,
+     "text": "go",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 134.17,
+     "end_s": 136.57,
+     "text": "po",
+     "confidence": 0.383
+    },
+    {
+     "start_s": 138.54,
+     "end_s": 139.91,
+     "text": "cc",
+     "confidence": 0.52
+    },
+    {
+     "start_s": 140.31,
+     "end_s": 141.41,
+     "text": "so",
+     "confidence": 0.333
+    },
+    {
+     "start_s": 142.71,
+     "end_s": 145.35,
+     "text": "al",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 146.11,
+     "end_s": 148.52,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 149.18,
+     "end_s": 149.35,
+     "text": "do",
+     "confidence": 0.282
+    },
+    {
+     "start_s": 149.85,
+     "end_s": 151.72,
+     "text": "pm",
+     "confidence": 0.233
+    },
+    {
+     "start_s": 152.35,
+     "end_s": 152.82,
+     "text": "at",
+     "confidence": 0.418
+    },
+    {
+     "start_s": 153.55,
+     "end_s": 153.69,
+     "text": "ok",
+     "confidence": 0.313
+    },
+    {
+     "start_s": 154.09,
+     "end_s": 154.59,
+     "text": "asl",
+     "confidence": 0.489
+    },
+    {
+     "start_s": 155.16,
+     "end_s": 155.96,
+     "text": "asl",
+     "confidence": 0.263
+    },
+    {
+     "start_s": 159.96,
+     "end_s": 165.63,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 166.03,
+     "end_s": 166.13,
+     "text": "of",
+     "confidence": 0.491
+    },
+    {
+     "start_s": 167.87,
+     "end_s": 168.37,
+     "text": "c",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 171.27,
+     "end_s": 171.74,
+     "text": "so",
+     "confidence": 0.785
+    },
+    {
+     "start_s": 173.27,
+     "end_s": 173.74,
+     "text": "if",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 175.14,
+     "end_s": 176.68,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 177.21,
+     "end_s": 178.48,
+     "text": "asl",
+     "confidence": 0.337
+    },
+    {
+     "start_s": 178.88,
+     "end_s": 180.05,
+     "text": "o",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 180.91,
+     "end_s": 181.01,
+     "text": "sob",
+     "confidence": 0.435
+    },
+    {
+     "start_s": 182.58,
+     "end_s": 182.98,
+     "text": "po",
+     "confidence": 0.653
+    },
+    {
+     "start_s": 184.02,
+     "end_s": 193.19,
+     "text": "it",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 195.43,
+     "end_s": 196.73,
+     "text": "cl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 197.63,
+     "end_s": 200.6,
+     "text": "pa",
+     "confidence": 0.334
+    },
+    {
+     "start_s": 201.07,
+     "end_s": 202.04,
+     "text": "ps",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 202.64,
+     "end_s": 211.28,
+     "text": "ama",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 211.31,
+     "end_s": 217.98,
+     "text": "id",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 219.05,
+     "end_s": 219.85,
+     "text": "cc",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 220.29,
+     "end_s": 223.46,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 223.92,
+     "end_s": 231.6,
+     "text": "n",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 232.9,
+     "end_s": 233.77,
+     "text": "soul",
+     "confidence": 0.312
+    },
+    {
+     "start_s": 236.5,
+     "end_s": 238.47,
+     "text": "cc",
+     "confidence": 0.63
+    },
+    {
+     "start_s": 238.91,
+     "end_s": 243.21,
+     "text": "flala",
+     "confidence": 0.743
+    },
+    {
+     "start_s": 243.68,
+     "end_s": 244.98,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 245.48,
+     "end_s": 249.48,
+     "text": "all",
+     "confidence": 0.558
+    },
+    {
+     "start_s": 257.39,
+     "end_s": 261.36,
+     "text": "asl",
+     "confidence": 0.558
+    },
+    {
+     "start_s": 262.06,
+     "end_s": 263.83,
+     "text": "as",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 265.8,
+     "end_s": 273.74,
+     "text": "monuriores",
+     "confidence": 0.621
+    },
+    {
+     "start_s": 274.34,
+     "end_s": 274.57,
+     "text": "t",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 275.74,
+     "end_s": 285.42,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 285.45,
+     "end_s": 292.96,
+     "text": "comm",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 293.63,
+     "end_s": 295.53,
+     "text": "bat",
+     "confidence": 0.649
+    },
+    {
+     "start_s": 297.03,
+     "end_s": 304.17,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 305.61,
+     "end_s": 307.71,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 308.51,
+     "end_s": 310.84,
+     "text": "to",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 313.65,
+     "end_s": 314.71,
+     "text": "e",
+     "confidence": 0.701
+    },
+    {
+     "start_s": 317.28,
+     "end_s": 319.75,
+     "text": "cl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 320.32,
+     "end_s": 320.89,
+     "text": "so",
+     "confidence": 0.247
+    },
+    {
+     "start_s": 321.29,
+     "end_s": 322.26,
+     "text": "so",
+     "confidence": 0.39
+    },
+    {
+     "start_s": 322.99,
+     "end_s": 324.52,
+     "text": "tat",
+     "confidence": 0.0
+    }
+   ]
+  },
+  "cdc_rad_decon": {
+   "terms_spelled": 0,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 1,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 121.39,
+     "word": "condor",
+     "correct": false
+    }
+   ],
+   "terms": [],
+   "letters_share": 0.983,
+   "segments": [
+    {
+     "start_s": 11.21,
+     "end_s": 11.48,
+     "text": "so",
+     "confidence": 0.686
+    },
+    {
+     "start_s": 11.88,
+     "end_s": 16.72,
+     "text": "sadien",
+     "confidence": 0.841
+    },
+    {
+     "start_s": 17.25,
+     "end_s": 19.55,
+     "text": "cd",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 20.42,
+     "end_s": 21.15,
+     "text": "cite",
+     "confidence": 0.597
+    },
+    {
+     "start_s": 21.72,
+     "end_s": 22.22,
+     "text": "if",
+     "confidence": 0.495
+    },
+    {
+     "start_s": 22.76,
+     "end_s": 27.36,
+     "text": "bios",
+     "confidence": 0.689
+    },
+    {
+     "start_s": 28.26,
+     "end_s": 35.0,
+     "text": "sandor",
+     "confidence": 0.818
+    },
+    {
+     "start_s": 35.4,
+     "end_s": 35.77,
+     "text": "asl",
+     "confidence": 0.219
+    },
+    {
+     "start_s": 36.84,
+     "end_s": 39.17,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 41.24,
+     "end_s": 50.62,
+     "text": "am",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 52.42,
+     "end_s": 53.95,
+     "text": "horse",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 54.42,
+     "end_s": 58.43,
+     "text": "asl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 59.03,
+     "end_s": 59.56,
+     "text": "of",
+     "confidence": 0.823
+    },
+    {
+     "start_s": 60.13,
+     "end_s": 60.79,
+     "text": "so",
+     "confidence": 0.329
+    },
+    {
+     "start_s": 62.26,
+     "end_s": 66.53,
+     "text": "ah",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 67.2,
+     "end_s": 71.1,
+     "text": "l",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 72.71,
+     "end_s": 73.04,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 74.01,
+     "end_s": 74.71,
+     "text": "co",
+     "confidence": 0.479
+    },
+    {
+     "start_s": 75.44,
+     "end_s": 79.55,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 80.78,
+     "end_s": 81.55,
+     "text": "ah",
+     "confidence": 0.499
+    },
+    {
+     "start_s": 82.22,
+     "end_s": 82.72,
+     "text": "com",
+     "confidence": 0.3
+    },
+    {
+     "start_s": 83.75,
+     "end_s": 84.02,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 85.99,
+     "end_s": 89.26,
+     "text": "md",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 89.69,
+     "end_s": 90.32,
+     "text": "pm",
+     "confidence": 0.303
+    },
+    {
+     "start_s": 91.12,
+     "end_s": 96.66,
+     "text": "ad",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 97.3,
+     "end_s": 98.26,
+     "text": "sl",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 99.93,
+     "end_s": 103.17,
+     "text": "pee",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 105.51,
+     "end_s": 105.64,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 106.64,
+     "end_s": 107.97,
+     "text": "coat",
+     "confidence": 0.407
+    },
+    {
+     "start_s": 108.68,
+     "end_s": 111.01,
+     "text": "at",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 112.58,
+     "end_s": 114.08,
+     "text": "door",
+     "confidence": 0.546
+    },
+    {
+     "start_s": 114.51,
+     "end_s": 120.69,
+     "text": "am",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 121.39,
+     "end_s": 125.56,
+     "text": "condor",
+     "confidence": 0.904
+    },
+    {
+     "start_s": 126.23,
+     "end_s": 126.59,
+     "text": "b",
+     "confidence": 0.942
+    },
+    {
+     "start_s": 127.53,
+     "end_s": 127.79,
+     "text": "ok",
+     "confidence": 0.787
+    },
+    {
+     "start_s": 128.33,
+     "end_s": 128.43,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 129.06,
+     "end_s": 137.04,
+     "text": "ok",
+     "confidence": 0.33
+    },
+    {
+     "start_s": 138.74,
+     "end_s": 139.01,
+     "text": "ok",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 139.54,
+     "end_s": 140.07,
+     "text": "pi",
+     "confidence": 0.24
+    },
+    {
+     "start_s": 140.47,
+     "end_s": 140.77,
+     "text": "co",
+     "confidence": 0.155
+    },
+    {
+     "start_s": 142.38,
+     "end_s": 151.62,
+     "text": "at",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 151.65,
+     "end_s": 160.09,
+     "text": "contists",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 160.13,
+     "end_s": 163.53,
+     "text": "at",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 164.26,
+     "end_s": 170.47,
+     "text": "un",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 172.71,
+     "end_s": 175.18,
+     "text": "pa",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 175.58,
+     "end_s": 185.49,
+     "text": "he",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 185.52,
+     "end_s": 188.42,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 188.99,
+     "end_s": 197.0,
+     "text": "a",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 197.03,
+     "end_s": 205.94,
+     "text": "or",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 206.34,
+     "end_s": 212.28,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 212.95,
+     "end_s": 213.11,
+     "text": "ok",
+     "confidence": 0.545
+    },
+    {
+     "start_s": 213.58,
+     "end_s": 216.68,
+     "text": "ass",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 217.75,
+     "end_s": 217.95,
+     "text": "so",
+     "confidence": 0.123
+    },
+    {
+     "start_s": 218.48,
+     "end_s": 218.62,
+     "text": "asl",
+     "confidence": 0.334
+    },
+    {
+     "start_s": 219.15,
+     "end_s": 220.29,
+     "text": "id",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 222.62,
+     "end_s": 224.29,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 226.36,
+     "end_s": 227.36,
+     "text": "wa",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 228.46,
+     "end_s": 229.06,
+     "text": "ok",
+     "confidence": 0.579
+    },
+    {
+     "start_s": 230.1,
+     "end_s": 232.23,
+     "text": "poom",
+     "confidence": 0.367
+    },
+    {
+     "start_s": 234.1,
+     "end_s": 234.8,
+     "text": "com",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 238.07,
+     "end_s": 239.34,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 241.31,
+     "end_s": 243.28,
+     "text": "pun",
+     "confidence": 0.357
+    },
+    {
+     "start_s": 243.88,
+     "end_s": 251.08,
+     "text": "ad",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 251.48,
+     "end_s": 252.55,
+     "text": "co",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 255.39,
+     "end_s": 262.4,
+     "text": "shamps",
+     "confidence": 0.886
+    },
+    {
+     "start_s": 263.0,
+     "end_s": 263.56,
+     "text": "car",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 264.83,
+     "end_s": 269.27,
+     "text": "cd",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 269.84,
+     "end_s": 272.84,
+     "text": "ar",
+     "confidence": 0.739
+    },
+    {
+     "start_s": 273.27,
+     "end_s": 280.78,
+     "text": "un",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 282.48,
+     "end_s": 283.05,
+     "text": "so",
+     "confidence": 0.353
+    },
+    {
+     "start_s": 283.95,
+     "end_s": 285.22,
+     "text": "poon",
+     "confidence": 0.439
+    },
+    {
+     "start_s": 285.89,
+     "end_s": 286.89,
+     "text": "are",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 287.95,
+     "end_s": 291.76,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 293.76,
+     "end_s": 295.03,
+     "text": "so",
+     "confidence": 0.0
+    },
+    {
+     "start_s": 295.6,
+     "end_s": 296.93,
+     "text": "ok",
+     "confidence": 0.0
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 45,
+  "terms_read": 21,
+  "terms_spoken": 0,
+  "spoken": 9,
+  "spoken_correct": 3
+ }
+}
