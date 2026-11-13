@@ -56,7 +56,8 @@ and letters signed inconsistently between sessions. The debugging stories (two m
 | 9 Spoken narration with ElevenLabs (`--speak`) | done (journal 16) |
 | 10 Fingerspelling detection: read only the moments that are spelling | done (journal 17) |
 | 11 Real-world benchmark (7 public-domain videos) + safe job runner for the laptop | done (journal 18) |
-| Next: small signers (crop before tracking), recognising whole signs, motion letters J and Z | planned |
+| 12 Small signers: find the signer, track hands in an enlarged crop (both hands found 2× as often on insets) | done (journal 19) |
+| Next: recognising whole signs, motion letters J and Z | planned |
 
 ## Built for a laptop CPU
 Runs on an Intel i5-8265U with no GPU required. The runtime needs only OpenCV, MediaPipe and NumPy (no PyTorch).
@@ -80,7 +81,8 @@ source .venv/bin/activate
 PYTHONPATH=src python -m aslcv.tutor_app       # the tutor (SPACE skip, ENTER teach, D debug, ESC quit)
 PYTHONPATH=src python -m aslcv.translate my_clip.mp4   # captioned video + .srt into outputs/
                                                # (--engine sequence|frame; the sequence model and the fingerspelling
-                                               #  detector are local-only, see journals 15 and 17; --no-detect)
+                                               #  detector are local-only, see journals 15 and 17; --no-detect;
+                                               #  --no-crop to skip looking for a small signer, journal 19)
 PYTHONPATH=src python -m aslcv.record_clip     # record a test clip into clips/
 PYTHONPATH=src python -m aslcv.record          # record your own training samples (reference hand shown on the right)
 PYTHONPATH=src python -m aslcv.extract_public  # landmarks from the Kaggle ASL Alphabet set in data/raw/
