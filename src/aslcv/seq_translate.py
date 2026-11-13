@@ -121,13 +121,87 @@ def load_char_lm():
     return CharLM(texts, order=5) if texts else None
 
 
-def hand_pass(video_path, max_fps=30.0):
-    """Pass 1: up to two hands in every (subsampled) frame. The slow part; its result can be saved (save_hands)."""
+CROP_SIDE = 720          # a crop around a small signer is enlarged to this many pixels on its longer side
+
+
+def _palm(h):
+    """Wrist -> middle-finger base distance in pixels: the hand's size."""
+    return float(np.linalg.norm(h.landmarks_px[9, :2] - h.landmarks_px[0, :2]))
+
+
+def signer_box(tile_pts, tile_palms, W, H):
+    """Hand detections (each (21, 2) frame pixels, with palm sizes) -> the box around the densest cluster, padded
+    for the signing space; None if there is no clear cluster or it covers most of the frame."""
+    palm = float(np.median(tile_palms))
+    # the signer is where the hands keep coming back: the densest cluster of wrists (stray detections in the
+    # background, or another person's hand at the edge, would otherwise stretch the box)
+    wrists = np.array([p[0] for p in tile_pts])
+    near = np.linalg.norm(wrists[:, None] - wrists[None], axis=2)
+    centre = wrists[np.argmax((near < 6 * palm).sum(axis=1))]
+    keep = np.linalg.norm(wrists - centre, axis=1) < 10 * palm
+    if keep.sum() < 5:
+        return None
+    pts = np.concatenate([p for p, k in zip(tile_pts, keep) if k])
+    (x_lo, y_lo), (x_hi, y_hi) = np.percentile(pts, 5, axis=0), np.percentile(pts, 95, axis=0)
+    pad = 3 * palm                                               # head, shoulders and reach around the hands
+    x0, y0 = max(0, int(x_lo - pad)), max(0, int(y_lo - 2 * pad))
+    x1, y1 = min(W, int(x_hi + pad)), min(H, int(y_hi + pad))
+    if (x1 - x0) * (y1 - y0) > 0.6 * W * H:                      # the hands are all over the frame: no inset
+        return None
+    return (x0, y0, x1, y1)
+
+
+def find_signer_roi(video_path, samples=40, min_palm_frac=0.05):
+    """Where to look for hands (journal 19). Returns None to use the whole frame, or (x0, y0, x1, y1) in pixels.
+
+    On `samples` frames spread over the video, the hand detector runs on the full frame and on 9 overlapping tiles
+    (each half the frame, enlarged 2x). A signer shown as a small inset is found in the tiles but missed or tiny in
+    the full frame; then the box around the tile detections, padded for the signing space, is returned."""
+    cap = cv2.VideoCapture(str(video_path))
+    n = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
+    W, H = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    det = HandDetector(max_hands=2, mode="image")
+    full_hits, full_palms, tile_pts, tile_palms = 0, [], [], []
+    try:
+        for i in np.linspace(0.05 * n, 0.95 * n, samples).astype(int):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, int(i))
+            ok, frame = cap.read()
+            if not ok:
+                continue
+            hs = det.detect(frame)
+            full_hits += bool(hs)
+            full_palms += [_palm(h) / H for h in hs]
+            for x0 in (0, W // 4, W // 2):
+                for y0 in (0, H // 4, H // 2):
+                    tile = cv2.resize(frame[y0:y0 + H // 2, x0:x0 + W // 2], (W, H), interpolation=cv2.INTER_CUBIC)
+                    for h in det.detect(tile):
+                        pts = h.landmarks[:, :2] * [W / 2, H / 2] + [x0, y0]          # back to frame pixels
+                        tile_pts.append(pts)
+                        tile_palms.append(_palm(h) / 2)
+    finally:
+        det.close()
+        cap.release()
+    if len(tile_pts) < 5:
+        return None
+    if full_hits >= 0.5 * samples and full_palms and np.median(full_palms) >= min_palm_frac:
+        return None                                              # hands are found and big enough already
+    return signer_box(tile_pts, tile_palms, W, H)
+
+
+def hand_pass(video_path, max_fps=30.0, roi=None):
+    """Pass 1: up to two hands in every (subsampled) frame. The slow part; its result can be saved (save_hands).
+    roi: track hands only inside this box (find_signer_roi), enlarged to CROP_SIDE; the hands' pixel points are then
+    in the enlarged crop (what the models see), their normalised points in the full frame (for drawing)."""
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
         raise SystemExit(f"cannot open video {video_path}")
     src_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
-    size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+    W, H = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    size = (W, H)
+    if roi is not None:
+        x0, y0, x1, y1 = roi
+        k = CROP_SIDE / max(x1 - x0, y1 - y0)
+        size = (round((x1 - x0) * k), round((y1 - y0) * k))
     step = max(1, round(src_fps / max_fps))
     det = HandDetector(max_hands=2, mode="video")
     hands, times, idx = [], [], -1
@@ -140,12 +214,22 @@ def hand_pass(video_path, max_fps=30.0):
             if idx % step:
                 continue
             t = idx / src_fps
-            hands.append(det.detect(frame, t_ms=t * 1000))
+            if roi is None:
+                hs = det.detect(frame, t_ms=t * 1000)
+            else:
+                crop = cv2.resize(frame[y0:y1, x0:x1], size, interpolation=cv2.INTER_CUBIC)
+                hs = det.detect(crop, t_ms=t * 1000)
+                for h in hs:
+                    h.landmarks = h.landmarks.copy()
+                    h.landmarks[:, 0] = (x0 + h.landmarks[:, 0] * (x1 - x0)) / W
+                    h.landmarks[:, 1] = (y0 + h.landmarks[:, 1] * (y1 - y0)) / H
+            hands.append(hs)
             times.append(t)
     finally:
         det.close()
         cap.release()
-    return {"hands": hands, "times": times, "size": size, "src_fps": src_fps, "step": step, "fps": src_fps / step}
+    return {"hands": hands, "times": times, "size": size, "src_fps": src_fps, "step": step, "fps": src_fps / step,
+            "roi": roi}
 
 
 def save_hands(hp, path):
@@ -157,7 +241,8 @@ def save_hands(hp, path):
         for k, h in enumerate(hs[:2]):
             norm[t, k], px[t, k], side[t, k], score[t, k] = h.landmarks, h.landmarks_px, h.handedness, h.score
     np.savez_compressed(path, norm=norm, px=px, side=side, score=score, times=np.array(hp["times"]),
-                        size=np.array(hp["size"]), src_fps=hp["src_fps"], step=hp["step"])
+                        size=np.array(hp["size"]), src_fps=hp["src_fps"], step=hp["step"],
+                        roi=np.array(hp.get("roi") or [-1, -1, -1, -1]))
 
 
 def load_hands(path):
@@ -167,10 +252,11 @@ def load_hands(path):
     with np.load(path) as d:
         norm, px, side, score = d["norm"], d["px"], d["side"], d["score"]
         times, size, src_fps, step = d["times"], d["size"], float(d["src_fps"]), int(d["step"])
+        roi = tuple(int(x) for x in d["roi"]) if "roi" in d and d["roi"][0] >= 0 else None
     hands = [[Hand(norm[t, k].copy(), px[t, k].copy(), str(side[t, k]), float(score[t, k]))
               for k in range(2) if not np.isnan(px[t, k, 0, 0])] for t in range(len(times))]
     return {"hands": hands, "times": list(times), "size": tuple(int(x) for x in size),
-            "src_fps": src_fps, "step": step, "fps": src_fps / step}
+            "src_fps": src_fps, "step": step, "fps": src_fps / step, "roi": roi}
 
 
 def decode_pass(hp, model_path=SEQ_MODEL, hand="auto", use_lm=True, detect=True, verbose=False):
@@ -210,10 +296,14 @@ def decode_pass(hp, model_path=SEQ_MODEL, hand="auto", use_lm=True, detect=True,
 
 
 def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_MODEL, hand="auto", skeleton=True,
-                       max_fps=30.0, use_lm=True, verbose=True, detect=True):
-    """detect: read only the stretches the fingerspelling detector marks (if its model exists locally)."""
+                       max_fps=30.0, use_lm=True, verbose=True, detect=True, crop=True):
+    """detect: read only the stretches the fingerspelling detector marks (if its model exists locally).
+    crop: find a small signer first and track hands in a crop around them (find_signer_roi)."""
     t0 = time.time()
-    hp = hand_pass(video_path, max_fps)
+    roi = find_signer_roi(video_path) if crop else None
+    if verbose and roi is not None:
+        print(f"  small signer: tracking hands in {roi}", flush=True)
+    hp = hand_pass(video_path, max_fps, roi)
     dp = decode_pass(hp, model_path, hand, use_lm, detect, verbose)
     hands, times, fps, src_fps, step = hp["hands"], hp["times"], hp["fps"], hp["src_fps"], hp["step"]
     events, chosen, side, fs_mask, lm = dp["events"], dp["chosen"], dp["side"], dp["fs_mask"], dp["lm"]
@@ -259,4 +349,4 @@ def translate_sequence(video_path, out_video=None, out_srt=None, model_path=SEQ_
             "handedness_used": side, "seconds": round(elapsed, 1),
             "speed_fps": round(len(hands) / max(elapsed, 1e-6), 1), "decoder": "beam+LM" if lm else "greedy",
             "detector": "fingerspelling detector" if dp["use_detector"] else "off",
-            "fingerspelling_share": round(float(fs_mask.mean()), 3) if hands else 0.0}
+            "fingerspelling_share": round(float(fs_mask.mean()), 3) if hands else 0.0, "signer_roi": roi}

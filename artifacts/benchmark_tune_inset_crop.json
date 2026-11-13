@@ -1,0 +1,181 @@
+{
+ "split": "tune",
+ "settings": {
+  "detect": true,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true,
+  "crop": true
+ },
+ "videos": {
+  "inset_microwave@usda_microwave": {
+   "terms_spelled": 5,
+   "terms_read": 1,
+   "terms_spoken": 0,
+   "spoken": 1,
+   "spoken_correct": 0,
+   "spoken_words": [
+    {
+     "t": 70.38,
+     "word": "stakes",
+     "correct": false
+    }
+   ],
+   "terms": [
+    {
+     "t": 34.5,
+     "word": "salmonella",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 96.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 99.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": true,
+     "spoken": false
+    },
+    {
+     "t": 171.0,
+     "word": "foodsafety",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.178,
+   "roi": [
+    830,
+    358,
+    1105,
+    719
+   ],
+   "segments": [
+    {
+     "start_s": 27.66,
+     "end_s": 29.33,
+     "text": "uron",
+     "confidence": 0.816
+    },
+    {
+     "start_s": 33.4,
+     "end_s": 35.8,
+     "text": "sloelabrutaria",
+     "confidence": 0.773
+    },
+    {
+     "start_s": 40.94,
+     "end_s": 41.61,
+     "text": "cotta",
+     "confidence": 0.763
+    },
+    {
+     "start_s": 48.08,
+     "end_s": 48.95,
+     "text": "slak",
+     "confidence": 0.671
+    },
+    {
+     "start_s": 60.23,
+     "end_s": 62.9,
+     "text": "yonettut",
+     "confidence": 0.72
+    },
+    {
+     "start_s": 65.83,
+     "end_s": 67.03,
+     "text": "afed",
+     "confidence": 0.903
+    },
+    {
+     "start_s": 69.57,
+     "end_s": 74.24,
+     "text": "ovenstakeshillagaptures",
+     "confidence": 0.707
+    },
+    {
+     "start_s": 90.06,
+     "end_s": 91.72,
+     "text": "watagy",
+     "confidence": 0.873
+    },
+    {
+     "start_s": 95.73,
+     "end_s": 97.26,
+     "text": "watag",
+     "confidence": 0.805
+    },
+    {
+     "start_s": 100.67,
+     "end_s": 104.27,
+     "text": "deviscato",
+     "confidence": 0.864
+    },
+    {
+     "start_s": 105.27,
+     "end_s": 106.81,
+     "text": "iwatage",
+     "confidence": 0.83
+    },
+    {
+     "start_s": 111.88,
+     "end_s": 112.81,
+     "text": "safes",
+     "confidence": 0.721
+    },
+    {
+     "start_s": 128.16,
+     "end_s": 129.23,
+     "text": "baria",
+     "confidence": 0.698
+    },
+    {
+     "start_s": 139.51,
+     "end_s": 140.44,
+     "text": "bafe",
+     "confidence": 0.775
+    },
+    {
+     "start_s": 144.58,
+     "end_s": 145.25,
+     "text": "ihes",
+     "confidence": 0.812
+    },
+    {
+     "start_s": 172.17,
+     "end_s": 173.14,
+     "text": "risd",
+     "confidence": 0.87
+    },
+    {
+     "start_s": 175.01,
+     "end_s": 178.68,
+     "text": "wtfodesaftisgov",
+     "confidence": 0.783
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 5,
+  "terms_read": 1,
+  "terms_spoken": 0,
+  "spoken": 1,
+  "spoken_correct": 0
+ }
+}

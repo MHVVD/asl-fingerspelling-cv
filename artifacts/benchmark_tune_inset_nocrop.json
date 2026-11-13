@@ -1,0 +1,86 @@
+{
+ "split": "tune",
+ "settings": {
+  "detect": true,
+  "min_confidence": 0.6,
+  "vocab": null,
+  "lm": true,
+  "crop": false
+ },
+ "videos": {
+  "inset_microwave@usda_microwave": {
+   "terms_spelled": 5,
+   "terms_read": 0,
+   "terms_spoken": 0,
+   "spoken": 0,
+   "spoken_correct": 0,
+   "spoken_words": [],
+   "terms": [
+    {
+     "t": 34.5,
+     "word": "salmonella",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 91.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 96.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 99.0,
+     "word": "wattage",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    },
+    {
+     "t": 171.0,
+     "word": "foodsafety",
+     "verdict": "spelled",
+     "read": false,
+     "spoken": false
+    }
+   ],
+   "letters_share": 0.036,
+   "roi": null,
+   "segments": [
+    {
+     "start_s": 45.81,
+     "end_s": 46.48,
+     "text": "das",
+     "confidence": 0.846
+    },
+    {
+     "start_s": 78.08,
+     "end_s": 78.71,
+     "text": "or",
+     "confidence": 0.538
+    },
+    {
+     "start_s": 112.28,
+     "end_s": 113.05,
+     "text": "fes",
+     "confidence": 0.742
+    }
+   ]
+  }
+ },
+ "total": {
+  "terms_spelled": 5,
+  "terms_read": 0,
+  "terms_spoken": 0,
+  "spoken": 0,
+  "spoken_correct": 0
+ }
+}

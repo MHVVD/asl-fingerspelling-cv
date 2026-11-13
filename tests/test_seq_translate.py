@@ -49,3 +49,22 @@ def test_fingerspelling_mask_marks_detected_stretch_with_padding():
     mask, segs = fingerspelling_mask(hands, times, (640, 360), Stub(), pad_s=0.2)
     assert len(segs) == 1 and abs(segs[0][0] - 1.0) < 0.1 and abs(segs[0][1] - 2.0) < 0.15
     assert mask[int(0.85 * 30)] and not mask[int(0.5 * 30)] and not mask[int(2.6 * 30)]
+
+
+def test_signer_box_ignores_stray_detections():
+    from aslcv.seq_translate import signer_box
+    rng = np.random.default_rng(0)
+    hand = lambda x, y: np.c_[rng.normal(x, 8, 21), rng.normal(y, 8, 21)]
+    cluster = [hand(950 + rng.normal(0, 25), 560 + rng.normal(0, 25)) for _ in range(30)]
+    strays = [hand(60, 400), hand(500, 100), hand(1200, 50)]
+    box = signer_box(cluster + strays, [20.0] * 33, 1280, 720)
+    assert box is not None
+    x0, y0, x1, y1 = box
+    assert 800 < x0 < 950 < x1 < 1150 and 300 < y0 < 560 < y1 <= 720
+
+
+def test_signer_box_none_when_hands_fill_the_frame():
+    from aslcv.seq_translate import signer_box
+    rng = np.random.default_rng(1)
+    pts = [np.c_[rng.normal(x, 5, 21), rng.normal(y, 5, 21)] for x, y in rng.uniform([0, 0], [1280, 720], (40, 2))]
+    assert signer_box(pts, [150.0] * 40, 1280, 720) is None          # big hands everywhere: not an inset

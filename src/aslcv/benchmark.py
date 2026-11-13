@@ -14,6 +14,7 @@ Scores, per video and in total, against benchmark/key.json and the English text 
 import argparse
 import json
 import re
+import shutil
 from pathlib import Path
 import numpy as np
 
@@ -78,10 +79,14 @@ def score_video(video, terms, captions, segments, spoken, frames_letters):
             "terms": found, "letters_share": round(frames_letters, 3)}
 
 
-def decoded_segments(video, hp, detect, use_lm):
+def hands_path(video, crop):
+    return CACHE / "hands" / (f"{video}__crop.npz" if crop else f"{video}.npz")
+
+
+def decoded_segments(video, hp, detect, use_lm, crop=False):
     """Decode once per video and decode setting, saved as soon as it is done, so an interrupted run resumes."""
     from .seq_translate import decode_pass
-    path = CACHE / "decoded" / f"{video}__det{int(detect)}_lm{int(use_lm)}.json"
+    path = CACHE / "decoded" / f"{video}__det{int(detect)}_lm{int(use_lm)}{'_crop' if crop else ''}.json"
     if path.exists():
         return json.loads(path.read_text())
     segments = decode_pass(hp, detect=detect, use_lm=use_lm)["segments"]
@@ -93,17 +98,17 @@ def decoded_segments(video, hp, detect, use_lm):
     return segments
 
 
-def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=True):
+def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=True, crop=False, videos=None):
     from .seq_translate import load_hands
     from .spotting import load_vocab
     from .translate import speech_segments
     key = load_key()
     vocab = load_vocab(vocab_file)
     out = {"split": split, "settings": {"detect": detect, "min_confidence": min_confidence, "vocab": vocab_file,
-                                        "lm": use_lm}, "videos": {}}
-    for video in key["split"][split]:
-        hp = load_hands(CACHE / "hands" / f"{video}.npz")
-        segments = decoded_segments(video, hp, detect, use_lm)
+                                        "lm": use_lm, "crop": crop}, "videos": {}}
+    for video in videos or key["split"][split]:
+        hp = load_hands(hands_path(video, crop))
+        segments = decoded_segments(video, hp, detect, use_lm, crop)
         spoken, _ = speech_segments({"segments": segments}, "sequence", min_confidence, vocab)
         in_seg = np.zeros(len(hp["times"]), bool)
         times = np.array(hp["times"])
@@ -111,7 +116,9 @@ def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=Tr
             in_seg[(times >= s["start_s"]) & (times <= s["end_s"])] = True
         with_hand = np.array([bool(h) for h in hp["hands"]])
         share = float(in_seg[with_hand].mean()) if with_hand.any() else 0.0
-        out["videos"][video] = score_video(video, key["videos"][video], load_captions(video), segments, spoken, share)
+        out["videos"][video] = score_video(video, key["videos"][video.split("@")[-1]], load_captions(video.split("@")[-1]),
+                                           segments, spoken, share)
+        out["videos"][video]["roi"] = hp.get("roi")
         out["videos"][video]["segments"] = segments
     tot = {k: sum(v[k] for v in out["videos"].values())
            for k in ("terms_spelled", "terms_read", "terms_spoken", "spoken", "spoken_correct")}
@@ -129,15 +136,22 @@ def run(split, name, detect=True, min_confidence=0.6, vocab_file=None, use_lm=Tr
     return out
 
 
-def cmd_hands():
-    from .seq_translate import hand_pass, save_hands
+def cmd_hands(crop=False, videos=None):
+    """Pass 1 per video, cached. A video name may carry another key: "inset_microwave@usda_microwave" is the file
+    clips/benchmark/inset_microwave.* scored against usda_microwave's key (the synthetic inset, journal 19)."""
+    from .seq_translate import find_signer_roi, hand_pass, save_hands
     (CACHE / "hands").mkdir(parents=True, exist_ok=True)
-    for video in load_key()["videos"]:
-        path = CACHE / "hands" / f"{video}.npz"
+    for video in videos or load_key()["videos"]:
+        path = hands_path(video, crop)
         if path.exists():
             continue
-        print(f"  {video} ...", flush=True)
-        save_hands(hand_pass(CLIPS / f"{video}.webm"), path)
+        clip = next(CLIPS.glob(f"{video.split('@')[0]}.*"))
+        roi = find_signer_roi(clip) if crop else None
+        print(f"  {video}: roi {roi} ...", flush=True)
+        if crop and roi is None and hands_path(video, False).exists():
+            shutil.copyfile(hands_path(video, False), path)    # no crop chosen: identical to the uncropped pass
+            continue
+        save_hands(hand_pass(clip, roi=roi), path)
 
 
 def main():
@@ -148,11 +162,13 @@ def main():
     ap.add_argument("--no-detect", action="store_true")
     ap.add_argument("--min-confidence", type=float, default=0.6)
     ap.add_argument("--vocab")
+    ap.add_argument("--crop", action="store_true", help="find a small signer first and crop around them")
+    ap.add_argument("--videos", nargs="*", help="only these videos (name or file@key)")
     a = ap.parse_args()
     if a.command == "hands":
-        cmd_hands()
+        cmd_hands(a.crop, a.videos)
     else:
-        run(a.split, a.name, not a.no_detect, a.min_confidence, a.vocab)
+        run(a.split, a.name, not a.no_detect, a.min_confidence, a.vocab, crop=a.crop, videos=a.videos)
 
 
 if __name__ == "__main__":
